@@ -24,6 +24,8 @@ public class CameraLook : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Settings.paused)
+            return;
         _rotationX -= Input.GetAxis("Mouse Y") * sensitivityVert;
         _rotationX = Mathf.Clamp(_rotationX, minimumVert, maximumVert);
         

@@ -3,7 +3,10 @@
 
 public static class Settings 
 {
-    public static readonly string INTERACTABLE_LAYER_NAME = "Interactable";
+    public const string INTERACTABLE_LAYER_NAME = "Interactable";
 
+    public static bool dialogue = false;
+
+    public static bool paused {get {return dialogue;}}
 
 }
