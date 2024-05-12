@@ -24,7 +24,6 @@ public class PictureViewer : MonoBehaviour
     private void ViewPicture(Texture pictureImg) {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        Settings.viewingPicture = true;
         pictureBackground.SetActive(true);
         picture.texture = pictureImg;
     }
@@ -32,7 +31,7 @@ public class PictureViewer : MonoBehaviour
     public void HidePicture() {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        Settings.viewingPicture = false;
+        Settings.takingPicture = false;
         pictureBackground.SetActive(false);
     }
 }

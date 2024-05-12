@@ -26,6 +26,7 @@ public class SpecialCamera : MonoBehaviour
             return;
 
         if (Input.GetKeyDown(KeyCode.Q) && !animationPlaying) {
+            Settings.takingPicture = true;
             StartCoroutine(TakePicture());
         }
     }
