@@ -1,28 +1,42 @@
 using System.Collections;
-using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(Animator))]
 public class SpecialCamera : MonoBehaviour
 {
+    private Animator polaroidAnimator;
+    [SerializeField] private Image cameraFlash;
+    private float cameraFlashTime = 0.75f;
+
     [SerializeField] private Camera specialCamera;
     [SerializeField] private GameObject pictureOriginal;
     private GameObject pictureFrame;
-    [SerializeField] private float cooldown = 5f;
-    private float lastPictureTime = -5f;
+
+    private bool animationPlaying = false;
+    private float polaroidMovementTime = 3f;
+    private float picturePrintTime = 5f;
+
+    private void Start() {
+        polaroidAnimator = GetComponent<Animator>();
+    }
 
     private void Update() {
         if (Settings.paused)
             return;
 
-        if (Input.GetKeyDown(KeyCode.Q) && Time.time - lastPictureTime > cooldown) {
-            lastPictureTime = Time.time;
+        if (Input.GetKeyDown(KeyCode.Q) && !animationPlaying) {
             StartCoroutine(TakePicture());
         }
     }
 
     public IEnumerator TakePicture()
     {
+        animationPlaying = true;
+        polaroidAnimator.SetTrigger("takePicture");
+
+        yield return new WaitForSeconds(polaroidMovementTime);
+
         yield return new WaitForEndOfFrame();
 
         pictureFrame = Instantiate(pictureOriginal, pictureOriginal.transform.parent);
@@ -42,9 +56,27 @@ public class SpecialCamera : MonoBehaviour
         image.Apply();
         pictureFrame.transform.Find("Picture").GetComponent<Renderer>().material.mainTexture = image;
         pictureFrame.GetComponent<Animator>().SetBool("out", true);
-        yield return new WaitForSeconds(cooldown);
+        yield return new WaitForSeconds(picturePrintTime);
         ShowPicture();
         DestroyPicture();
+        animationPlaying = false;
+    }
+
+    private void CameraFlash() {
+		StartCoroutine(FlashCoroutine());
+    }
+
+    private IEnumerator FlashCoroutine() {
+        float startTime = Time.time;
+
+        Color white = Color.white;
+        Color originalColor = cameraFlash.color;
+
+        while (Time.time - startTime < cameraFlashTime) {
+            cameraFlash.color = Color.Lerp(white, originalColor, (Time.time - startTime) / cameraFlashTime);
+            yield return null;
+        }
+        cameraFlash.color = originalColor;
     }
 
     public void ShowPicture() {
