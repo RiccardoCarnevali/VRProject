@@ -10,8 +10,11 @@ public class PlayerInventory : MonoBehaviour
 {
     [SerializeField] private Canvas _inventoryCanvas;
     [SerializeField] private GameObject _inventorySlotPrefab;
-    [SerializeField] private GameObject _debugInventoryItem;
-    [SerializeField] private GameObject _debugInventoryItem2;
+    /*
+    Debug items
+    [SerializeField] private Item _debugInventoryItem;
+    [SerializeField] private Item _debugInventoryItem2;
+    */
     [SerializeField] private GameObject _selectedItemPreview;
     [SerializeField] private TextMeshProUGUI _noItemText;
 
@@ -53,6 +56,8 @@ public class PlayerInventory : MonoBehaviour
         s_itemPreviewSlot = _selectedItemPreview.GetComponentInChildren<InventorySlot>();
         s_itemPreviewText = _selectedItemPreview.GetComponentInChildren<TextMeshProUGUI>();
 
+
+        /* Debug items
         for(int i = 0; i < 3; ++i)
         {
             if(i % 2 == 0)
@@ -64,6 +69,7 @@ public class PlayerInventory : MonoBehaviour
                 AddItem(_debugInventoryItem2);
             }
         }
+        Debug items*/
     }
 
     private void Open()
@@ -90,19 +96,20 @@ public class PlayerInventory : MonoBehaviour
         Debug.Log(s_itemSlots.IndexOf(s_selectedInventorySlot));
     }
 
-    public InventorySlot AddItem(GameObject gameObject)
+    public InventorySlot AddItem(Item item)
     {
-        GameObject itemObject = Instantiate(gameObject, Vector3.zero, Quaternion.Euler(45f, 0f, 45f));
-        Item item = itemObject.GetComponent<Item>();
 
         GameObject slot = Instantiate(_inventorySlotPrefab);
         slot.transform.SetParent(s_slotsLayout.transform, false);
+
+        Item newItem = Instantiate(item, Vector3.zero, Quaternion.Euler(45f, 0f, 45f));
+        newItem.transform.SetParent(slot.transform, false);
 
         InventorySlot slotComponent = slot.GetComponent<InventorySlot>();
         slotComponent.GetComponent<Button>().onClick.AddListener(delegate {SetSelected(slotComponent);});
         slotComponent.GetComponentInChildren<ParticleSystem>().Stop();
 
-        slotComponent.SetItem(item);
+        slotComponent.SetItem(newItem);
         s_itemSlots.Add(slotComponent);
         SetSelected(slotComponent);
 
@@ -146,7 +153,7 @@ public class PlayerInventory : MonoBehaviour
         {
             RemoveItem(firstItem);
             RemoveItem(secondItem);
-            InventorySlot resultSlot = AddItem(result.gameObject);
+            InventorySlot resultSlot = AddItem(result);
             SetSelected(resultSlot);
             s_itemSlots.ForEach(slot => Debug.Log(slot.Selected));
         }

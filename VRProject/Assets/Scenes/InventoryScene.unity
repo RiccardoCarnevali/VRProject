@@ -1462,8 +1462,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _inventoryCanvas: {fileID: 1659882005}
   _inventorySlotPrefab: {fileID: 1781011029317953784, guid: 41601c0700e1663abb71ea8917b0ea62, type: 3}
-  _debugInventoryItem: {fileID: 6610320515987919248, guid: 298b20bfa40fa69a39276c094f502621, type: 3}
-  _debugInventoryItem2: {fileID: 5334333360248551874, guid: 2ed629d7bf9edc09a91c91dbd0046e79, type: 3}
+  _debugInventoryItem: {fileID: -1060724073623722745, guid: 298b20bfa40fa69a39276c094f502621, type: 3}
+  _debugInventoryItem2: {fileID: 6335350851675599679, guid: 2ed629d7bf9edc09a91c91dbd0046e79, type: 3}
   _selectedItemPreview: {fileID: 870716419}
   _noItemText: {fileID: 1789807761}
 --- !u!4 &1602492317
