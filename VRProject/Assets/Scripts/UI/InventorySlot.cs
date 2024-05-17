@@ -35,7 +35,6 @@ public class InventorySlot : MonoBehaviour
     {
         if(Item != null)
         {
-            Debug.Log("Test");
             Destroy(Item.gameObject);
         }
             
@@ -46,17 +45,13 @@ public class InventorySlot : MonoBehaviour
         ClearItem();
         Item = item;
         Item.transform.SetParent(transform, false);
-        Item.transform.localPosition = new(0,0,-100);
-
+        Item.transform.SetLocalPositionAndRotation(new(0,0,-100), Quaternion.Euler(45f,0f,45f));
         ResizeItemToFitTile();
-        Item.gameObject.layer = LayerMask.NameToLayer(Settings.UI_LAYER);
-
     }
 
     private void ResizeItemToFitTile()
     {
-        if(!Item.TryGetComponent<Renderer>(out Renderer renderer))
-            return;
+        Renderer renderer = Item.GetComponentInChildren<Renderer>();
         Bounds bound = renderer.bounds;
         float maxBound = Mathf.Abs(Mathf.Max(bound.size.x, bound.size.y, bound.size.z));
         Item.transform.localScale = new (

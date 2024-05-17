@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6725029679853507285}
   - component: {fileID: 6681352633447780372}
   - component: {fileID: -2892515344850986685}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,9 +28,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1647619290891135542}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.6577282, y: -11.150725, z: 97.407196}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.3535534, y: -0.14644663, z: 0.3535534, w: 0.85355335}
+  m_LocalPosition: {x: 0, y: 0, z: -100}
+  m_LocalScale: {x: 0.5857864, y: 0.5857864, z: 0.5857864}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -118,5 +118,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9081b89376c9486fca9e61bfe463221b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Description>k__BackingField: A sphere, made by combining the cube and the cylinder.
-  type: 2
+  <Description>k__BackingField: Prefab
+  type: 0

@@ -120,5 +120,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9081b89376c9486fca9e61bfe463221b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Description>k__BackingField: A cylinder.
-  type: 1
+  <Description>k__BackingField: Prefab
+  type: 0

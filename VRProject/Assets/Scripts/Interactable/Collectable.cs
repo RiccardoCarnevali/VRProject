@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Item))]
 public class Collectable : Interactable
 {
     public override string GetLabel()
@@ -11,7 +12,9 @@ public class Collectable : Interactable
 
     public override void Interact()
     {
-        Destroy(gameObject);
+        PlayerInventory inventory = FindAnyObjectByType<PlayerInventory>();
+        inventory.AddItem(GetComponent<Item>());
+ 
         Debug.Log("Picked up");
     }
 }

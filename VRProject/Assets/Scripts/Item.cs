@@ -8,9 +8,7 @@ public class Item: MonoBehaviour
 
     public enum ItemType
     {
-        [InspectorName("Cube")] CUBE = 0,
-        [InspectorName("Cylinder")] CYLINDER = 1,
-        [InspectorName("Sphere")] SPHERE = 2
+        [InspectorName("Screwdriver")] SCREWDRIVER,
     }
 
     [field: SerializeField] public string Description {get; private set;}

@@ -10,11 +10,6 @@ public class PlayerInventory : MonoBehaviour
 {
     [SerializeField] private Canvas _inventoryCanvas;
     [SerializeField] private GameObject _inventorySlotPrefab;
-    /*
-    Debug items
-    [SerializeField] private Item _debugInventoryItem;
-    [SerializeField] private Item _debugInventoryItem2;
-    */
     [SerializeField] private GameObject _selectedItemPreview;
     [SerializeField] private TextMeshProUGUI _noItemText;
 
@@ -33,14 +28,16 @@ public class PlayerInventory : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.I))
+        if(Input.GetKeyDown(KeyCode.E) && !(Settings.paused || Settings.inventoryOn))
         {
             Open();
+            Settings.inventoryOn = true;
         }
 
-        if(Input.GetKeyDown(KeyCode.Escape)) 
+        else if(Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Escape) && Settings.inventoryOn) 
         {
             Close();
+            Settings.inventoryOn = false;
         }
 
         bool noItems = s_itemSlots.Count() == 0;
@@ -55,21 +52,7 @@ public class PlayerInventory : MonoBehaviour
         s_slotsLayout = _inventoryCanvas.GetComponentInChildren<GridLayoutGroup>();        
         s_itemPreviewSlot = _selectedItemPreview.GetComponentInChildren<InventorySlot>();
         s_itemPreviewText = _selectedItemPreview.GetComponentInChildren<TextMeshProUGUI>();
-
-
-        /* Debug items
-        for(int i = 0; i < 3; ++i)
-        {
-            if(i % 2 == 0)
-            {
-                AddItem(_debugInventoryItem);
-            } 
-            else 
-            {
-                AddItem(_debugInventoryItem2);
-            }
-        }
-        Debug items*/
+        
     }
 
     private void Open()
@@ -98,22 +81,20 @@ public class PlayerInventory : MonoBehaviour
 
     public InventorySlot AddItem(Item item)
     {
-
+        _inventoryCanvas.gameObject.SetActive(true);
         GameObject slot = Instantiate(_inventorySlotPrefab);
         slot.transform.SetParent(s_slotsLayout.transform, false);
-
-        Item newItem = Instantiate(item, Vector3.zero, Quaternion.Euler(45f, 0f, 45f));
-        newItem.transform.SetParent(slot.transform, false);
 
         InventorySlot slotComponent = slot.GetComponent<InventorySlot>();
         slotComponent.GetComponent<Button>().onClick.AddListener(delegate {SetSelected(slotComponent);});
         slotComponent.GetComponentInChildren<ParticleSystem>().Stop();
+        slotComponent.SetItem(item);
 
-        slotComponent.SetItem(newItem);
         s_itemSlots.Add(slotComponent);
         SetSelected(slotComponent);
-
+        _inventoryCanvas.gameObject.SetActive(Settings.inventoryOn);
         return slotComponent;
+
     }
 
     private void RemoveItem(Item item)
@@ -153,7 +134,7 @@ public class PlayerInventory : MonoBehaviour
         {
             RemoveItem(firstItem);
             RemoveItem(secondItem);
-            InventorySlot resultSlot = AddItem(result);
+            InventorySlot resultSlot = AddItem(Instantiate(result));
             SetSelected(resultSlot);
             s_itemSlots.ForEach(slot => Debug.Log(slot.Selected));
         }
