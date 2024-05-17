@@ -9,7 +9,7 @@ using ItemType = Item.ItemType;
 
 public class ItemCombineRecipes : MonoBehaviour
 {
-    [field: SerializeField] public Item Sphere {get; private set;}
+    [field: SerializeField] public Item Screwdriver {get; private set;}
 
 
     public static Dictionary<HashSet<ItemType>, Item> CanCombine;
@@ -17,7 +17,7 @@ public class ItemCombineRecipes : MonoBehaviour
     void Awake()
     {
         CanCombine = new();
-        AddRecipe(ItemType.CUBE, ItemType.CYLINDER, Sphere);
+        AddRecipe(ItemType.SCREWDRIVER_HANDLE, ItemType.SCREWDRIVER_TIP, Screwdriver);
     }
 
     private void AddRecipe(ItemType first, ItemType second, Item result)

@@ -19,6 +19,8 @@ public class InteractableUpdate : MonoBehaviour
         if (Settings.paused)
             return;
 
+        canInteractText.SetActive(false);
+
         Ray ray = _characterCamera.ScreenPointToRay(new Vector3(_characterCamera.pixelWidth / 2, _characterCamera.pixelHeight / 2, 0));
         if(Physics.Raycast(ray, maxDistance: interactDistance, hitInfo: out RaycastHit hitInfo)) {
             bool hitInteractable = hitInfo.transform.gameObject.layer == LayerMask.NameToLayer(Settings.INTERACTABLE_LAYER_NAME);
@@ -33,9 +35,6 @@ public class InteractableUpdate : MonoBehaviour
                     interactable.Interact();
                 }
             }
-        }
-        else {
-            canInteractText.SetActive(false);
         }
 
     }

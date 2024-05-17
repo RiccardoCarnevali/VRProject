@@ -14,7 +14,5 @@ public class Collectable : Interactable
     {
         PlayerInventory inventory = FindAnyObjectByType<PlayerInventory>();
         inventory.AddItem(GetComponent<Item>());
- 
-        Debug.Log("Picked up");
     }
 }

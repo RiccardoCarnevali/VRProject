@@ -76,7 +76,6 @@ public class PlayerInventory : MonoBehaviour
             SetItemPreview();
         }
         
-        Debug.Log(s_itemSlots.IndexOf(s_selectedInventorySlot));
     }
 
     public InventorySlot AddItem(Item item)
@@ -136,7 +135,6 @@ public class PlayerInventory : MonoBehaviour
             RemoveItem(secondItem);
             InventorySlot resultSlot = AddItem(Instantiate(result));
             SetSelected(resultSlot);
-            s_itemSlots.ForEach(slot => Debug.Log(slot.Selected));
         }
         return canCombine;
     }
