@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(AudioSource))]
 public class SpecialCamera : MonoBehaviour
 {
     private Animator polaroidAnimator;
@@ -13,12 +14,15 @@ public class SpecialCamera : MonoBehaviour
     [SerializeField] private GameObject pictureOriginal;
     private GameObject pictureFrame;
 
+    private AudioSource audioSource;
+
     private bool animationPlaying = false;
     private float polaroidMovementTime = 3f;
     private float picturePrintTime = 5f;
 
     private void Start() {
         polaroidAnimator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Update() {
@@ -64,6 +68,7 @@ public class SpecialCamera : MonoBehaviour
     }
 
     private void CameraFlash() {
+        audioSource.Play();
 		StartCoroutine(FlashCoroutine());
     }
 
