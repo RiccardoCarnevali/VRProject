@@ -67,8 +67,8 @@ public class PlayerInventory : MonoBehaviour
         _inventoryCanvas.gameObject.SetActive(true);
     }
 
-    //This is a coroutine so that pressing escape and going to the inventory happen on subsequent frames, otherwise
-    //the inventory would also immediately close
+    //This is a coroutine so that pressing escape and going back to the game happen on subsequent frames, otherwise
+    //the pausa menu would also immediately open
     private IEnumerator Close() 
     {
         yield return null;
@@ -151,9 +151,13 @@ public class PlayerInventory : MonoBehaviour
         return canCombine;
     }
 
-    public void ExamineItem()
+    public void InspectItem()
     {
-        StartCoroutine(Close());
+        StartCoroutine(InspectItemCoroutine());
+    }
+
+    public IEnumerator InspectItemCoroutine() {
+        yield return Close();
         inspectionScreen.StartInspecting(s_selectedInventorySlot.Item.gameObject);
         _inventoryCanvas.gameObject.SetActive(false);
     }
