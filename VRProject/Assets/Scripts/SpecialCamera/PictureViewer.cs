@@ -17,20 +17,18 @@ public class PictureViewer : MonoBehaviour
     }
 
     private void Update() {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (pictureBackground.activeSelf && Input.GetKeyDown(KeyCode.Escape))
             HidePicture();
     }
 
     private void ViewPicture(Texture pictureImg) {
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        CursorManager.ShowCursor();
         pictureBackground.SetActive(true);
         picture.texture = pictureImg;
     }
 
     public void HidePicture() {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        CursorManager.HideCursor();
         Settings.takingPicture = false;
         pictureBackground.SetActive(false);
     }

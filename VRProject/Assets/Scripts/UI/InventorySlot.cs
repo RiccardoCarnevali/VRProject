@@ -14,10 +14,13 @@ public class InventorySlot : MonoBehaviour
 
     public Item Item { get; private set; }
     public PlayerInventory Inventory;
-    [property: SerializeField] public bool Selected {
-        get {return _selected;} 
-        set {
-            if(_selected != value)
+    [property: SerializeField]
+    public bool Selected
+    {
+        get { return _selected; }
+        set
+        {
+            if (_selected != value)
             {
                 _selected = value;
                 GetComponent<Image>().sprite = _selected ? _selectedBg : _normalBg;
@@ -33,11 +36,11 @@ public class InventorySlot : MonoBehaviour
 
     public void ClearItem()
     {
-        if(Item != null)
+        if (Item != null)
         {
             Destroy(Item.gameObject);
         }
-            
+
     }
 
     public void SetItem(Item item)
@@ -45,7 +48,7 @@ public class InventorySlot : MonoBehaviour
         ClearItem();
         Item = item;
         Item.transform.SetParent(transform, false);
-        Item.transform.SetLocalPositionAndRotation(new(0,0,-100), Quaternion.Euler(45f,0f,45f));
+        Item.transform.SetLocalPositionAndRotation(new(0, 0, -100), Quaternion.Euler(45f, 0f, 45f));
         ResizeItemToFitTile();
     }
 
@@ -54,12 +57,12 @@ public class InventorySlot : MonoBehaviour
         Renderer renderer = Item.GetComponentInChildren<Renderer>();
         Bounds bound = renderer.bounds;
         float maxBound = Mathf.Abs(Mathf.Max(bound.size.x, bound.size.y, bound.size.z));
-        Item.transform.localScale = new (
-            Item.transform.localScale.x / maxBound, 
-            Item.transform.localScale.y / maxBound, 
+        Item.transform.localScale = new(
+            Item.transform.localScale.x / maxBound,
+            Item.transform.localScale.y / maxBound,
             Item.transform.localScale.z / maxBound
             );
 
-        
+
     }
 }

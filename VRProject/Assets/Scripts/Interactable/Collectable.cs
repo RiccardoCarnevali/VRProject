@@ -12,7 +12,6 @@ public class Collectable : Interactable
 
     public override void Interact()
     {
-        PlayerInventory inventory = FindAnyObjectByType<PlayerInventory>();
-        inventory.AddItem(GetComponent<Item>());
+        PlayerInventory.Instance().AddItem(GetComponent<Item>());
     }
 }

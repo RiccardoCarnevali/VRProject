@@ -14,7 +14,6 @@ public class PlayerMove : MonoBehaviour
         _characterController = GetComponentInChildren<CharacterController>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Settings.paused)

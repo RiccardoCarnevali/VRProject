@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PauseMenu : MonoBehaviour
@@ -11,19 +9,21 @@ public class PauseMenu : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape)) {
             if (Settings.pauseMenuOn) {
                 Resume();
-            } else {
+            } else if (!Settings.paused){
                 Pause();
             }
         }
     }
 
     public void Pause(){
+        CursorManager.ShowCursor();
         Settings.pauseMenuOn = true;
         pauseMenu.SetActive(true);
         Time.timeScale = 0f;
     }
     
     public void Resume(){
+        CursorManager.HideCursor();
         Settings.pauseMenuOn = false;
         pauseMenu.SetActive(false);
         Time.timeScale = 1f;

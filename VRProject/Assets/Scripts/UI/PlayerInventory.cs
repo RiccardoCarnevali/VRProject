@@ -8,36 +8,40 @@ using TMPro;
 
 public class PlayerInventory : MonoBehaviour
 {
+    private static PlayerInventory instance = null;
+
     [SerializeField] private Canvas _inventoryCanvas;
     [SerializeField] private GameObject _inventorySlotPrefab;
     [SerializeField] private GameObject _selectedItemPreview;
     [SerializeField] private TextMeshProUGUI _noItemText;
+    [SerializeField] private InspectionScreen inspectionScreen;
 
-
-    private static GridLayoutGroup s_slotsLayout;
-    private static TextMeshProUGUI s_itemPreviewText;
-    private static InventorySlot s_selectedInventorySlot;
-    private static InventorySlot s_itemPreviewSlot;
-    private static InventorySlot s_selectedCombineObject = null;
-    private static Item s_itemPreview = null;
-    private static readonly List<InventorySlot> s_itemSlots = new();
+    private GridLayoutGroup s_slotsLayout;
+    private TextMeshProUGUI s_itemPreviewText;
+    private InventorySlot s_selectedInventorySlot;
+    private InventorySlot s_itemPreviewSlot;
+    private InventorySlot s_selectedCombineObject = null;
+    private Item s_itemPreview = null;
+    private readonly List<InventorySlot> s_itemSlots = new();
     
     public IList<Item> Items { get => s_itemSlots.Select(i => i.Item).AsReadOnlyList(); }
 
+    public static PlayerInventory Instance() {
+        if (instance == null)
+            instance = FindObjectOfType<PlayerInventory>();
+        return instance;
+    }
 
-    // Update is called once per frame
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.E) && !(Settings.paused || Settings.inventoryOn))
         {
             Open();
-            Settings.inventoryOn = true;
         }
 
-        else if(Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Escape) && Settings.inventoryOn) 
+        else if((Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Escape)) && Settings.inventoryOn) 
         {
             Close();
-            Settings.inventoryOn = false;
         }
 
         bool noItems = s_itemSlots.Count() == 0;
@@ -55,13 +59,17 @@ public class PlayerInventory : MonoBehaviour
         
     }
 
-    private void Open()
+    public void Open()
     {
+        Settings.inventoryOn = true;
+        CursorManager.ShowCursor();
         _inventoryCanvas.gameObject.SetActive(true);
     }
 
     private void Close() 
     {
+        Settings.inventoryOn = false;
+        CursorManager.HideCursor();
         _inventoryCanvas.gameObject.SetActive(false);
     }
 
@@ -141,7 +149,8 @@ public class PlayerInventory : MonoBehaviour
 
     public void ExamineItem()
     {
-        //GameObject item = Instantiate(s_selectedInventorySlot.Item);
-        throw new NotImplementedException();
+        Close();
+        inspectionScreen.StartInspecting(s_selectedInventorySlot.Item.gameObject);
+        _inventoryCanvas.gameObject.SetActive(false);
     }
 }
