@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using System;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections;
 
 public class PlayerInventory : MonoBehaviour
 {
@@ -41,7 +42,7 @@ public class PlayerInventory : MonoBehaviour
 
         else if((Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Escape)) && Settings.inventoryOn) 
         {
-            Close();
+            StartCoroutine(Close());
         }
 
         bool noItems = s_itemSlots.Count() == 0;
@@ -66,8 +67,11 @@ public class PlayerInventory : MonoBehaviour
         _inventoryCanvas.gameObject.SetActive(true);
     }
 
-    private void Close() 
+    //This is a coroutine so that pressing escape and going to the inventory happen on subsequent frames, otherwise
+    //the inventory would also immediately close
+    private IEnumerator Close() 
     {
+        yield return null;
         Settings.inventoryOn = false;
         CursorManager.HideCursor();
         _inventoryCanvas.gameObject.SetActive(false);
@@ -149,7 +153,7 @@ public class PlayerInventory : MonoBehaviour
 
     public void ExamineItem()
     {
-        Close();
+        StartCoroutine(Close());
         inspectionScreen.StartInspecting(s_selectedInventorySlot.Item.gameObject);
         _inventoryCanvas.gameObject.SetActive(false);
     }
