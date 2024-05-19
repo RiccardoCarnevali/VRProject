@@ -28,6 +28,13 @@ public class PictureViewer : MonoBehaviour
     }
 
     public void HidePicture() {
+        StartCoroutine(HidePictureCoroutine());
+    }
+
+    //This is a coroutine so that pressing escape and going back to the game happen on subsequent frames, otherwise
+    //the pause menu would also immediately open
+    public IEnumerator HidePictureCoroutine() {
+        yield return null;
         CursorManager.HideCursor();
         Settings.takingPicture = false;
         pictureBackground.SetActive(false);
