@@ -15,7 +15,7 @@ public class MorseCodeLight : MonoBehaviour
     //The wait between dits and dahs, whose duration is equal to that of a dit
     private float waitBetweenDitsAndDahsSeconds;
 
-    //The wait between characters of the same word, whose duration is equal 3 times the duration of a dit
+    //The wait between characters of the same word, whose duration is equal to 3 times the duration of a dit
     private float waitBetweenCharactersSeconds;
 
     //The wait between words of the same sentence, whose duration is equal to 7 times the duration of a dit
