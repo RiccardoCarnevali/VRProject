@@ -1,6 +1,3 @@
-
-
-
 public static class Settings 
 {
     public static readonly string UI_LAYER = "UI";
@@ -11,6 +8,7 @@ public static class Settings
     public static bool pauseMenuOn = false;
     public static bool inventoryOn = false;
     public static bool inspecting = false;
-    public static bool paused {get {return dialogue || takingPicture || pauseMenuOn || inventoryOn || inspecting;}}
+    public static bool inPuzzle = false;
+    public static bool paused {get {return dialogue || takingPicture || pauseMenuOn || inventoryOn || inspecting || inPuzzle;}}
 
 }
