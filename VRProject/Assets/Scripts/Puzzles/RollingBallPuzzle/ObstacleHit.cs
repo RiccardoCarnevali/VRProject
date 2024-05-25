@@ -5,9 +5,6 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class ObstacleHit : MonoBehaviour
 {
-    [SerializeField] private LayerMask visibleLayer;
-    [SerializeField] private LayerMask invisibleLayer;
-
     [SerializeField] private Material obstacleInvisible;
     [SerializeField] private Material obstacleVisible;
 
@@ -28,7 +25,8 @@ public class ObstacleHit : MonoBehaviour
 
     private IEnumerator MakeVisible() {
         float visibleProgress = 0;
-        gameObject.layer = (int) Mathf.Log(visibleLayer.value, 2);
+
+        gameObject.layer = LayerMask.NameToLayer(Layers.DEFAULT_LAYER);
         Renderer renderer = GetComponent<Renderer>();
 
         renderer.material = obstacleVisible;
@@ -42,7 +40,7 @@ public class ObstacleHit : MonoBehaviour
             yield return null;
         }
 
-        gameObject.layer = (int) Mathf.Log(invisibleLayer.value, 2);
+        gameObject.layer = LayerMask.NameToLayer(Layers.INVISIBLE_LAYER);
         renderer.material = obstacleInvisible;
     }
 }

@@ -11,6 +11,7 @@ public class Item: MonoBehaviour
         [InspectorName("Screwdriver")] SCREWDRIVER,
         [InspectorName("Screwdriver Handle")] SCREWDRIVER_HANDLE,
         [InspectorName("Screwdriver Tip")] SCREWDRIVER_TIP,
+        [InspectorName("Golden ball")] GOLDEN_BALL,
     }
 
     [field: SerializeField] public string Description {get; private set;}

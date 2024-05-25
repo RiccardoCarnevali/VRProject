@@ -9,12 +9,16 @@ public class PlaneControls : MonoBehaviour
     private Vector3 ballOriginalPosition;
 
     private bool canTilt = true;
-    private readonly float tiltAngle = 20;
-    private readonly float timeToTilt = 0.25f;
+    private readonly float tiltAngleDegrees = 20;
+    private readonly float timeToTiltSeconds = 0.25f;
     [SerializeField] private GameObject horizontalBumpers;
     [SerializeField] private GameObject verticalBumpers;
-    
-    private float minTiltedTime = 1f;
+
+    private float minTiltedTimeSeconds = 1f;
+
+    private float winDelaySeconds = 1f;
+
+    private bool won = false;
 
     private void Start() {
         horizontalBumpers.SetActive(false);
@@ -25,6 +29,8 @@ public class PlaneControls : MonoBehaviour
 
     void Update()
     {
+        if (won)
+            return;
 
         if (Input.GetKeyDown(KeyCode.Escape)) {
             Reset();
@@ -62,7 +68,7 @@ public class PlaneControls : MonoBehaviour
             return;
         }
 
-        Vector3 finalRotation = new Vector3(tiltAngle * vert, 0, tiltAngle * hor);
+        Vector3 finalRotation = new Vector3(tiltAngleDegrees * vert, 0, tiltAngleDegrees * hor);
         canTilt = false;
         StartCoroutine(TiltPlane(Vector3.zero, finalRotation));
         StartCoroutine(ResetPlane());
@@ -72,9 +78,9 @@ public class PlaneControls : MonoBehaviour
         float rotationProgress = 0;
         
         //Smooth transition from untilted to tilted
-        while (rotationProgress < timeToTilt) {
+        while (rotationProgress < timeToTiltSeconds) {
             rotationProgress += Time.deltaTime * Time.timeScale;
-            tiltingPartTransform.localRotation = Quaternion.Lerp(Quaternion.Euler(initialRotation), Quaternion.Euler(finalRotation), rotationProgress / timeToTilt);
+            tiltingPartTransform.localRotation = Quaternion.Lerp(Quaternion.Euler(initialRotation), Quaternion.Euler(finalRotation), rotationProgress / timeToTiltSeconds);
             yield return null;
         }
     }
@@ -82,7 +88,7 @@ public class PlaneControls : MonoBehaviour
     private IEnumerator ResetPlane() {
 
         //Waits a default minimum time to allow the ball to gain velocity through gravity (it can happen that right after tilting the plane the ball velocity still has magnitude 0)
-        yield return new WaitForSeconds(minTiltedTime);
+        yield return new WaitForSeconds(minTiltedTimeSeconds);
 
         //Wait until the ball stops after hitting an obstacle
         while (ballRigidbody.velocity.magnitude != 0)
@@ -98,17 +104,34 @@ public class PlaneControls : MonoBehaviour
 
     private void Reset() {
         StopAllCoroutines();
+        ResetMaze();
+        ResetBall();
+    }
+
+    private void ResetMaze() {
         tiltingPartTransform.localEulerAngles = Vector3.zero;
-        ball.transform.SetLocalPositionAndRotation(ballOriginalPosition, Quaternion.identity);
-        ballRigidbody.velocity = Vector3.zero;
-        ballRigidbody.angularVelocity = Vector3.zero;
         canTilt = true;
         horizontalBumpers.SetActive(false);
         verticalBumpers.SetActive(false);
     }
 
-    public void Win() {
-        Reset();
+    private void ResetBall() {
+        ball.transform.SetLocalPositionAndRotation(ballOriginalPosition, Quaternion.identity);
+        ballRigidbody.velocity = Vector3.zero;
+        ballRigidbody.angularVelocity = Vector3.zero;
+    }
+
+    public IEnumerator Win() {
+        won = true;
+        yield return new WaitForSeconds(winDelaySeconds);
+        StopAllCoroutines();
+        ResetMaze();
+
+        Destroy(ball.GetComponent<Ball>());
+        Destroy(ball.GetComponent<AudioSource>());
+        Destroy(ball.GetComponent<Rigidbody>());
+        ball.GetComponent<SphereCollider>().radius = 2;
+
         Settings.inPuzzle = false;
         gameObject.SetActive(false);
     }
