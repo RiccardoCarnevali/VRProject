@@ -2,16 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class ObstacleHit : MonoBehaviour
 {
     [SerializeField] private LayerMask visibleLayer;
     [SerializeField] private LayerMask invisibleLayer;
 
-    private float visibleTime = 1;
+    [SerializeField] private Material obstacleInvisible;
+    [SerializeField] private Material obstacleVisible;
 
+    private float visibleTime = 2f;
+
+    private AudioSource audioSource;
+
+    private void Start() {
+        audioSource = GetComponent<AudioSource>();
+    }
+    
     private void OnCollisionEnter(Collision collision) {
         if (Vector3.Dot(collision.rigidbody.velocity.normalized, collision.contacts[0].normal.normalized) > 0.8) {
             StartCoroutine(MakeVisible());
+            audioSource.Play();
         }
     }
 
@@ -19,7 +30,10 @@ public class ObstacleHit : MonoBehaviour
         float visibleProgress = 0;
         gameObject.layer = (int) Mathf.Log(visibleLayer.value, 2);
         Renderer renderer = GetComponent<Renderer>();
-        Color startColor = new Color(1, 1, 1, 0.8f);
+
+        renderer.material = obstacleVisible;
+
+        Color startColor = renderer.material.color;
         Color endColor = new Color(1, 1, 1, 0);
 
         while (visibleProgress < visibleTime) {
@@ -29,6 +43,6 @@ public class ObstacleHit : MonoBehaviour
         }
 
         gameObject.layer = (int) Mathf.Log(invisibleLayer.value, 2);
-        renderer.material.color = Color.white;
+        renderer.material = obstacleInvisible;
     }
 }

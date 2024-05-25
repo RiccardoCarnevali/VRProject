@@ -13,7 +13,7 @@ public class PlaneControls : MonoBehaviour
     private readonly float timeToTilt = 0.25f;
     [SerializeField] private GameObject horizontalBumpers;
     [SerializeField] private GameObject verticalBumpers;
-
+    
     private float minTiltedTime = 1f;
 
     private void Start() {
