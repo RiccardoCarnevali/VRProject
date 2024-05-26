@@ -157,4 +157,18 @@ public class PlayerInventory : MonoBehaviour
         inspectionScreen.StartInspecting(s_selectedInventorySlot.Item.gameObject);
         _inventoryCanvas.gameObject.SetActive(false);
     }
+
+    public Item GetSelectedItem() {
+        if (s_selectedInventorySlot == null)
+            return null;
+        return s_selectedInventorySlot.Item;
+    }
+
+    public void ConsumeSelectedItem() {
+        if (s_selectedInventorySlot != null) {
+            RemoveItem(s_selectedInventorySlot.Item);
+            s_selectedInventorySlot = null;
+        }
+    }
+
 }

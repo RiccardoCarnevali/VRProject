@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -26,6 +27,7 @@ public class PauseMenu : MonoBehaviour
         CursorManager.HideCursor();
         Settings.pauseMenuOn = false;
         pauseMenu.SetActive(false);
+        EventSystem.current.SetSelectedGameObject(null);
         Time.timeScale = 1f;
     }
 
