@@ -3,13 +3,13 @@ using UnityEngine;
 public class GoalTrigger : MonoBehaviour
 {
     [SerializeField] private PlaneControls planeControls;
-    [SerializeField] private RollingBallPuzzleTrigger puzzleTrigger;
-    [SerializeField] private Collider puzzleTriggerCollider;
+    [SerializeField] private JoystickBaseInteractable joystickInteractable;
+    [SerializeField] private Collider joystickInteractableCollider;
     
     private void OnTriggerEnter(Collider other) {
-        puzzleTrigger.enabled = false;
-        puzzleTriggerCollider.enabled = false;
-        puzzleTrigger.gameObject.layer = LayerMask.NameToLayer(Layers.DEFAULT_LAYER);
+        joystickInteractable.enabled = false;
+        joystickInteractableCollider.enabled = false;
+        joystickInteractable.gameObject.layer = LayerMask.NameToLayer(Layers.DEFAULT_LAYER);
         StartCoroutine(planeControls.Win());
     }
 }
