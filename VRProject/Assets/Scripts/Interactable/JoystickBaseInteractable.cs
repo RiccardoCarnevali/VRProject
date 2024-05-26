@@ -6,9 +6,11 @@ public class JoystickBaseInteractable : Interactable
     [SerializeField] Dialogue inspectDialogue;
     private bool joystickInserted = false;
     private RollingBallPuzzle rollingBallPuzzle;
+    [SerializeField] private GameObject joystickShaft;
 
     private void Start() {
         rollingBallPuzzle = GetComponent<RollingBallPuzzle>();
+        joystickShaft.SetActive(false);
     }
 
     public override string GetLabel()
@@ -27,7 +29,8 @@ public class JoystickBaseInteractable : Interactable
             rollingBallPuzzle.StartPuzzle();
         }
         else if (IsJoystickSelected()) {
-            Debug.Log("Used item");
+            PlayerInventory.Instance().ConsumeSelectedItem();
+            joystickShaft.SetActive(true);
             joystickInserted = true;
         }
         else {
@@ -36,6 +39,7 @@ public class JoystickBaseInteractable : Interactable
     }
 
     private bool IsJoystickSelected() {
-        return true;
+        Item item = PlayerInventory.Instance().GetSelectedItem();
+        return item != null && item.type == Item.ItemType.JOYSTICK;
     }
 }

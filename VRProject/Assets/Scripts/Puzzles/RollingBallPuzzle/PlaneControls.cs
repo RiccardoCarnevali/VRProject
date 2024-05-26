@@ -4,6 +4,7 @@ using UnityEngine;
 public class PlaneControls : MonoBehaviour
 {
     [SerializeField] private Transform tiltingPartTransform;
+    [SerializeField] private Transform joystickTransform;
     [SerializeField] private GameObject ball;
     private Rigidbody ballRigidbody;
     private Vector3 ballOriginalPosition;
@@ -80,7 +81,9 @@ public class PlaneControls : MonoBehaviour
         //Smooth transition from untilted to tilted
         while (rotationProgress < timeToTiltSeconds) {
             rotationProgress += Time.deltaTime * Time.timeScale;
-            tiltingPartTransform.localRotation = Quaternion.Lerp(Quaternion.Euler(initialRotation), Quaternion.Euler(finalRotation), rotationProgress / timeToTiltSeconds);
+            Quaternion rotation = Quaternion.Lerp(Quaternion.Euler(initialRotation), Quaternion.Euler(finalRotation), rotationProgress / timeToTiltSeconds);
+            tiltingPartTransform.localRotation = rotation;
+            joystickTransform.localRotation = rotation;
             yield return null;
         }
     }
