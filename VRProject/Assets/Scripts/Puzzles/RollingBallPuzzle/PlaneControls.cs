@@ -113,6 +113,7 @@ public class PlaneControls : MonoBehaviour
 
     private void ResetMaze() {
         tiltingPartTransform.localEulerAngles = Vector3.zero;
+        joystickTransform.localEulerAngles = Vector3.zero;
         canTilt = true;
         horizontalBumpers.SetActive(false);
         verticalBumpers.SetActive(false);

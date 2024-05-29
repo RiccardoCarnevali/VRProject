@@ -14,6 +14,8 @@ public class Password : MonoBehaviour
 
     private bool won = false;
 
+    [SerializeField] private Door door;
+
     private void Start() {
         passwordInput = GetComponent<TMP_InputField>();
     }
@@ -60,6 +62,7 @@ public class Password : MonoBehaviour
         resultText.color = Color.green;
         yield return ShowResult("Access granted");
         yield return new WaitForSeconds(1);
+        door.Open();
         Settings.inPuzzle = false;
         computerScreen.SetActive(false);
     }
