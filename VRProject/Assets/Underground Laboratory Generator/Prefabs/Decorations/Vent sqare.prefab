@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 2994100711834739235}
   - component: {fileID: 9120109628363068953}
   - component: {fileID: 1587511822094836412}
-  - component: {fileID: 171609555376288219}
   m_Layer: 0
   m_Name: Vent sqare 2
   m_TagString: Untagged
@@ -26,12 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 171609555376288218}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4611213271616772387}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &9120109628363068953
 MeshFilter:
@@ -52,10 +52,12 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -80,28 +82,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &171609555376288219
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 171609555376288218}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7939606da92c0a48afb3b69f7670dc2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EnableChance: 0
-  CreateChance: 60
-  EnableChildrensDestroy: 0
-  ChildrensLeft: 1
-  EnableAlbedoRandom: 1
-  Colors:
-  - {r: 1, g: 0.9009434, b: 0.9009434, a: 1}
-  - {r: 0.9161581, g: 1, b: 0.9019608, a: 1}
-  - {r: 0.9049057, g: 0.9019608, b: 1, a: 1}
-  - {r: 1, g: 0.99964947, b: 0.9019608, a: 1}
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &4611213271616772386
 GameObject:
   m_ObjectHideFlags: 0
@@ -111,7 +92,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4611213271616772387}
-  - component: {fileID: 4611213271616772412}
   m_Layer: 0
   m_Name: Vent sqare
   m_TagString: Untagged
@@ -126,33 +106,16 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4611213271616772386}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 2.4139862, y: 1, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 782054365232095925}
   - {fileID: 2994100711834739235}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4611213271616772412
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4611213271616772386}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7939606da92c0a48afb3b69f7670dc2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EnableChance: 1
-  CreateChance: 60
-  EnableChildrensDestroy: 1
-  ChildrensLeft: 1
-  EnableAlbedoRandom: 0
-  Colors: []
 --- !u!1 &7126444758507347497
 GameObject:
   m_ObjectHideFlags: 0
@@ -164,7 +127,6 @@ GameObject:
   - component: {fileID: 782054365232095925}
   - component: {fileID: 5715425782076579262}
   - component: {fileID: 4995732616060372977}
-  - component: {fileID: 7126444758507347498}
   m_Layer: 0
   m_Name: Vent sqare 1
   m_TagString: Untagged
@@ -179,12 +141,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7126444758507347497}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4611213271616772387}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5715425782076579262
 MeshFilter:
@@ -205,10 +168,12 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -233,25 +198,4 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &7126444758507347498
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7126444758507347497}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7939606da92c0a48afb3b69f7670dc2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EnableChance: 0
-  CreateChance: 60
-  EnableChildrensDestroy: 0
-  ChildrensLeft: 1
-  EnableAlbedoRandom: 1
-  Colors:
-  - {r: 1, g: 0.9009434, b: 0.9009434, a: 1}
-  - {r: 0.9161581, g: 1, b: 0.9019608, a: 1}
-  - {r: 0.9049057, g: 0.9019608, b: 1, a: 1}
-  - {r: 1, g: 0.99964947, b: 0.9019608, a: 1}
+  m_AdditionalVertexStreams: {fileID: 0}

@@ -9,6 +9,9 @@ using System.Collections;
 
 public class PlayerInventory : MonoBehaviour
 {
+
+    [SerializeField] private Canvas uiCanvas;
+
     private static PlayerInventory instance = null;
 
     [SerializeField] private Canvas _inventoryCanvas;
@@ -62,6 +65,7 @@ public class PlayerInventory : MonoBehaviour
 
     public void Open()
     {
+        uiCanvas.enabled = false;
         Settings.inventoryOn = true;
         CursorManager.ShowCursor();
         _inventoryCanvas.gameObject.SetActive(true);
@@ -72,6 +76,7 @@ public class PlayerInventory : MonoBehaviour
     private IEnumerator Close() 
     {
         yield return null;
+        uiCanvas.enabled = true;
         Settings.inventoryOn = false;
         CursorManager.HideCursor();
         _inventoryCanvas.gameObject.SetActive(false);

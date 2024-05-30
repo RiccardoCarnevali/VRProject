@@ -8,6 +8,12 @@ public class Door : MonoBehaviour
     private float doorOpenTimeSeconds = 1f;
     [SerializeField] private float yEnd;
 
+    private AudioSource audioSource;
+
+    private void Start() {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     public void Open() {
         StartCoroutine(OpenCoroutine());
     }
@@ -19,6 +25,7 @@ public class Door : MonoBehaviour
 
         float doorOpenProgress = 0;
 
+        audioSource.Play();
         while (doorOpenProgress < doorOpenTimeSeconds) {
             doorOpenProgress += Time.deltaTime * Time.timeScale;
             transform.localPosition = Vector3.Lerp(start, end, doorOpenProgress / doorOpenTimeSeconds);

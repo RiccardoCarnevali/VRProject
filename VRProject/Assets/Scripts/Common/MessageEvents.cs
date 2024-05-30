@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class MessageEvents
 {
-    public static string VIEW_PICTURE = "VIEW_PICTURE";
+    public const string VIEW_PICTURE = "VIEW_PICTURE";
+    public const string POLAROID_PICKED_UP = "POLAROID_PICKED_UP";
 }
