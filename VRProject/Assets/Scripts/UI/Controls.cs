@@ -11,23 +11,28 @@ public class Controls : MonoBehaviour
     [SerializeField] private CanvasGroup takePictureControls;
     private float takePictureControlsShowTimeSeconds = 5f;
 
+    [SerializeField] private CanvasGroup inventoryControls;
+    private float inventoryControlsShowTimeSeconds = 5f;
+
     private float disappearTimeSeconds = 1f;
 
     private void Awake() {
         Messenger.AddListener(MessageEvents.POLAROID_PICKED_UP, OnPolaroidPickedUp);
+        Messenger.AddListener(MessageEvents.FIRST_ITEM_PICKED_UP, OnFirstItemPickedUp);
     }
 
     private void OnDestroy() {
         Messenger.RemoveListener(MessageEvents.POLAROID_PICKED_UP, OnPolaroidPickedUp);
+        Messenger.RemoveListener(MessageEvents.FIRST_ITEM_PICKED_UP, OnFirstItemPickedUp);
     }
 
     void Start()
     {
-        StartCoroutine(Show(moveControlsShowTimeSeconds, moveControls));
-        StartCoroutine(Show(lookControlsShowTimeSeconds, lookControls));
+        StartCoroutine(Show(moveControls, moveControlsShowTimeSeconds));
+        StartCoroutine(Show(lookControls, lookControlsShowTimeSeconds));
     }
 
-    private IEnumerator Show(float waitSeconds, CanvasGroup group) {
+    private IEnumerator Show(CanvasGroup group, float waitSeconds) {
         group.gameObject.SetActive(true);
         yield return new WaitForSeconds(waitSeconds);
 
@@ -43,6 +48,10 @@ public class Controls : MonoBehaviour
     }
 
     private void OnPolaroidPickedUp() {
-        StartCoroutine(Show(takePictureControlsShowTimeSeconds, takePictureControls));
+        StartCoroutine(Show(takePictureControls, takePictureControlsShowTimeSeconds));
+    }
+
+    private  void OnFirstItemPickedUp() {
+        StartCoroutine(Show(inventoryControls, inventoryControlsShowTimeSeconds));
     }
 }

@@ -16,7 +16,7 @@ public class Password : MonoBehaviour
 
     [SerializeField] private Door door;
 
-    [SerializeField] private GameObject computer;
+    [SerializeField] private Interactable computer;
 
     private void Start() {
         passwordInput = GetComponent<TMP_InputField>();
@@ -65,7 +65,8 @@ public class Password : MonoBehaviour
         yield return ShowResult("Access granted");
         yield return new WaitForSeconds(1);
         door.Open();
-        computer.layer = LayerMask.NameToLayer(Layers.DEFAULT_LAYER);
+
+        computer.DisableInteraction();
         Settings.inPuzzle = false;
         computerScreen.SetActive(false);
     }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Door : MonoBehaviour
 {
 
-    private float doorOpenTimeSeconds = 1f;
+    private float doorOpenTimeSeconds = 1.4f;
     [SerializeField] private float yEnd;
 
     private AudioSource audioSource;

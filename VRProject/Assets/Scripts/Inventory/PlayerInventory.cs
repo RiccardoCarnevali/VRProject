@@ -11,6 +11,7 @@ public class PlayerInventory : MonoBehaviour
 {
 
     [SerializeField] private Canvas uiCanvas;
+    private bool firstItem = true;
 
     private static PlayerInventory instance = null;
 
@@ -97,6 +98,11 @@ public class PlayerInventory : MonoBehaviour
 
     public InventorySlot AddItem(Item item)
     {
+        if (firstItem) {
+            Messenger.Broadcast(MessageEvents.FIRST_ITEM_PICKED_UP);
+            firstItem = false;
+        }
+        
         _inventoryCanvas.gameObject.SetActive(true);
         GameObject slot = Instantiate(_inventorySlotPrefab);
         slot.transform.SetParent(s_slotsLayout.transform, false);

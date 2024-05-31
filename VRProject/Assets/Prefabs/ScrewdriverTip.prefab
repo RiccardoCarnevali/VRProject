@@ -62,7 +62,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b1b27dfd0df4295478e3d664f5a804cc, type: 3}
       propertyPath: m_Name
-      value: screwdriver_tip
+      value: ScrewdriverTip
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b1b27dfd0df4295478e3d664f5a804cc, type: 3}
       propertyPath: m_Layer
@@ -81,6 +81,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b1b27dfd0df4295478e3d664f5a804cc, type: 3}
       insertIndex: -1
       addedObject: {fileID: 564568038748576718}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b1b27dfd0df4295478e3d664f5a804cc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2221368404638892769}
   m_SourcePrefab: {fileID: 100100000, guid: b1b27dfd0df4295478e3d664f5a804cc, type: 3}
 --- !u!1 &7614535998046718002 stripped
 GameObject:
@@ -134,3 +137,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3779cf0361033d84bb9dd36b6e6eeaf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2221368404638892769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7614535998046718002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5ca1e5e45b9ba14f96278acc3f351bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highlightMaterial: {fileID: 2100000, guid: 482c7346297ff204cb2ea25644a126fc, type: 2}
