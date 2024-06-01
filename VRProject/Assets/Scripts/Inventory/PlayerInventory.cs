@@ -164,7 +164,11 @@ public class PlayerInventory : MonoBehaviour
 
     public void ExamineItem()
     {
-        StartCoroutine(Close());
+        StartCoroutine(ExamineItemCoroutine());
+    }
+
+    public IEnumerator ExamineItemCoroutine() {
+        yield return Close();
         inspectionScreen.StartInspecting(s_selectedInventorySlot.Item.gameObject);
         _inventoryCanvas.gameObject.SetActive(false);
     }

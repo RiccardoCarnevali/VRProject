@@ -36,7 +36,6 @@ public class PlayerMove : MonoBehaviour
         _characterController.Move(movement);
 
         if (_characterController.velocity.magnitude >= 2f && !step) {
-            Debug.Log(_characterController.velocity.magnitude);
             audioSource.PlayOneShot(footstepSFX);
             StartCoroutine(WaitForFootsteps());
         }

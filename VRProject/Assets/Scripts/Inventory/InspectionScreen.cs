@@ -3,14 +3,16 @@ using UnityEngine;
 
 public class InspectionScreen : MonoBehaviour
 {
+    [SerializeField] private Canvas ui;
+
     [SerializeField] private float inspectedObjectDistanceFromCamera = 3f;
     [SerializeField] private float rotationSpeed = 40;
     [SerializeField] private GameObject inventoryCanvas;
-    private Camera inspectionCamera;
+    [SerializeField] private GameObject inspectionCamera;
     private GameObject inspectedObject;
 
     private void Start() {
-        inspectionCamera = GetComponentInChildren<Camera>();
+        inspectionCamera.SetActive(false);
     }
 
     private void Update() {
@@ -25,9 +27,10 @@ public class InspectionScreen : MonoBehaviour
     }
 
     public void StartInspecting(GameObject objectToInspect) {
+        ui.enabled = false;
         CursorManager.ShowCursor();
         Settings.inspecting = true;
-        inspectionCamera.enabled = true;
+        inspectionCamera.SetActive(true);
         inspectedObject = Instantiate(objectToInspect);
         inspectedObject.transform.SetParent(transform, false);
         inspectedObject.transform.localScale = Vector3.one;
@@ -38,8 +41,9 @@ public class InspectionScreen : MonoBehaviour
     //the inventory would also immediately close
     private IEnumerator StopInspecting() {
         yield return null;
+        ui.enabled = true;
         Settings.inspecting = false;
-        inspectionCamera.enabled = false;
+        inspectionCamera.SetActive(false);
         PlayerInventory.Instance().Open();
         Destroy(inspectedObject);
     }
