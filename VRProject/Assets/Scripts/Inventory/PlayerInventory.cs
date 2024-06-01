@@ -169,6 +169,7 @@ public class PlayerInventory : MonoBehaviour
         _inventoryCanvas.gameObject.SetActive(false);
     }
 
+    //Returns the selected item or null if no item is selected
     public Item GetSelectedItem() {
         if (s_selectedInventorySlot == null)
             return null;
