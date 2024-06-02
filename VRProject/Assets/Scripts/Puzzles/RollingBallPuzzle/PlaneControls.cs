@@ -35,8 +35,7 @@ public class PlaneControls : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape)) {
             Reset();
-            Settings.inPuzzle = false;
-            gameObject.SetActive(false);
+            ExitPuzzle();
             return;
         }
 
@@ -135,7 +134,11 @@ public class PlaneControls : MonoBehaviour
         Destroy(ball.GetComponent<AudioSource>());
         Destroy(ball.GetComponent<Rigidbody>());
         ball.GetComponent<SphereCollider>().radius = 2;
+        ExitPuzzle();
+    }
 
+    private void ExitPuzzle() {
+        Messenger.Broadcast(MessageEvents.TOGGLE_UI);
         Settings.inPuzzle = false;
         gameObject.SetActive(false);
     }

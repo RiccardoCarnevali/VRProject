@@ -9,6 +9,7 @@ public static class Settings
     public static bool inventoryOn = false;
     public static bool inspecting = false;
     public static bool inPuzzle = false;
-    public static bool paused {get {return dialogue || takingPicture || pauseMenuOn || inventoryOn || inspecting || inPuzzle;}}
+    public static bool gameStarting = true;
+    public static bool paused {get {return dialogue || takingPicture || pauseMenuOn || inventoryOn || inspecting || inPuzzle || gameStarting;}}
 
 }

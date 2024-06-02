@@ -9,25 +9,20 @@ public class ScrewInteractable : Interactable
 
     public override string GetLabel()
     {
-        if (IsScrewdriverSelected())
-            return "Use item";
+        if (PlayerInventory.Instance().CheckSelectedItem(Item.ItemType.SCREWDRIVER))
+            return InteractionLabels.USE_ITEM;
         else
-            return "Inspect";
+            return InteractionLabels.INSPECT;
     }
 
     public override void Interact()
     {
-        if (IsScrewdriverSelected()) {
+        if (PlayerInventory.Instance().CheckSelectedItem(Item.ItemType.SCREWDRIVER)) {
             Destroy(gameObject);
             screwedBox.ScrewRemoved();
         }
         else {
             DialogueManager.Instance().StartDialogue(inspectionDialgoue);
         }
-    }
-
-    private bool IsScrewdriverSelected() {
-        Item item = PlayerInventory.Instance().GetSelectedItem();
-        return item != null && item.type == Item.ItemType.SCREWDRIVER;
     }
 }

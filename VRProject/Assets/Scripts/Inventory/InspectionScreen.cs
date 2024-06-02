@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class InspectionScreen : MonoBehaviour
 {
-    [SerializeField] private Canvas ui;
-
     [SerializeField] private float inspectedObjectDistanceFromCamera = 3f;
     [SerializeField] private float rotationSpeed = 40;
     [SerializeField] private GameObject inventoryCanvas;
@@ -27,7 +25,7 @@ public class InspectionScreen : MonoBehaviour
     }
 
     public void StartInspecting(GameObject objectToInspect) {
-        ui.enabled = false;
+        Messenger.Broadcast(MessageEvents.TOGGLE_UI);
         CursorManager.ShowCursor();
         Settings.inspecting = true;
         inspectionCamera.SetActive(true);
@@ -41,7 +39,7 @@ public class InspectionScreen : MonoBehaviour
     //the inventory would also immediately close
     private IEnumerator StopInspecting() {
         yield return null;
-        ui.enabled = true;
+        Messenger.Broadcast(MessageEvents.TOGGLE_UI);
         Settings.inspecting = false;
         inspectionCamera.SetActive(false);
         PlayerInventory.Instance().Open();

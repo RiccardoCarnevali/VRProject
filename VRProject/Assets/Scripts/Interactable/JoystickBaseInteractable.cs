@@ -16,11 +16,11 @@ public class JoystickBaseInteractable : Interactable
     public override string GetLabel()
     {
         if (joystickInserted) 
-            return "Interact";
-        else if (IsJoystickSelected())
-            return "Use item";
+            return InteractionLabels.INTERACT;
+        else if (PlayerInventory.Instance().CheckSelectedItem(Item.ItemType.JOYSTICK))
+            return InteractionLabels.USE_ITEM;
         else 
-            return "Inspect";
+            return InteractionLabels.INSPECT;
     }
 
     public override void Interact()
@@ -28,7 +28,7 @@ public class JoystickBaseInteractable : Interactable
         if (joystickInserted) {
             rollingBallPuzzle.StartPuzzle();
         }
-        else if (IsJoystickSelected()) {
+        else if (PlayerInventory.Instance().CheckSelectedItem(Item.ItemType.JOYSTICK)) {
             PlayerInventory.Instance().ConsumeSelectedItem();
             joystickShaft.SetActive(true);
             joystickInserted = true;
@@ -36,10 +36,5 @@ public class JoystickBaseInteractable : Interactable
         else {
             DialogueManager.Instance().StartDialogue(inspectDialogue);
         }
-    }
-
-    private bool IsJoystickSelected() {
-        Item item = PlayerInventory.Instance().GetSelectedItem();
-        return item != null && item.type == Item.ItemType.JOYSTICK;
     }
 }

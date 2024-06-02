@@ -3,10 +3,10 @@ using UnityEngine;
 public class GoalTrigger : MonoBehaviour
 {
     [SerializeField] private PlaneControls planeControls;
-    [SerializeField] private GameObject joystick;
+    [SerializeField] private Interactable joystick;
     
     private void OnTriggerEnter(Collider other) {
-        joystick.gameObject.layer = LayerMask.NameToLayer(Layers.DEFAULT_LAYER);
+        joystick.DisableInteraction();
         StartCoroutine(planeControls.Win());
     }
 }

@@ -6,7 +6,7 @@ public class DialogueInteractable : Interactable
 
     public override string GetLabel()
     {
-        return "Read";
+        return InteractionLabels.READ;
     }
 
     public override void Interact()

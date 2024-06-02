@@ -10,7 +10,6 @@ using System.Collections;
 public class PlayerInventory : MonoBehaviour
 {
 
-    [SerializeField] private Canvas uiCanvas;
     private bool firstItem = true;
 
     private static PlayerInventory instance = null;
@@ -66,7 +65,7 @@ public class PlayerInventory : MonoBehaviour
 
     public void Open()
     {
-        uiCanvas.enabled = false;
+        Messenger.Broadcast(MessageEvents.TOGGLE_UI);
         Settings.inventoryOn = true;
         CursorManager.ShowCursor();
         _inventoryCanvas.gameObject.SetActive(true);
@@ -77,7 +76,7 @@ public class PlayerInventory : MonoBehaviour
     private IEnumerator Close() 
     {
         yield return null;
-        uiCanvas.enabled = true;
+        Messenger.Broadcast(MessageEvents.TOGGLE_UI);
         Settings.inventoryOn = false;
         CursorManager.HideCursor();
         _inventoryCanvas.gameObject.SetActive(false);
@@ -173,11 +172,11 @@ public class PlayerInventory : MonoBehaviour
         _inventoryCanvas.gameObject.SetActive(false);
     }
 
-    //Returns the selected item or null if no item is selected
-    public Item GetSelectedItem() {
+    //Checks if the selected item is of type type
+    public bool CheckSelectedItem(Item.ItemType type) {
         if (s_selectedInventorySlot == null)
-            return null;
-        return s_selectedInventorySlot.Item;
+            return false;
+        return s_selectedInventorySlot.Item.type == type;
     }
 
     public void ConsumeSelectedItem() {

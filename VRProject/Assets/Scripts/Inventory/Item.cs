@@ -10,15 +10,11 @@ public class Item: MonoBehaviour
         [InspectorName("Screwdriver Tip")] SCREWDRIVER_TIP,
         [InspectorName("Golden ball")] GOLDEN_BALL,
         [InspectorName("Joystick")] JOYSTICK,
+        [InspectorName("Scissors")] SCISSORS,
     }
 
     [field: SerializeField] public string Description {get; private set;}
     [Searchable] public ItemType type;
-
-    void Start()
-    {
-        
-    }
     
 }
 
