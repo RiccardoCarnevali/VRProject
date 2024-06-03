@@ -8,6 +8,8 @@ public class GameStart : MonoBehaviour
     [SerializeField] private Image startBlack;
     private float fadeDurationSeconds = 2f;
 
+    [SerializeField] private Dialogue startDialogue;
+
     void Start()
     {
         StartCoroutine(FadeIn());
@@ -27,5 +29,6 @@ public class GameStart : MonoBehaviour
 
         startBlack.color = transparent;
         Settings.gameStarting = false;
+        DialogueManager.Instance().StartDialogue(startDialogue);
     }
 }

@@ -28,6 +28,13 @@ public class Controls : MonoBehaviour
 
     void Start()
     {
+        StartCoroutine(OnGameStart());
+    }
+
+    private IEnumerator OnGameStart() {
+        while (Settings.paused)
+            yield return null;
+
         StartCoroutine(Show(moveControls, moveControlsShowTimeSeconds));
         StartCoroutine(Show(lookControls, lookControlsShowTimeSeconds));
     }

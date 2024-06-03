@@ -1,23 +1,20 @@
-
-
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 using ItemType = Item.ItemType;
 
 public class ItemCombineRecipes : MonoBehaviour
 {
-    [field: SerializeField] public Item Screwdriver {get; private set;}
-
+    [SerializeField] private Item screwdriver;
+    [SerializeField] private Item scissors;
 
     public static Dictionary<HashSet<ItemType>, Item> CanCombine;
 
     void Awake()
     {
         CanCombine = new();
-        AddRecipe(ItemType.SCREWDRIVER_HANDLE, ItemType.SCREWDRIVER_TIP, Screwdriver);
+        AddRecipe(ItemType.SCREWDRIVER_HANDLE, ItemType.SCREWDRIVER_TIP, screwdriver);
+        AddRecipe(ItemType.SCISSORS_INDEX_HALF, ItemType.SCISSORS_THUMB_HALF, scissors);
     }
 
     private void AddRecipe(ItemType first, ItemType second, Item result)

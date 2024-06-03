@@ -11,6 +11,8 @@ public class Item: MonoBehaviour
         [InspectorName("Golden ball")] GOLDEN_BALL,
         [InspectorName("Joystick")] JOYSTICK,
         [InspectorName("Scissors")] SCISSORS,
+        [InspectorName("ScissorsIndexHalf")] SCISSORS_INDEX_HALF,
+        [InspectorName("ScissorsThumbHalf")] SCISSORS_THUMB_HALF,
     }
 
     [field: SerializeField] public string Description {get; private set;}
