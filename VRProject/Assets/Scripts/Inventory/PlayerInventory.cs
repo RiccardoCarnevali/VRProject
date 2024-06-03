@@ -17,6 +17,8 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] private Canvas _inventoryCanvas;
     [SerializeField] private GameObject _inventorySlotPrefab;
     [SerializeField] private GameObject _selectedItemPreview;
+    [SerializeField] private GameObject _combineButton;
+    [SerializeField] private GameObject _inspectButton;
     [SerializeField] private TextMeshProUGUI _noItemText;
     [SerializeField] private InspectionScreen inspectionScreen;
 
@@ -51,6 +53,8 @@ public class PlayerInventory : MonoBehaviour
         bool noItems = s_itemSlots.Count() == 0;
 
         _selectedItemPreview.SetActive(!noItems);
+        _combineButton.SetActive(!noItems);
+        _inspectButton.SetActive(!noItems);
         _noItemText.gameObject.SetActive(noItems);
         
     }
@@ -71,7 +75,7 @@ public class PlayerInventory : MonoBehaviour
         _inventoryCanvas.gameObject.SetActive(true);
     }
 
-    //This is a coroutine so that pressing escape and going to the inventory happen on subsequent frames, otherwise
+    //This is a coroutine so that pressing escape and going to the inventory happens on subsequent frames, otherwise
     //the inventory would also immediately close
     private IEnumerator Close() 
     {
@@ -80,6 +84,7 @@ public class PlayerInventory : MonoBehaviour
         Settings.inventoryOn = false;
         CursorManager.HideCursor();
         _inventoryCanvas.gameObject.SetActive(false);
+        s_selectedCombineObject = null;
     }
 
     public void SetSelected(InventorySlot slot)
