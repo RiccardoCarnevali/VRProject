@@ -12,6 +12,7 @@ public class GameStart : MonoBehaviour
 
     void Start()
     {
+        Messenger.Broadcast(MessageEvents.TOGGLE_UI);
         StartCoroutine(FadeIn());
     }
 

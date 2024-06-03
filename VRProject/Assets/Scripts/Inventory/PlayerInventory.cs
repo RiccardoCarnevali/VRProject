@@ -9,10 +9,9 @@ using System.Collections;
 
 public class PlayerInventory : MonoBehaviour
 {
+    private static PlayerInventory instance = null;
 
     private bool firstItem = true;
-
-    private static PlayerInventory instance = null;
 
     [SerializeField] private Canvas _inventoryCanvas;
     [SerializeField] private GameObject _inventorySlotPrefab;
@@ -96,6 +95,7 @@ public class PlayerInventory : MonoBehaviour
             s_itemSlots.ForEach(other => other.Selected = other == slot);
             s_selectedInventorySlot = slot;
             SetItemPreview();
+            Messenger<Item>.Broadcast(MessageEvents.SELECTED_ITEM, s_selectedInventorySlot.Item);
         }
         
     }
@@ -189,6 +189,7 @@ public class PlayerInventory : MonoBehaviour
             s_selectedInventorySlot = null;
             s_itemPreviewSlot.ClearItem();
             s_itemPreviewText.SetText("");
+            Messenger<Item>.Broadcast(MessageEvents.SELECTED_ITEM, null);
         }
     }
 

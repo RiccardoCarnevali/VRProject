@@ -37,5 +37,6 @@ public class PictureViewer : MonoBehaviour
         CursorManager.HideCursor();
         Settings.takingPicture = false;
         pictureBackground.SetActive(false);
+        Messenger.Broadcast(MessageEvents.TOGGLE_UI);
     }
 }
