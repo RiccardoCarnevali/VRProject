@@ -91,4 +91,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Description>k__BackingField: A pair of scissors. Might prove useful to cut something
     soft.
+  <Rotation>k__BackingField: {x: 140, y: -90, z: -90}
+  <Scale>k__BackingField: 300
   type: 5

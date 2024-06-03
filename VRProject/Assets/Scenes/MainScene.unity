@@ -2236,12 +2236,10 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1154444898}
-  - {fileID: 289503337}
-  - {fileID: 740514235}
-  - {fileID: 320902714}
   - {fileID: 1004171585}
   - {fileID: 1157263591}
   - {fileID: 949856746}
+  - {fileID: 1401506783}
   m_Father: {fileID: 2136131640}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -4611,7 +4609,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &289503337
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4619,18 +4617,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 289503336}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1136643079}
-  m_Father: {fileID: 84995550}
+  m_Father: {fileID: 1401506783}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -131, y: 143}
-  m_SizeDelta: {x: 250, y: 100}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 110, y: -302.5}
+  m_SizeDelta: {x: 200, y: 85}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &289503338
 MonoBehaviour:
@@ -5543,19 +5541,19 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 320902713}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2042037537}
   - {fileID: 1851602254}
-  m_Father: {fileID: 84995550}
+  m_Father: {fileID: 1401506783}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -131, y: 324}
-  m_SizeDelta: {x: 220, y: 320}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 110, y: -165.41112}
+  m_SizeDelta: {x: 220, y: 280}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &321893779
 GameObject:
@@ -7578,6 +7576,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Description>k__BackingField: A golden ball found hidden in a cup.
+  <Rotation>k__BackingField: {x: 0, y: 0, z: 0}
+  <Scale>k__BackingField: 50
   type: 3
 --- !u!135 &472045517
 SphereCollider:
@@ -10673,9 +10673,9 @@ RectTransform:
   m_Father: {fileID: 740514235}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 125.5, y: 49}
-  m_SizeDelta: {x: 250, y: 100}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: -56, y: -56}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &721942617
 MonoBehaviour:
@@ -11717,18 +11717,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 740514234}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 721942616}
-  m_Father: {fileID: 84995550}
+  m_Father: {fileID: 1401506783}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -131, y: 73}
-  m_SizeDelta: {x: 250, y: 100}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 110, y: -347.91113}
+  m_SizeDelta: {x: 200, y: 85}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &740514236
 MonoBehaviour:
@@ -19194,6 +19194,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Description>k__BackingField: A golden ball foud locked away in a small wooden
     box.
+  <Rotation>k__BackingField: {x: 0, y: 0, z: 0}
+  <Scale>k__BackingField: 50
   type: 3
 --- !u!135 &1181768038
 SphereCollider:
@@ -22450,6 +22452,71 @@ Transform:
   - {fileID: 735961248}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1401506782
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1401506783}
+  - component: {fileID: 1401506785}
+  m_Layer: 5
+  m_Name: RightPanel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1401506783
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1401506782}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 320902714}
+  - {fileID: 289503337}
+  - {fileID: 740514235}
+  m_Father: {fileID: 84995550}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -125, y: 20.000002}
+  m_SizeDelta: {x: 220, y: -40.000004}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1401506785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1401506782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 4
+  m_Spacing: 0
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 0
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
 --- !u!4 &1406242804 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8075795743059959683, guid: a8b9c6f9a89711d4da799da51e7037ce, type: 3}
@@ -22812,7 +22879,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 7209819e2bde32c40b87f02ae8cf8e53, type: 2}
     - target: {fileID: 919132149155446097, guid: d3517c24de7289843a6b373d000350e6, type: 3}
       propertyPath: m_Name
-      value: Box
+      value: ScrewedBox
       objectReference: {fileID: 0}
     - target: {fileID: 3732412489461408951, guid: d3517c24de7289843a6b373d000350e6, type: 3}
       propertyPath: m_IsActive
@@ -23197,6 +23264,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Description>k__BackingField: A small metal rod, perhaps a part of some kind of
     tool
+  <Rotation>k__BackingField: {x: -45, y: 90, z: 0}
+  <Scale>k__BackingField: 700
   type: 2
 --- !u!65 &1467362714
 BoxCollider:
@@ -24657,7 +24726,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1640757352
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25732,6 +25801,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Description>k__BackingField: A golden ball retrieved from a maze.
+  <Rotation>k__BackingField: {x: 0, y: 0, z: 0}
+  <Scale>k__BackingField: 50
   type: 3
 --- !u!114 &1732125066
 MonoBehaviour:
@@ -27333,6 +27404,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Description>k__BackingField: A joystick. Maybe it can be used to control something
+  <Rotation>k__BackingField: {x: 0, y: 0, z: 0}
+  <Scale>k__BackingField: 500
   type: 4
 --- !u!65 &1833904480
 BoxCollider:
@@ -27668,6 +27741,7 @@ GameObject:
   - component: {fileID: 1851602254}
   - component: {fileID: 1851602256}
   - component: {fileID: 1851602255}
+  - component: {fileID: 1851602257}
   m_Layer: 5
   m_Name: SelectedItemPreviewDescription
   m_TagString: Untagged
@@ -27689,10 +27763,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 320902714}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -110}
-  m_SizeDelta: {x: 220, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 0, y: 40}
+  m_SizeDelta: {x: 0, y: 16.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1851602255
 MonoBehaviour:
@@ -27749,7 +27823,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: 1024
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -27791,6 +27865,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1851602253}
   m_CullTransparentMesh: 1
+--- !u!114 &1851602257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1851602253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 0
+  m_VerticalFit: 2
 --- !u!1 &1861518470
 GameObject:
   m_ObjectHideFlags: 0
@@ -30365,9 +30453,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 320902714}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 50}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 110, y: -110}
   m_SizeDelta: {x: 220, y: 220}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2042037538
@@ -31668,6 +31756,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Description>k__BackingField: The handle of a screwdriver.
+  <Rotation>k__BackingField: {x: 120, y: 90, z: 90}
+  <Scale>k__BackingField: 500
   type: 1
 --- !u!23 &2128523578
 MeshRenderer:
@@ -31841,9 +31931,7 @@ MonoBehaviour:
   _inventorySlotPrefab: {fileID: 1781011029317953784, guid: 41601c0700e1663abb71ea8917b0ea62, type: 3}
   _selectedItemPreview: {fileID: 320902713}
   _combineButton: {fileID: 740514234}
-  _inspectButton: {fileID: 289503336}
   _noItemText: {fileID: 949856744}
-  inspectionScreen: {fileID: 1640757352}
 --- !u!4 &2136131640
 Transform:
   m_ObjectHideFlags: 0
@@ -33027,6 +33115,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Description>k__BackingField: Half of a pair of scissors. This looks like the part
     where you put your index finger in.
+  <Rotation>k__BackingField: {x: -190, y: -90, z: -90}
+  <Scale>k__BackingField: 300
   type: 6
 --- !u!65 &2681748246143307567
 BoxCollider:
@@ -33482,6 +33572,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Description>k__BackingField: Half of a pair of scissors. This looks like the part
     where you put your thumb in.
+  <Rotation>k__BackingField: {x: 45, y: 90, z: 90}
+  <Scale>k__BackingField: 300
   type: 7
 --- !u!65 &3690605161344012277
 BoxCollider:

@@ -18,9 +18,9 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] private GameObject _inventorySlotPrefab;
     [SerializeField] private GameObject _selectedItemPreview;
     [SerializeField] private GameObject _combineButton;
-    [SerializeField] private GameObject _inspectButton;
+    // [SerializeField] private GameObject _inspectButton;
     [SerializeField] private TextMeshProUGUI _noItemText;
-    [SerializeField] private InspectionScreen inspectionScreen;
+    // [SerializeField] private InspectionScreen inspectionScreen;
 
     private GridLayoutGroup s_slotsLayout;
     private TextMeshProUGUI s_itemPreviewText;
@@ -54,7 +54,7 @@ public class PlayerInventory : MonoBehaviour
 
         _selectedItemPreview.SetActive(!noItems);
         _combineButton.SetActive(!noItems);
-        _inspectButton.SetActive(!noItems);
+        // _inspectButton.SetActive(!noItems);
         _noItemText.gameObject.SetActive(noItems);
         
     }
@@ -114,7 +114,7 @@ public class PlayerInventory : MonoBehaviour
         InventorySlot slotComponent = slot.GetComponent<InventorySlot>();
         slotComponent.GetComponent<Button>().onClick.AddListener(delegate {SetSelected(slotComponent);});
         slotComponent.GetComponentInChildren<ParticleSystem>().Stop();
-        slotComponent.SetItem(item);
+        slotComponent.SetItem(item, false);
 
         s_itemSlots.Add(slotComponent);
         SetSelected(slotComponent);
@@ -132,10 +132,9 @@ public class PlayerInventory : MonoBehaviour
 
     private void SetItemPreview()
     {
-        s_itemPreview = Instantiate(s_selectedInventorySlot.Item, Vector3.zero, Quaternion.Euler(45f,0,45f));
-        s_itemPreviewSlot.SetItem(s_itemPreview);
+        s_itemPreview = Instantiate(s_selectedInventorySlot.Item);
+        s_itemPreviewSlot.SetItem(s_itemPreview, true);
         s_itemPreviewText.SetText(s_itemPreview.Description);
-        s_itemPreview.transform.localScale *= 1.8f;
     }
 
     public void OnCombineClicked()
@@ -166,16 +165,16 @@ public class PlayerInventory : MonoBehaviour
         return canCombine;
     }
 
-    public void ExamineItem()
-    {
-        StartCoroutine(ExamineItemCoroutine());
-    }
+    // public void ExamineItem()
+    // {
+    //     StartCoroutine(ExamineItemCoroutine());
+    // }
 
-    public IEnumerator ExamineItemCoroutine() {
-        yield return Close();
-        inspectionScreen.StartInspecting(s_selectedInventorySlot.Item.gameObject);
-        _inventoryCanvas.gameObject.SetActive(false);
-    }
+    // public IEnumerator ExamineItemCoroutine() {
+    //     yield return Close();
+    //     inspectionScreen.StartInspecting(s_selectedInventorySlot.Item.gameObject);
+    //     _inventoryCanvas.gameObject.SetActive(false);
+    // }
 
     //Checks if the selected item is of type type
     public bool CheckSelectedItem(Item.ItemType type) {
@@ -188,6 +187,8 @@ public class PlayerInventory : MonoBehaviour
         if (s_selectedInventorySlot != null) {
             RemoveItem(s_selectedInventorySlot.Item);
             s_selectedInventorySlot = null;
+            s_itemPreviewSlot.ClearItem();
+            s_itemPreviewText.SetText("");
         }
     }
 
