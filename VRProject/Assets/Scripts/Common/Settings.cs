@@ -11,6 +11,7 @@ public static class Settings
     public static bool pauseMenuOn = false;
     public static bool inventoryOn = false;
     public static bool inspecting = false;
-    public static bool paused {get {return dialogue || takingPicture || pauseMenuOn || inventoryOn || inspecting;}}
+    public static bool padlockOn = false;
+    public static bool paused {get {return dialogue || takingPicture || pauseMenuOn || inventoryOn || inspecting || padlockOn;}}
 
 }
