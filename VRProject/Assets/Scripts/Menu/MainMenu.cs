@@ -29,6 +29,11 @@ public class MainMenu : MonoBehaviour
 
     }
 
+    public void Back(){
+        settingsMenu.SetActive(false);
+        mainMenu.SetActive(true);
+    }
+
     public void Exit(){
         Application.Quit();
     }

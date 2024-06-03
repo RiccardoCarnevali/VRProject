@@ -6,12 +6,12 @@ using UnityEngine.Audio;
 
 public class VolumeController : MonoBehaviour
 {
-    public Slider volumeSlider;
-    public AudioMixer audioMixer;
+    [SerializeField] private Slider volumeSlider;
+    [SerializeField] private AudioMixer audioMixer;
 
     void Start(){
         if (volumeSlider != null){
-            float volume = PlayerPrefs.GetFloat("Master", 0.50f);
+            float volume = PlayerPrefs.GetFloat("Master", 0.5f);
             volumeSlider.value = volume;
             SetVolume(volume);
             volumeSlider.onValueChanged.AddListener(SetVolume);
