@@ -10,8 +10,9 @@ public class GameStart : MonoBehaviour
 
     [SerializeField] private Dialogue startDialogue;
 
-    void Start()
+    void Awake()
     {
+        Settings.gameStarting = true;
         StartCoroutine(FadeIn());
     }
 

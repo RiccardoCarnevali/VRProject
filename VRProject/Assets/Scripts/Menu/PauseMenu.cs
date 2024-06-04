@@ -41,6 +41,8 @@ public class PauseMenu : MonoBehaviour
     }
 
     public void BackToMainMenuConfirmation(){
+        Settings.pauseMenuOn = false;
+        Time.timeScale = 1f;
         SceneManager.LoadScene("MainMenu");
     }
 }
