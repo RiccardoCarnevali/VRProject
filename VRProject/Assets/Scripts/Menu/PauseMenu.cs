@@ -1,9 +1,11 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-    public GameObject pauseMenu;
+    [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private GameObject warningPanel;
 
     void Update()
     {
@@ -24,6 +26,9 @@ public class PauseMenu : MonoBehaviour
     }
     
     public void Resume(){
+        if (warningPanel.activeSelf) {
+            warningPanel.SetActive(false);
+        }
         CursorManager.HideCursor();
         Settings.pauseMenuOn = false;
         pauseMenu.SetActive(false);
@@ -31,7 +36,11 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1f;
     }
 
-    public void Exit(){
-        Application.Quit();
+    public void BackToMainMenu(){
+        warningPanel.SetActive(true);
+    }
+
+    public void BackToMainMenuConfirmation(){
+        SceneManager.LoadScene("MainMenu");
     }
 }
