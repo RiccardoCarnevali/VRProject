@@ -7,8 +7,6 @@ using UnityEngine.UI;
 public class SpecialCamera : MonoBehaviour
 {
     private Animator polaroidAnimator;
-    [SerializeField] private Image cameraFlash;
-    private float cameraFlashTime = 0.75f;
 
     [SerializeField] private Camera specialCamera;
     [SerializeField] private GameObject pictureOriginal;
@@ -37,6 +35,7 @@ public class SpecialCamera : MonoBehaviour
 
     public IEnumerator TakePicture()
     {
+        Messenger.Broadcast(MessageEvents.TOGGLE_UI);
         animationPlaying = true;
         polaroidAnimator.SetTrigger("takePicture");
 
@@ -69,20 +68,7 @@ public class SpecialCamera : MonoBehaviour
 
     private void CameraFlash() {
         audioSource.Play();
-		StartCoroutine(FlashCoroutine());
-    }
-
-    private IEnumerator FlashCoroutine() {
-        float startTime = Time.time;
-
-        Color white = Color.white;
-        Color originalColor = cameraFlash.color;
-
-        while (Time.time - startTime < cameraFlashTime) {
-            cameraFlash.color = Color.Lerp(white, originalColor, (Time.time - startTime) / cameraFlashTime);
-            yield return null;
-        }
-        cameraFlash.color = originalColor;
+		Messenger.Broadcast(MessageEvents.CAMERA_FLASH);
     }
 
     public void ShowPicture() {

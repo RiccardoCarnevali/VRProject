@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class UIToggle : MonoBehaviour
 {
-    [SerializeField] private Canvas ui;
+    [SerializeField] private GameObject ui;
 
     void Start()
     {
@@ -14,6 +14,6 @@ public class UIToggle : MonoBehaviour
     }
 
     private void ToggleUI() {
-        ui.enabled = !ui.enabled;
+        ui.SetActive(!ui.activeSelf);
     }
 }

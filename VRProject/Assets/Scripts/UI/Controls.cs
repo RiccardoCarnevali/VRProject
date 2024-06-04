@@ -34,6 +34,8 @@ public class Controls : MonoBehaviour
     private IEnumerator OnGameStart() {
         while (Settings.paused)
             yield return null;
+        
+        Messenger.Broadcast(MessageEvents.TOGGLE_UI);
 
         StartCoroutine(Show(moveControls, moveControlsShowTimeSeconds));
         StartCoroutine(Show(lookControls, lookControlsShowTimeSeconds));

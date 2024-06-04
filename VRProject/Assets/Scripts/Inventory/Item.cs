@@ -16,6 +16,8 @@ public class Item: MonoBehaviour
     }
 
     [field: SerializeField] public string Description {get; private set;}
+    [field: SerializeField] public Vector3 Rotation {get; private set;}
+    [field: SerializeField] public float Scale {get; private set;}
     [Searchable] public ItemType type;
     
 }

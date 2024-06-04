@@ -43,26 +43,33 @@ public class InventorySlot : MonoBehaviour
 
     }
 
-    public void SetItem(Item item)
+    public void SetItem(Item item, bool preview)
     {
         ClearItem();
         Item = item;
         Item.transform.SetParent(transform, false);
-        Item.transform.SetLocalPositionAndRotation(new(0, 0, -100), Quaternion.Euler(45f, 0f, 45f));
-        ResizeItemToFitTile();
+        Item.transform.SetLocalPositionAndRotation(new(0, 0, -100), Quaternion.Euler(Item.Rotation));
+        
+        //In preview the object is already scaled to the canvas so we just make it a bit bigger
+        if (preview)
+            Item.transform.localScale = Item.transform.localScale * 2;
+        else
+            Item.transform.localScale = Vector3.one * Item.Scale;
+            
+        // ResizeItemToFitTile();
     }
 
-    private void ResizeItemToFitTile()
-    {
-        Renderer renderer = Item.GetComponentInChildren<Renderer>();
-        Bounds bound = renderer.bounds;
-        float maxBound = Mathf.Abs(Mathf.Max(bound.size.x, bound.size.y, bound.size.z));
-        Item.transform.localScale = new(
-            Item.transform.localScale.x / maxBound,
-            Item.transform.localScale.y / maxBound,
-            Item.transform.localScale.z / maxBound
-            );
+    // private void ResizeItemToFitTile()
+    // {
+    //     Renderer renderer = Item.GetComponentInChildren<Renderer>();
+    //     Bounds bound = renderer.bounds;
+    //     float maxBound = Mathf.Abs(Mathf.Max(bound.size.x, bound.size.y, bound.size.z));
+    //     Item.transform.localScale = new(
+    //         Item.transform.localScale.x / maxBound,
+    //         Item.transform.localScale.y / maxBound,
+    //         Item.transform.localScale.z / maxBound
+    //         );
 
 
-    }
+    // }
 }

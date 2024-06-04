@@ -13,6 +13,7 @@ public class GameStart : MonoBehaviour
     void Awake()
     {
         Settings.gameStarting = true;
+        Messenger.Broadcast(MessageEvents.TOGGLE_UI);
         StartCoroutine(FadeIn());
     }
 

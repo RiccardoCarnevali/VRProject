@@ -62,7 +62,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 992cd787ab3683c47aafc7b9f7f021a8, type: 3}
       propertyPath: m_Name
-      value: screwdriver
+      value: Screwdriver
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -91,4 +91,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Description>k__BackingField: A screwdriver, made by combining a handle with a
     tip.
+  <Rotation>k__BackingField: {x: 45, y: -90, z: 0}
+  <Scale>k__BackingField: 300
   type: 0
