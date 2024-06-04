@@ -27,7 +27,7 @@ public class InteractableUpdate : MonoBehaviour
 
             //All objects marked with layer Interactable should have the Interactable component, but this checks just in case
             if (hitInteractable && hitInfo.transform.TryGetComponent(out Interactable interactable)) {
-                canInteractText.GetComponent<TextMeshProUGUI>().text = interactable.GetLabel() + " (F)";
+                canInteractText.GetComponent<TextMeshProUGUI>().text = interactable.GetLabel();
                 canInteractText.SetActive(true);
 
                 if (Input.GetKeyDown(KeyCode.F)) {

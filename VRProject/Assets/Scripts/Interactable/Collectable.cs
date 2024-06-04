@@ -12,6 +12,7 @@ public class Collectable : Interactable
 
     public override void Interact()
     {
+        DisableInteraction();
         PlayerInventory.Instance().AddItem(GetComponent<Item>());
     }
 }

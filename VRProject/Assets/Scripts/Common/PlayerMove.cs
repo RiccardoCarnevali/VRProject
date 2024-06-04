@@ -1,17 +1,21 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    // Start is called before the first frame update
     public float speed = 6.0f;
     public float gravity = -9.8f;
     private CharacterController _characterController;
 
+    private AudioSource audioSource;
+    [SerializeField] private AudioClip footstepSFX;
+    private float footstepLengthSeconds = 0.3f;
+    private bool step = false;
+
     void Start()
     {
         _characterController = GetComponentInChildren<CharacterController>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -30,5 +34,16 @@ public class PlayerMove : MonoBehaviour
         movement = transform.TransformDirection(movement);
 
         _characterController.Move(movement);
+
+        if (_characterController.velocity.magnitude >= 2f && !step) {
+            audioSource.PlayOneShot(footstepSFX);
+            StartCoroutine(WaitForFootsteps());
+        }
+    }
+
+    private IEnumerator WaitForFootsteps() {
+        step = true;
+        yield return new WaitForSeconds(footstepLengthSeconds);
+        step = false;
     }
 }

@@ -11,7 +11,7 @@ public class ShapesPuzzleTrigger : Interactable
 
     public override string GetLabel()
     {
-        return "Interact";
+        return InteractionLabels.INTERACT;
     }
 
     public override void Interact()

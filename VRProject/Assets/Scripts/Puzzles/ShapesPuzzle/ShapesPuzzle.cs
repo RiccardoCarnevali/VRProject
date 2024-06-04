@@ -15,7 +15,14 @@ public class ShapesPuzzle : MonoBehaviour
     private Color loseColor = new Color(1, 0, 0, 0.1f);
     private float resetDelaySeconds = 1f;
 
+    [SerializeField] private GameObject cup;
+    [SerializeField] private GameObject cupFallen;
+    [SerializeField] private GameObject ball;
+    private ShapesPuzzleTrigger shapesPuzzleTrigger;
+
     public void StartPuzzle() {
+        shapesPuzzleTrigger = GetComponent<ShapesPuzzleTrigger>();
+        Messenger.Broadcast(MessageEvents.TOGGLE_UI);
         Settings.inPuzzle = true;
         puzzleCamera.SetActive(true);
         CursorManager.ShowCursor();
@@ -28,7 +35,7 @@ public class ShapesPuzzle : MonoBehaviour
 
             if (AllSlotsFull()) {
                 if (CheckSolution()) {
-                    Win();
+                    StartCoroutine(Win());
                 }
                 else {
                     Lose();
@@ -66,10 +73,18 @@ public class ShapesPuzzle : MonoBehaviour
         StartCoroutine(Reset());
     }
 
-    private void Win() {
+    private IEnumerator Win() {
         foreach (Slate slate in chosenSlates) {
             slate.gameObject.GetComponent<Renderer>().material.color = winColor;
         }
+
+        cup.SetActive(false);
+        cupFallen.SetActive(true);
+        cupFallen.GetComponent<AudioSource>().Play();
+        ball.SetActive(true);
+        shapesPuzzleTrigger.DisableInteraction();
+
+        yield return Reset();
 
         ExitPuzzle();
     }
@@ -87,6 +102,7 @@ public class ShapesPuzzle : MonoBehaviour
     }
 
     public void ExitPuzzle() {
+        Messenger.Broadcast(MessageEvents.TOGGLE_UI);
         puzzleCamera.SetActive(false);
         Settings.inPuzzle = false;
         CursorManager.HideCursor();

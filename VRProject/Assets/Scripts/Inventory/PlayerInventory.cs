@@ -9,11 +9,16 @@ using System.Collections;
 
 public class PlayerInventory : MonoBehaviour
 {
+
+    private bool firstItem = true;
+
     private static PlayerInventory instance = null;
 
     [SerializeField] private Canvas _inventoryCanvas;
     [SerializeField] private GameObject _inventorySlotPrefab;
     [SerializeField] private GameObject _selectedItemPreview;
+    [SerializeField] private GameObject _combineButton;
+    [SerializeField] private GameObject _inspectButton;
     [SerializeField] private TextMeshProUGUI _noItemText;
     [SerializeField] private InspectionScreen inspectionScreen;
 
@@ -48,6 +53,8 @@ public class PlayerInventory : MonoBehaviour
         bool noItems = s_itemSlots.Count() == 0;
 
         _selectedItemPreview.SetActive(!noItems);
+        _combineButton.SetActive(!noItems);
+        _inspectButton.SetActive(!noItems);
         _noItemText.gameObject.SetActive(noItems);
         
     }
@@ -62,19 +69,22 @@ public class PlayerInventory : MonoBehaviour
 
     public void Open()
     {
+        Messenger.Broadcast(MessageEvents.TOGGLE_UI);
         Settings.inventoryOn = true;
         CursorManager.ShowCursor();
         _inventoryCanvas.gameObject.SetActive(true);
     }
 
-    //This is a coroutine so that pressing escape and going to the inventory happen on subsequent frames, otherwise
+    //This is a coroutine so that pressing escape and going to the inventory happens on subsequent frames, otherwise
     //the inventory would also immediately close
     private IEnumerator Close() 
     {
         yield return null;
+        Messenger.Broadcast(MessageEvents.TOGGLE_UI);
         Settings.inventoryOn = false;
         CursorManager.HideCursor();
         _inventoryCanvas.gameObject.SetActive(false);
+        s_selectedCombineObject = null;
     }
 
     public void SetSelected(InventorySlot slot)
@@ -92,6 +102,11 @@ public class PlayerInventory : MonoBehaviour
 
     public InventorySlot AddItem(Item item)
     {
+        if (firstItem) {
+            Messenger.Broadcast(MessageEvents.FIRST_ITEM_PICKED_UP);
+            firstItem = false;
+        }
+        
         _inventoryCanvas.gameObject.SetActive(true);
         GameObject slot = Instantiate(_inventorySlotPrefab);
         slot.transform.SetParent(s_slotsLayout.transform, false);
@@ -153,15 +168,20 @@ public class PlayerInventory : MonoBehaviour
 
     public void ExamineItem()
     {
-        StartCoroutine(Close());
+        StartCoroutine(ExamineItemCoroutine());
+    }
+
+    public IEnumerator ExamineItemCoroutine() {
+        yield return Close();
         inspectionScreen.StartInspecting(s_selectedInventorySlot.Item.gameObject);
         _inventoryCanvas.gameObject.SetActive(false);
     }
 
-    public Item GetSelectedItem() {
+    //Checks if the selected item is of type type
+    public bool CheckSelectedItem(Item.ItemType type) {
         if (s_selectedInventorySlot == null)
-            return null;
-        return s_selectedInventorySlot.Item;
+            return false;
+        return s_selectedInventorySlot.Item.type == type;
     }
 
     public void ConsumeSelectedItem() {
