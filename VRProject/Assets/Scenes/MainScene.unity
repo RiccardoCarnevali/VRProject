@@ -24890,10 +24890,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 515f4b910814ff343bd2e166be378993, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inspectedObjectDistanceFromCamera: 0.3
-  rotationSpeed: 180
-  inventoryCanvas: {fileID: 0}
-  inspectionCamera: {fileID: 1740331548}
 --- !u!4 &1640757353
 Transform:
   m_ObjectHideFlags: 0
@@ -27291,12 +27287,12 @@ GameObject:
   - component: {fileID: 1823032327}
   - component: {fileID: 1823032329}
   - component: {fileID: 1823032328}
-  - component: {fileID: 1823032333}
   - component: {fileID: 1823032332}
   - component: {fileID: 1823032334}
   - component: {fileID: 1823032335}
   - component: {fileID: 1823032336}
   - component: {fileID: 1823032337}
+  - component: {fileID: 1823032338}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -27383,21 +27379,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sensitivityHor: 9
---- !u!114 &1823032333
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1823032326}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e40eeab37aa047c4bb8e086db88e9f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 6
-  gravity: -9.8
-  footstepSFX: {fileID: 8300000, guid: 3268cd1a6c97e7f4782f307572c1f429, type: 3}
 --- !u!143 &1823032334
 CharacterController:
   m_ObjectHideFlags: 0
@@ -27546,6 +27527,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1823032338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1823032326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e40eeab37aa047c4bb8e086db88e9f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 6
+  gravity: -9.8
+  footstepSFX: {fileID: 8300000, guid: 3268cd1a6c97e7f4782f307572c1f429, type: 3}
 --- !u!1 &1825325751
 GameObject:
   m_ObjectHideFlags: 0
