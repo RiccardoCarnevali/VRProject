@@ -4,7 +4,7 @@ public class UIToggle : MonoBehaviour
 {
     [SerializeField] private GameObject ui;
 
-    void Start()
+    void Awake()
     {
         Messenger.AddListener(MessageEvents.TOGGLE_UI, ToggleUI);
     }
