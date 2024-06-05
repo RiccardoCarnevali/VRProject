@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class Password : MonoBehaviour
 {
-    private TMP_InputField passwordInput;
+    [SerializeField] private TMP_InputField passwordInput;
     [SerializeField] private TextMeshProUGUI resultText;
     [SerializeField] private string password;
     [SerializeField] private GameObject computerScreen;
@@ -14,20 +14,21 @@ public class Password : MonoBehaviour
 
     private Coroutine lastCoroutine = null;
 
-    private bool won = false;
+    private bool displayingText = false;
 
     [SerializeField] private PasswordTarget target;
 
     [SerializeField] private Interactable computer;
 
     private void Start() {
-        passwordInput = GetComponent<TMP_InputField>();
+        if (Settings.load && SaveSystem.CheckFlag("password_" + password + "_won")) {
+            computer.DisableInteraction();
+        }
     }
 
     void Update()
     {
-
-        if (won)
+        if (displayingText || !computerScreen.activeSelf)
             return;
 
         //Keeps the input field always focused
@@ -56,13 +57,16 @@ public class Password : MonoBehaviour
     }
 
     private IEnumerator Lose() {
+        displayingText = true;
         resultText.color = Color.red;
         resultText.text = "";
         yield return ShowResult(loseText);
+        displayingText = false;
     }
 
-    private IEnumerator Win() {
-        won = true;
+    private IEnumerator Win() { 
+
+        displayingText = true;
         passwordInput.enabled = false;
         resultText.color = Color.green;
         resultText.text = "";
@@ -70,7 +74,9 @@ public class Password : MonoBehaviour
             yield return ShowResult(s + "\n");
             yield return new WaitForSeconds(1f);
         }
+        SaveSystem.SetFlag("password_" + password + "_won");
         target.Unlock();
+        displayingText = false;
 
         computer.DisableInteraction();
         Settings.inPuzzle = false;

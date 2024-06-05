@@ -3,14 +3,16 @@ using UnityEngine;
 
 public class ShapesPuzzle : MonoBehaviour
 {
-    [SerializeField] private GameObject puzzleCamera;
+    [SerializeField] private Camera puzzleCamera;
     [SerializeField] private GameObject slatesPrefab;
     [SerializeField] private GameObject slates;
+    [SerializeField] private LayerMask slatesLayer;
 
     [SerializeField] private GameObject[] slateSpots;
     [SerializeField] private Slate.SlateShape[] solution;
     private Slate[] chosenSlates = new Slate[] {null, null, null};
 
+    private bool won = false;
     private Color winColor = new Color(0, 1, 0, 0.1f);
     private Color loseColor = new Color(1, 0, 0, 0.1f);
     private float resetDelaySeconds = 1f;
@@ -20,15 +22,43 @@ public class ShapesPuzzle : MonoBehaviour
     [SerializeField] private GameObject ball;
     private ShapesPuzzleTrigger shapesPuzzleTrigger;
 
-    public void StartPuzzle() {
+    private void Start() {
         shapesPuzzleTrigger = GetComponent<ShapesPuzzleTrigger>();
+        if (Settings.load && SaveSystem.CheckFlag("shapes_puzzle_won")) {
+            cup.SetActive(false);
+            cupFallen.SetActive(true);
+            ball.SetActive(true);
+            shapesPuzzleTrigger.DisableInteraction();
+        }
+    }
+
+    private void Update() {
+        if (won || !puzzleCamera.gameObject.activeSelf)
+            return;
+
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            ExitPuzzle();
+        }
+
+        if (Input.GetMouseButtonDown(0)) {
+            Ray ray = puzzleCamera.ScreenPointToRay(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Input.mousePosition.z));
+
+            if (Physics.Raycast(ray, out RaycastHit hit, 2, slatesLayer)) {
+                if (hit.transform.TryGetComponent(out Slate slate)) {
+                    TrySetSlate(slate);
+                }
+            }
+        }
+    }
+
+    public void StartPuzzle() {
         Messenger.Broadcast(MessageEvents.TOGGLE_UI);
         Settings.inPuzzle = true;
-        puzzleCamera.SetActive(true);
+        puzzleCamera.gameObject.SetActive(true);
         CursorManager.ShowCursor();
     }
 
-    public void TrySetSlate(Slate slate) {
+    private void TrySetSlate(Slate slate) {
         if (chosenSlates[(int) slate.Size] == null) {
             chosenSlates[(int) slate.Size] = slate;
             PlaceSlate(slate);
@@ -74,6 +104,8 @@ public class ShapesPuzzle : MonoBehaviour
     }
 
     private IEnumerator Win() {
+        won = true;
+        SaveSystem.SetFlag("shapes_puzzle_won");
         foreach (Slate slate in chosenSlates) {
             slate.gameObject.GetComponent<Renderer>().material.color = winColor;
         }
@@ -101,9 +133,9 @@ public class ShapesPuzzle : MonoBehaviour
         slates.transform.localPosition = Vector3.zero;
     }
 
-    public void ExitPuzzle() {
+    private void ExitPuzzle() {
         Messenger.Broadcast(MessageEvents.TOGGLE_UI);
-        puzzleCamera.SetActive(false);
+        puzzleCamera.gameObject.SetActive(false);
         Settings.inPuzzle = false;
         CursorManager.HideCursor();
     }

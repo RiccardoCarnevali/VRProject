@@ -8,6 +8,12 @@ public class WoolInteractable : Interactable
     [SerializeField] private Dialogue afterCutDialogue;
     [SerializeField] private AudioSource audioSource;
 
+    private void Start() {
+        if (Settings.load && SaveSystem.CheckFlag("wool_destroyed")) {
+            Destroy(gameObject);
+        }
+    }
+
     public override string GetLabel()
     {
         if (PlayerInventory.Instance().CheckSelectedItem(Item.ItemType.SCISSORS))
@@ -19,6 +25,7 @@ public class WoolInteractable : Interactable
     public override void Interact()
     {
         if (PlayerInventory.Instance().CheckSelectedItem(Item.ItemType.SCISSORS)) {
+            SaveSystem.SetFlag("wool_destroyed");
             audioSource.Play();
             Destroy(gameObject);
             DialogueManager.Instance().StartDialogue(afterCutDialogue);

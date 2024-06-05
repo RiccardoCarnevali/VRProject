@@ -17,12 +17,15 @@ public class ObjectHighlight : MonoBehaviour
     private float progress;
     private bool highlightRising = false;
 
+    private void Awake() {
+        renderers = GetComponentsInChildren<Renderer>();
+    }
+
     void Start()
     {
         endColor = highlightMaterial.color;
         startColor = endColor;
         startColor.a = 0;
-        renderers = GetComponentsInChildren<Renderer>();
 
         progress = loopTimeSeconds;
 
@@ -52,7 +55,7 @@ public class ObjectHighlight : MonoBehaviour
 
     public void DisableHighlight() {
         foreach (Renderer renderer in renderers) {
-            //People on the internet told me this is O(n) and I have no reason to not believe them
+            //People on the internet told me this is O(n) and I have no reason not to believe them
             renderer.materials = renderer.materials.Reverse().Skip(1).Reverse().ToArray();
         }
         Destroy(this);

@@ -1,10 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Item))]
 public class Collectable : Interactable
 {
+    [SerializeField] private Item item;
+
+    private void Start() {
+
+        if (Settings.load && SaveSystem.CheckFlag(item.Id + "_picked_up")) {
+            Destroy(gameObject);
+        }
+    }
+
     public override string GetLabel()
     {
         return "Pick up";
@@ -12,7 +18,8 @@ public class Collectable : Interactable
 
     public override void Interact()
     {
-        DisableInteraction();
-        PlayerInventory.Instance().AddItem(GetComponent<Item>());
+        SaveSystem.SetFlag(item.Id + "_picked_up");
+        Destroy(gameObject);
+        PlayerInventory.Instance().AddItem(Instantiate(item));
     }
 }

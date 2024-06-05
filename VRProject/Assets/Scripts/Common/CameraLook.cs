@@ -5,12 +5,25 @@ using UnityEngine;
 public class CameraLook : MonoBehaviour
 {
 
-    public float sensitivityVert = 9.0f;
+    private float sensitivityVert = 9.0f;
 
-    public float minimumVert = -45.0f;
-    public float maximumVert = 45.0f;
+    private float minimumVert = -60.0f;
+    private float maximumVert = 60.0f;
 
-    private float _rotationX = 0f;
+    private float _rotationX;
+
+    private void Start() {
+        if (Settings.load) {
+            Vector3 angle = transform.localEulerAngles;
+            angle.x = SaveSystem.GetFloat("playerlook_x");
+            transform.localEulerAngles = angle;
+        }
+        else {
+            SaveSystem.SetFloat("playerlook_x", transform.localEulerAngles.x);
+        }
+        
+        _rotationX = transform.localEulerAngles.x >= 360 + minimumVert ? transform.localEulerAngles.x - 360 : transform.localEulerAngles.x;
+    }
 
     void Update()
     {
@@ -21,5 +34,7 @@ public class CameraLook : MonoBehaviour
         
         float rotationY = transform.localEulerAngles.y;
         transform.localEulerAngles = new Vector3(_rotationX, rotationY, 0);
+
+        SaveSystem.SetFloat("playerlook_x", transform.localEulerAngles.x);
     }
 }

@@ -23,7 +23,7 @@ public class InteractableUpdate : MonoBehaviour
 
         Ray ray = _characterCamera.ScreenPointToRay(new Vector3(_characterCamera.pixelWidth / 2, _characterCamera.pixelHeight / 2, 0));
         if(Physics.Raycast(ray, maxDistance: interactDistance, hitInfo: out RaycastHit hitInfo)) {
-            bool hitInteractable = hitInfo.transform.gameObject.layer == LayerMask.NameToLayer(Settings.INTERACTABLE_LAYER_NAME);
+            bool hitInteractable = hitInfo.transform.gameObject.layer == LayerMask.NameToLayer(Layers.INTERACTABLE_LAYER);
 
             //All objects marked with layer Interactable should have the Interactable component, but this checks just in case
             if (hitInteractable && hitInfo.transform.TryGetComponent(out Interactable interactable)) {

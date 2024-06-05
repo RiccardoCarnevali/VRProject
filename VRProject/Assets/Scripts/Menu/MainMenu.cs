@@ -11,15 +11,24 @@ public class MainMenu : MonoBehaviour
     }
 
     public void NewGame(){
+        SaveSystem.DeleteSave();
         CursorManager.HideCursor();
+        Settings.load = false;
         SceneManager.LoadScene("MainScene");
     }
 
     public void Continue(){
-        //TODO
+        if (SaveSystem.Load()) {
+            CursorManager.HideCursor();
+            Settings.load = true;
+            SceneManager.LoadScene("MainScene");
+        }
+        else {
+            //No save file found
+        }
     }
 
-    public void Settings(){
+    public void SettingsMenu(){
         settingsMenu.SetActive(true);
         mainMenu.SetActive(false);
 

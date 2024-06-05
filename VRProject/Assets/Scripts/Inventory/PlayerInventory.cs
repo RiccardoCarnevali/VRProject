@@ -13,6 +13,8 @@ public class PlayerInventory : MonoBehaviour
 
     private bool firstItem = true;
 
+    [SerializeField] private Item[] itemPrefabs;
+
     [SerializeField] private Canvas _inventoryCanvas;
     [SerializeField] private GameObject _inventorySlotPrefab;
     [SerializeField] private GameObject _selectedItemPreview;
@@ -37,6 +39,33 @@ public class PlayerInventory : MonoBehaviour
         return instance;
     }
 
+    private void Start()
+    {
+        s_slotsLayout = _inventoryCanvas.GetComponentInChildren<GridLayoutGroup>();        
+        s_itemPreviewSlot = _selectedItemPreview.GetComponentInChildren<InventorySlot>();
+        s_itemPreviewText = _selectedItemPreview.GetComponentInChildren<TextMeshProUGUI>();
+
+        Dictionary<string, Item> idToItem = new Dictionary<string, Item>();
+
+        foreach (Item prefab in itemPrefabs) {
+            idToItem[prefab.Id] = prefab;
+        }
+
+        if (Settings.load) {
+            List<string> loadedItemsIds = SaveSystem.GetInventoryItems();
+            string selectedItemId = SaveSystem.GetSelectedInventoryItem();
+            
+            foreach (string loadedItemId in loadedItemsIds) {
+                AddItem(Instantiate(idToItem[loadedItemId]));
+            }
+            
+            if (selectedItemId != null)
+                SetSelected(s_itemSlots.First(slot => slot.Item.Id == selectedItemId));
+            else 
+                SetSelected(null);
+        }    
+    }
+
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.E) && !(Settings.paused || Settings.inventoryOn))
@@ -55,14 +84,6 @@ public class PlayerInventory : MonoBehaviour
         _combineButton.SetActive(!noItems);
         // _inspectButton.SetActive(!noItems);
         _noItemText.gameObject.SetActive(noItems);
-        
-    }
-
-    private void Start()
-    {
-        s_slotsLayout = _inventoryCanvas.GetComponentInChildren<GridLayoutGroup>();        
-        s_itemPreviewSlot = _selectedItemPreview.GetComponentInChildren<InventorySlot>();
-        s_itemPreviewText = _selectedItemPreview.GetComponentInChildren<TextMeshProUGUI>();
         
     }
 
@@ -95,7 +116,9 @@ public class PlayerInventory : MonoBehaviour
             s_itemSlots.ForEach(other => other.Selected = other == slot);
             s_selectedInventorySlot = slot;
             SetItemPreview();
-            Messenger<Item>.Broadcast(MessageEvents.SELECTED_ITEM, s_selectedInventorySlot.Item);
+
+            SaveSystem.SetSelectedInventoryItem(slot == null ? null : s_selectedInventorySlot.Item.Id);
+            Messenger<Item>.Broadcast(MessageEvents.SELECTED_ITEM, slot == null ? null : s_selectedInventorySlot.Item);
         }
         
     }
@@ -106,6 +129,8 @@ public class PlayerInventory : MonoBehaviour
             Messenger.Broadcast(MessageEvents.FIRST_ITEM_PICKED_UP);
             firstItem = false;
         }
+
+        SaveSystem.AddInventoryItem(item);
         
         _inventoryCanvas.gameObject.SetActive(true);
         GameObject slot = Instantiate(_inventorySlotPrefab);
@@ -125,6 +150,7 @@ public class PlayerInventory : MonoBehaviour
 
     private void RemoveItem(Item item)
     {
+        SaveSystem.RemoveInventoryItem(item);
         InventorySlot slot = s_itemSlots.First(slot => slot.Item == item);
         s_itemSlots.Remove(slot);
         Destroy(slot.gameObject);
@@ -132,9 +158,15 @@ public class PlayerInventory : MonoBehaviour
 
     private void SetItemPreview()
     {
-        s_itemPreview = Instantiate(s_selectedInventorySlot.Item);
-        s_itemPreviewSlot.SetItem(s_itemPreview, true);
-        s_itemPreviewText.SetText(s_itemPreview.Description);
+        if (s_selectedInventorySlot == null) {
+            s_itemPreviewSlot.ClearItem();
+            s_itemPreviewText.SetText("");
+        }
+        else {
+            s_itemPreview = Instantiate(s_selectedInventorySlot.Item);
+            s_itemPreviewSlot.SetItem(s_itemPreview, true);
+            s_itemPreviewText.SetText(s_itemPreview.Description);
+        }
     }
 
     public void OnCombineClicked()
@@ -186,10 +218,7 @@ public class PlayerInventory : MonoBehaviour
     public void ConsumeSelectedItem() {
         if (s_selectedInventorySlot != null) {
             RemoveItem(s_selectedInventorySlot.Item);
-            s_selectedInventorySlot = null;
-            s_itemPreviewSlot.ClearItem();
-            s_itemPreviewText.SetText("");
-            Messenger<Item>.Broadcast(MessageEvents.SELECTED_ITEM, null);
+            SetSelected(null);            
         }
     }
 

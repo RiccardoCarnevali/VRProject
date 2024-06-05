@@ -89,6 +89,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9081b89376c9486fca9e61bfe463221b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Id>k__BackingField: screwdriver
   <Description>k__BackingField: A screwdriver, made by combining a handle with a
     tip.
   <Rotation>k__BackingField: {x: 45, y: -90, z: 0}
