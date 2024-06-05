@@ -37,8 +37,10 @@ public class Controls : MonoBehaviour
         
         Messenger.Broadcast(MessageEvents.TOGGLE_UI);
 
-        StartCoroutine(Show(moveControls, moveControlsShowTimeSeconds));
-        StartCoroutine(Show(lookControls, lookControlsShowTimeSeconds));
+        if (!Settings.load) {
+            StartCoroutine(Show(moveControls, moveControlsShowTimeSeconds));
+            StartCoroutine(Show(lookControls, lookControlsShowTimeSeconds));
+        }
     }
 
     private IEnumerator Show(CanvasGroup group, float waitSeconds) {

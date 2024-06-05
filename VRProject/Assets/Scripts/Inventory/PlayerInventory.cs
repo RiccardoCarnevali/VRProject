@@ -122,7 +122,8 @@ public class PlayerInventory : MonoBehaviour
 
     public InventorySlot AddItem(Item item)
     {
-        if (firstItem) {
+        if (firstItem && !SaveSystem.CheckFlag("first_item_picked_up")) {
+            SaveSystem.SetFlag("first_item_picked_up");
             Messenger.Broadcast(MessageEvents.FIRST_ITEM_PICKED_UP);
             firstItem = false;
         }
