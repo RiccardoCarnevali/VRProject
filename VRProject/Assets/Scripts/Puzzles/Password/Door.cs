@@ -24,10 +24,10 @@ public class Door : PasswordTarget
 
     public override void Unlock() {
         SaveSystem.SetFlag("door_" + id + "_open");
-        StartCoroutine(OpenCoroutine());
+        StartCoroutine(Open());
     }
 
-    private IEnumerator OpenCoroutine() {
+    private IEnumerator Open() {
         Vector3 start = transform.localPosition;
         Vector3 end = transform.localPosition;
         end.y = yEnd;

@@ -75,7 +75,7 @@ public class PlayerInventory : MonoBehaviour
 
         else if((Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Escape)) && Settings.inventoryOn) 
         {
-            StartCoroutine(Close());
+            Close();
         }
 
         bool noItems = s_itemSlots.Count() == 0;
@@ -95,11 +95,8 @@ public class PlayerInventory : MonoBehaviour
         _inventoryCanvas.gameObject.SetActive(true);
     }
 
-    //This is a coroutine so that pressing escape and going to the inventory happens on subsequent frames, otherwise
-    //the inventory would also immediately close
-    private IEnumerator Close() 
+    private void Close() 
     {
-        yield return null;
         Messenger.Broadcast(MessageEvents.TOGGLE_UI);
         Settings.inventoryOn = false;
         CursorManager.HideCursor();

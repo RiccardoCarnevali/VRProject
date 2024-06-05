@@ -16,7 +16,7 @@ public class InspectionScreen : MonoBehaviour
     private void Update() {
         if (Settings.inspecting) {
             if (Input.GetKeyDown(KeyCode.Escape)) {
-                StartCoroutine(StopInspecting());
+                StopInspecting();
             }
             else if (Input.GetMouseButton(0)) {
                 inspectedObject.transform.RotateAround(inspectedObject.transform.position, new Vector3(Input.GetAxis("Mouse Y"), -Input.GetAxis("Mouse X"), 0), rotationSpeed * Time.deltaTime);
@@ -35,10 +35,7 @@ public class InspectionScreen : MonoBehaviour
         inspectedObject.transform.localPosition = new Vector3(0, 0, inspectedObjectDistanceFromCamera);
     }
 
-    //This is a coroutine so that pressing escape and going to the inventory happen on subsequent frames, otherwise
-    //the inventory would also immediately close
-    private IEnumerator StopInspecting() {
-        yield return null;
+    private void StopInspecting() {
         Messenger.Broadcast(MessageEvents.TOGGLE_UI);
         Settings.inspecting = false;
         inspectionCamera.SetActive(false);
