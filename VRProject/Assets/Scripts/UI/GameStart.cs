@@ -31,6 +31,8 @@ public class GameStart : MonoBehaviour
 
         startBlack.color = transparent;
         Settings.gameStarting = false;
-        DialogueManager.Instance().StartDialogue(startDialogue);
+
+        if (!Settings.load)
+            DialogueManager.Instance().StartDialogue(startDialogue);
     }
 }

@@ -1,16 +1,17 @@
 using UnityEngine;
 
-[RequireComponent(typeof(RollingBallPuzzle))]
 public class JoystickBaseInteractable : Interactable
 {
     [SerializeField] Dialogue inspectDialogue;
     private bool joystickInserted = false;
-    private RollingBallPuzzle rollingBallPuzzle;
+    [SerializeField] private RollingBallPuzzle rollingBallPuzzle;
     [SerializeField] private GameObject joystickShaft;
 
     private void Start() {
-        rollingBallPuzzle = GetComponent<RollingBallPuzzle>();
-        joystickShaft.SetActive(false);
+        if (Settings.load && SaveSystem.CheckFlag("joystick_placed")) {
+            joystickShaft.SetActive(true);
+            joystickInserted = true;
+        }
     }
 
     public override string GetLabel()
@@ -32,6 +33,7 @@ public class JoystickBaseInteractable : Interactable
             PlayerInventory.Instance().ConsumeSelectedItem();
             joystickShaft.SetActive(true);
             joystickInserted = true;
+            SaveSystem.SetFlag("joystick_placed");
         }
         else {
             DialogueManager.Instance().StartDialogue(inspectDialogue);

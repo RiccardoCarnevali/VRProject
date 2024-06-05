@@ -89,6 +89,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9081b89376c9486fca9e61bfe463221b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Id>k__BackingField: scissors
   <Description>k__BackingField: A pair of scissors. Might prove useful to cut something
     soft.
   <Rotation>k__BackingField: {x: 140, y: -90, z: -90}

@@ -2,23 +2,30 @@ using UnityEngine;
 
 public class ScrewedBox : MonoBehaviour
 {
-    private float numberOfScrews = 4;
+    private int numberOfScrews = 4;
+    private int screwsRemoved = 0;
 
     [SerializeField] private GameObject cover;
 
     private AudioSource audioSource;
 
-    public void ScrewRemoved() {
-        --numberOfScrews;
+    private void Start() {
+        audioSource = GetComponent<AudioSource>();
+        if (Settings.load) {
+            screwsRemoved = SaveSystem.GetInt("screws_removed");
 
-        if (numberOfScrews == 0) {
-            Destroy(cover);
-            audioSource.Play();
+            if (screwsRemoved == numberOfScrews)
+                Destroy(cover);
         }
     }
 
-    void Start()
-    {
-        audioSource = GetComponent<AudioSource>();
+    public void ScrewRemoved() {
+        ++screwsRemoved;
+        SaveSystem.SetInt("screws_removed", screwsRemoved);
+
+        if (numberOfScrews == screwsRemoved) {
+            Destroy(cover);
+            audioSource.Play();
+        }
     }
 }

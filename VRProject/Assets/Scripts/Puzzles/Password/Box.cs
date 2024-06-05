@@ -14,10 +14,16 @@ public class Box : PasswordTarget
     private void Start() {
         audioSource = GetComponent<AudioSource>();
         openingAngle = Quaternion.Euler(135, 90, 0);
+
+        if (Settings.load && SaveSystem.CheckFlag("box_open")) {
+            ball.SetActive(true);
+            coverPivot.localRotation = openingAngle;
+        }
     }
 
     public override void Unlock()
     {
+        SaveSystem.SetFlag("box_open");
         StartCoroutine(Open());
     }
 

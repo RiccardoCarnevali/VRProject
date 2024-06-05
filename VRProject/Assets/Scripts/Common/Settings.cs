@@ -1,8 +1,5 @@
 public static class Settings 
 {
-    public static readonly string UI_LAYER = "UI";
-    public const string INTERACTABLE_LAYER_NAME = "Interactable";
-    public static readonly string INVENTORY_SELECTED_ITEM_PREVIEW_IMAGE = "SelectedItemPreviewImage";
     public static bool dialogue = false;
     public static bool takingPicture = false;
     public static bool pauseMenuOn = false;
@@ -14,5 +11,5 @@ public static class Settings
 
     public static bool paused {get {return dialogue || takingPicture || pauseMenuOn || inventoryOn || inspecting || inPuzzle || gameStarting || padlockOn; }}
 
-
+    public static bool load = false;
 }

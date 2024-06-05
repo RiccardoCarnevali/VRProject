@@ -15,6 +15,7 @@ public class Item: MonoBehaviour
         [InspectorName("ScissorsThumbHalf")] SCISSORS_THUMB_HALF,
     }
 
+    [field: SerializeField] public string Id {get; private set;}
     [field: SerializeField] public string Description {get; private set;}
     [field: SerializeField] public Vector3 Rotation {get; private set;}
     [field: SerializeField] public float Scale {get; private set;}

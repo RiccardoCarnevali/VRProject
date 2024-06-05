@@ -2,11 +2,9 @@ using UnityEngine;
 
 public class GoalTrigger : MonoBehaviour
 {
-    [SerializeField] private PlaneControls planeControls;
-    [SerializeField] private Interactable joystick;
+    [SerializeField] private RollingBallPuzzle rollingBallPuzzle;
     
     private void OnTriggerEnter(Collider other) {
-        joystick.DisableInteraction();
-        StartCoroutine(planeControls.Win());
+        StartCoroutine(rollingBallPuzzle.Win());
     }
 }

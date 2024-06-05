@@ -22,7 +22,6 @@ public class PauseMenu : MonoBehaviour
         CursorManager.ShowCursor();
         Settings.pauseMenuOn = true;
         pauseMenu.SetActive(true);
-        Time.timeScale = 0f;
     }
     
     public void SettingsMenu(){
@@ -34,7 +33,6 @@ public class PauseMenu : MonoBehaviour
         Settings.pauseMenuOn = false;
         pauseMenu.SetActive(false);
         EventSystem.current.SetSelectedGameObject(null);
-        Time.timeScale = 1f;
     }
 
     public void Back(){
@@ -42,8 +40,8 @@ public class PauseMenu : MonoBehaviour
     }
 
     public void BackToMainMenu(){
+        SaveSystem.Save();
         Settings.pauseMenuOn = false;
-        Time.timeScale = 1f;
         SceneManager.LoadScene("MainMenu");
     }
 }

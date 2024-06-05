@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -16,6 +17,13 @@ public class PlayerMove : MonoBehaviour
     {
         _characterController = GetComponentInChildren<CharacterController>();
         audioSource = GetComponent<AudioSource>();
+
+        if (Settings.load) {
+            transform.position = new Vector3(SaveSystem.GetFloat("player_x"), SaveSystem.GetFloat("player_y"), SaveSystem.GetFloat("player_z"));
+        }
+        else {
+            SavePosition();
+        }
     }
 
     void Update()
@@ -39,11 +47,19 @@ public class PlayerMove : MonoBehaviour
             audioSource.PlayOneShot(footstepSFX);
             StartCoroutine(WaitForFootsteps());
         }
+
+        SavePosition();
     }
 
     private IEnumerator WaitForFootsteps() {
         step = true;
         yield return new WaitForSeconds(footstepLengthSeconds);
         step = false;
+    }
+
+    private void SavePosition() {
+        SaveSystem.SetFloat("player_x", transform.position.x);
+        SaveSystem.SetFloat("player_y", transform.position.y);
+        SaveSystem.SetFloat("player_z", transform.position.z);
     }
 }

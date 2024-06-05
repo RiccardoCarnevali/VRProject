@@ -6,8 +6,9 @@ public class FlickeringLight : MonoBehaviour
 {
     private Light flickeringLight;
 
-    //The probability of the light to start flickering at each frame is 1 out of expectedFrameWaitTime
-    private int expectedFrameWaitTime = 1000;
+    //The probability of the light to start flickering at each second is 1 out of expectedSecondsWaitTime
+    private int expectedSecondsWaitTime = 6;
+    private float waitProgress = 0;
     private float minFlickerDurationSeconds = 0.2f;
     private float maxFlickerDurationSeconds = 0.6f;
 
@@ -21,9 +22,15 @@ public class FlickeringLight : MonoBehaviour
         if (Settings.paused || flickering)
             return;
 
-        if (Random.Range(1, expectedFrameWaitTime) == 1) {
-            flickering = true;
-            StartCoroutine(Flicker(Random.Range(minFlickerDurationSeconds, maxFlickerDurationSeconds)));
+        waitProgress += Time.deltaTime * Time.timeScale;
+
+        //Every one second try flickering
+        if (waitProgress >= 1) {
+            waitProgress = 0;
+            if (Random.Range(1, expectedSecondsWaitTime) == 1) {
+                flickering = true;
+                StartCoroutine(Flicker(Random.Range(minFlickerDurationSeconds, maxFlickerDurationSeconds)));
+            }
         }
     }
 

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BallsHolderInteractable : Interactable
@@ -15,6 +13,17 @@ public class BallsHolderInteractable : Interactable
 
     private void Start() {
         audioSource = GetComponent<AudioSource>();
+
+        if (Settings.load) {
+            inserted = SaveSystem.GetInt("balls_inserted");
+            for (int i = 0; i < inserted; ++i) {
+                balls[i].SetActive(true);
+            }
+
+            if (inserted == balls.Length) {
+                DisableInteraction();
+            }
+        }
     }
 
     public override string GetLabel()
@@ -31,6 +40,8 @@ public class BallsHolderInteractable : Interactable
             PlayerInventory.Instance().ConsumeSelectedItem();
             balls[inserted].SetActive(true);
             ++inserted;
+
+            SaveSystem.SetInt("balls_inserted", inserted);
             audioSource.Play();
 
             if (inserted == balls.Length) {
