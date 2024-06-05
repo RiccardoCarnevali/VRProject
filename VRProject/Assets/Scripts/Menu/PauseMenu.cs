@@ -11,7 +11,10 @@ public class PauseMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape)) {
             if (Settings.pauseMenuOn) {
-                Resume();
+                if (settingsMenu.activeSelf)
+                    Back();
+                else
+                    Resume();
             } else if (!Settings.paused){
                 Pause();
             }
