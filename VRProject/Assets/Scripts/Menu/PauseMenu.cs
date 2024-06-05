@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenu;
-    [SerializeField] private GameObject warningPanel;
+    [SerializeField] private GameObject settingsMenu;
 
     void Update()
     {
@@ -25,10 +25,11 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 0f;
     }
     
+    public void SettingsMenu(){
+        settingsMenu.SetActive(true);
+    }
+    
     public void Resume(){
-        if (warningPanel.activeSelf) {
-            warningPanel.SetActive(false);
-        }
         CursorManager.HideCursor();
         Settings.pauseMenuOn = false;
         pauseMenu.SetActive(false);
@@ -36,11 +37,11 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1f;
     }
 
-    public void BackToMainMenu(){
-        warningPanel.SetActive(true);
+    public void Back(){
+        settingsMenu.SetActive(false);
     }
 
-    public void BackToMainMenuConfirmation(){
+    public void BackToMainMenu(){
         Settings.pauseMenuOn = false;
         Time.timeScale = 1f;
         SceneManager.LoadScene("MainMenu");
