@@ -16,13 +16,14 @@ public class InventoryData
     public HashSet<string> Items { get; set; }
 }
 
-public class SaveSystem
+public static class SaveSystem
 {
     private static Dictionary<string, string> saveData = new();
     private static InventoryData inventoryData = new();
 
     private static string saveDataPath = Application.persistentDataPath + "/save.goku";
     private static string inventoryDataPath = Application.persistentDataPath + "/inventory.goku";
+    private static string settingsDataPath = Application.persistentDataPath + "/settings.goku";
 
     public static void SetFlag(string key) {
         saveData[key] = true.ToString();
@@ -90,16 +91,26 @@ public class SaveSystem
         return inventoryData.SelectedItem;
     }
 
+    public static bool SaveDataExists() {
+        return File.Exists(saveDataPath) || File.Exists(inventoryDataPath);
+    }
+
     public static void Save() {
         Serialize(saveData, File.Open(saveDataPath, FileMode.Create));
         Serialize(inventoryData, File.Open(inventoryDataPath, FileMode.Create));
     }
 
     public static bool Load() {
-        if (!File.Exists(saveDataPath) || !File.Exists(inventoryDataPath))
+        if (!SaveDataExists())
             return false;
-        saveData = Deserialize<Dictionary<string, string>>(File.Open(saveDataPath, FileMode.Open));
-        inventoryData = Deserialize<InventoryData>(File.Open(inventoryDataPath, FileMode.Open));
+
+        try {
+            saveData = Deserialize<Dictionary<string, string>>(File.Open(saveDataPath, FileMode.Open));
+            inventoryData = Deserialize<InventoryData>(File.Open(inventoryDataPath, FileMode.Open));
+        }
+        catch (Exception) {
+            return false;
+        }
         return true;
     }
 

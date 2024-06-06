@@ -12,4 +12,8 @@ public static class Settings
     public static bool paused {get {return dialogue || takingPicture || pauseMenuOn || inventoryOn || inspecting || inPuzzle || gameStarting || padlockOn; }}
 
     public static bool load = false;
+
+    public static float defaultMouseSensitivity = 10;
+    public static float defaultAmbienceVolume = 1f;
+    public static float defaultSFXVolume = 1f;
 }

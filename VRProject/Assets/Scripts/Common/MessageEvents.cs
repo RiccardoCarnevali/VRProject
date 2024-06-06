@@ -6,4 +6,6 @@ public class MessageEvents
     public const string POLAROID_PICKED_UP = "POLAROID_PICKED_UP";
     public const string FIRST_ITEM_PICKED_UP = "FIRST_ITEM_PICKED_UP";
     public const string SELECTED_ITEM = "SELECTED_ITEM";
+
+    public const string MOUSE_SENSITIVITY_CHANGED = "MOUSE_SENSITIVITY_CHANGED";
 }

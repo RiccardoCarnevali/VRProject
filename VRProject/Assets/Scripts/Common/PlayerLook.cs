@@ -5,11 +5,13 @@ using UnityEngine;
 public class PlayerLook : MonoBehaviour
 {
 
-    public float sensitivityHor = 9.0f;
+    private float sensitivityHor;
 
     // Start is called before the first frame update
     void Start()
     {
+        sensitivityHor = PlayerPrefs.GetFloat("mouse_sensitivity", Settings.defaultMouseSensitivity);
+        Messenger<float>.AddListener(MessageEvents.MOUSE_SENSITIVITY_CHANGED, OnSensitivityChanged);
         if (Settings.load) {
             Vector3 angle = transform.localEulerAngles;
             angle.y = SaveSystem.GetFloat("playerlook_y");
@@ -20,6 +22,10 @@ public class PlayerLook : MonoBehaviour
         }
     }
 
+    private void OnDestroy() {
+        Messenger<float>.RemoveListener(MessageEvents.MOUSE_SENSITIVITY_CHANGED, OnSensitivityChanged);
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -27,5 +33,9 @@ public class PlayerLook : MonoBehaviour
             return;
         transform.Rotate(0, Input.GetAxis("Mouse X") * sensitivityHor, 0);
         SaveSystem.SetFloat("playerlook_y", transform.localEulerAngles.y);
+    }
+
+    private void OnSensitivityChanged(float value) {
+        sensitivityHor = value;
     }
 }

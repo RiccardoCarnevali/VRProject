@@ -162,6 +162,9 @@ static public class Messenger<T> {
 		MessengerInternal.OnBroadcasting(eventType, mode);
 		var invocationList = MessengerInternal.GetInvocationList<Action<T>>(eventType);
 
+		if (invocationList == null)
+			return;
+
 		foreach(var callback in invocationList)
 			callback.Invoke(arg1);
 	}
