@@ -6153,7 +6153,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 110, y: -165.41112}
+  m_AnchoredPosition: {x: 110, y: -165.76666}
   m_SizeDelta: {x: 220, y: 280}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &321338330
@@ -12555,7 +12555,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 110, y: -347.91113}
+  m_AnchoredPosition: {x: 110, y: -348.26666}
   m_SizeDelta: {x: 200, y: 85}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &740514236
@@ -34268,7 +34268,7 @@ MonoBehaviour:
   - {fileID: 9196775077406443996, guid: 8ccc6ac83812ba147a3d478b76e314ec, type: 3}
   - {fileID: 2507435536471665249, guid: bb5d966ce118a134cbcf5d1ae3a72258, type: 3}
   _inventoryCanvas: {fileID: 84995553}
-  _inventorySlotPrefab: {fileID: 1781011029317953784, guid: 41601c0700e1663abb71ea8917b0ea62, type: 3}
+  _inventorySlotPrefab: {fileID: 1133377467433414187, guid: 5a1cfec821102414e8542d0f9cb5bea3, type: 3}
   _selectedItemPreview: {fileID: 320902713}
   _combineButton: {fileID: 740514234}
   _noItemText: {fileID: 949856744}
