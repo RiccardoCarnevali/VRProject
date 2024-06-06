@@ -1,3 +1,5 @@
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -11,7 +13,16 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject continueFailedPopup;
     [SerializeField] private Button continueButton;
 
+
+    [SerializeField] private AudioSource backgroundMusicAudioSource;
+    [SerializeField] private AudioSource sfxAudioSource;
+    [SerializeField] private AudioClip cinematicBoomSfx;
+
+    [SerializeField] private Image fadeImage;
+    private float fadeTimeSeconds = 2f;
+
     void Start(){
+        StartCoroutine(FadeIn());
         CursorManager.ShowCursor();
 
         if (!SaveSystem.SaveDataExists()) {
@@ -27,23 +38,55 @@ public class MainMenu : MonoBehaviour
         }
     }
 
+    private IEnumerator FadeIn() {
+        fadeImage.color = Color.black;
+        fadeImage.raycastTarget = true;
+        yield return new WaitForSeconds(2f);
+        yield return Fade(Color.black, new Color(0, 0, 0, 0));
+        fadeImage.raycastTarget = false;
+    }
+
+    private IEnumerator Play() {
+        CursorManager.HideCursor();
+        backgroundMusicAudioSource.Stop();
+        sfxAudioSource.PlayOneShot(cinematicBoomSfx);
+        fadeImage.raycastTarget = true;
+        yield return new WaitForSeconds(2f);
+        yield return Fade(new Color(0, 0, 0 ,0), Color.black);
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene("MainScene");
+    }
+
+    private IEnumerator Fade(Color startColor, Color endColor) {
+        float progress = 0;
+
+        while (progress < fadeTimeSeconds) {
+            progress += Time.deltaTime * Time.timeScale;
+            // fadeImage.color = Color.Lerp(startColor, endColor, progress / fadeTimeSeconds);
+            Color color = fadeImage.color;
+            color.a = Mathf.Lerp(startColor.a, endColor.a, progress / fadeTimeSeconds);
+            fadeImage.color = color;
+            yield return null;
+        }
+
+        fadeImage.color = endColor;
+    }
+
     public void NewGame() {
 
         if (SaveSystem.SaveDataExists()) {
             newGameConfirmationPopup.SetActive(true);
         }
         else {
-            CursorManager.HideCursor();
             Settings.load = false;
-            SceneManager.LoadScene("MainScene");
+            StartCoroutine(Play());
         }
     }
 
     public void ConfirmNewGame() {
         SaveSystem.DeleteSave();
-        CursorManager.HideCursor();
         Settings.load = false;
-        SceneManager.LoadScene("MainScene");
+        StartCoroutine(Play());
     }
 
     public void CancelNewGame() {
@@ -52,9 +95,8 @@ public class MainMenu : MonoBehaviour
 
     public void Continue(){
         if (SaveSystem.Load()) {
-            CursorManager.HideCursor();
             Settings.load = true;
-            SceneManager.LoadScene("MainScene");
+            StartCoroutine(Play());
         }
         else {
             //Save data missing or corrupted
