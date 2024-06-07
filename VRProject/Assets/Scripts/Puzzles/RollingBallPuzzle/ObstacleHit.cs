@@ -2,19 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(AudioSource))]
 public class ObstacleHit : MonoBehaviour
 {
     [SerializeField] private Material obstacleInvisible;
     [SerializeField] private Material obstacleVisible;
+    [SerializeField] private AudioSource audioSource;
 
     private float visibleTime = 2f;
-
-    private AudioSource audioSource;
-
-    private void Start() {
-        audioSource = GetComponent<AudioSource>();
-    }
     
     private void OnCollisionEnter(Collision collision) {
         if (Vector3.Dot(collision.rigidbody.velocity.normalized, collision.contacts[0].normal.normalized) > 0.8) {

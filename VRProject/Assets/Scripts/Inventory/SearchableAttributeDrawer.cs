@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using System;
 using UnityEngine;
 using UnityEditor;
@@ -72,3 +73,5 @@ public class SearchableAttributeDrawer : PropertyDrawer
         name.IndexOf(_search, StringComparison.InvariantCultureIgnoreCase) >= 0);
     }
 }
+
+#endif
