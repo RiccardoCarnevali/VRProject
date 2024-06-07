@@ -7,12 +7,14 @@ public class SettingsMenu : MonoBehaviour
 {
 
     [SerializeField] private Slider mouseSensitivitySlider;
+    [SerializeField] private Slider textSpeedSlider;
     [SerializeField] private Slider ambienceVolumeSlider;
     [SerializeField] private Slider sfxVolumeSlider;
     [SerializeField] private AudioMixer audioMixer;
 
     private void Start() {
         mouseSensitivitySlider.value = PlayerPrefs.GetFloat("mouse_sensitivity", Settings.defaultMouseSensitivity);
+        textSpeedSlider.value = PlayerPrefs.GetFloat("text_speed", Settings.defaultTextSpeed);
         ambienceVolumeSlider.value = PlayerPrefs.GetFloat("ambience_volume", Settings.defaultAmbienceVolume);
         audioMixer.SetFloat("Ambience", Mathf.Log10(ambienceVolumeSlider.value) * 20);
         sfxVolumeSlider.value = PlayerPrefs.GetFloat("sfx_volume", Settings.defaultSFXVolume);
@@ -22,6 +24,11 @@ public class SettingsMenu : MonoBehaviour
     public void OnSensitivityChanged(float value) {
         PlayerPrefs.SetFloat("mouse_sensitivity", value);
         Messenger<float>.Broadcast(MessageEvents.MOUSE_SENSITIVITY_CHANGED, value, MessengerMode.DONT_REQUIRE_LISTENER);
+    }
+
+    public void OnTextSpeedChanged(float value) {
+        PlayerPrefs.SetFloat("text_speed", value);
+        Messenger<float>.Broadcast(MessageEvents.TEXT_SPEED_CHANGED, value, MessengerMode.DONT_REQUIRE_LISTENER);
     }
 
     public void OnAmbienceVolumeChanged(float volume){

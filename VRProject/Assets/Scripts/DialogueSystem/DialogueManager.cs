@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.VersionControl;
 using UnityEngine;
 
 public class DialogueManager : MonoBehaviour
@@ -9,7 +10,7 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI speakerLabel;
     [SerializeField] private TextMeshProUGUI dialogueTextArea;
 
-    private float textDelay = 0.01f;
+    private float textDelay;
 
     private static DialogueManager instance = null;
 
@@ -25,6 +26,13 @@ public class DialogueManager : MonoBehaviour
 
     private void Start() {
         sentences = new Queue<string>();
+
+        textDelay = 1f / PlayerPrefs.GetFloat("text_speed", Settings.defaultTextSpeed);
+        Messenger<float>.AddListener(MessageEvents.TEXT_SPEED_CHANGED, OnTextSpeedChanged);
+    }
+
+    private void OnDestroy() {
+        Messenger<float>.RemoveListener(MessageEvents.TEXT_SPEED_CHANGED, OnTextSpeedChanged);
     }
 
     private void Update() {
@@ -86,5 +94,9 @@ public class DialogueManager : MonoBehaviour
         }
 
         sentenceEnded = true;
+    }
+
+    private void OnTextSpeedChanged(float value) {
+        textDelay = 1f / value;
     }
 }

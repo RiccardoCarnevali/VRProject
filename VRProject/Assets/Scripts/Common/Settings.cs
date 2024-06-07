@@ -14,6 +14,7 @@ public static class Settings
     public static bool load = false;
 
     public static float defaultMouseSensitivity = 10;
+    public static float defaultTextSpeed = 100;
     public static float defaultAmbienceVolume = 1f;
     public static float defaultSFXVolume = 1f;
 }
