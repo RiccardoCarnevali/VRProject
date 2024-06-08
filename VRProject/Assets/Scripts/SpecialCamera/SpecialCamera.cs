@@ -1,4 +1,7 @@
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,12 +27,17 @@ public class SpecialCamera : MonoBehaviour
     }
 
     private void Update() {
-        if (Settings.paused)
+        if (Settings.paused || animationPlaying)
             return;
 
-        if (Input.GetKeyDown(KeyCode.Q) && !animationPlaying) {
+        if (Input.GetKeyDown(KeyCode.Q)) {
             Settings.takingPicture = true;
             StartCoroutine(TakePicture());
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            StartCoroutine(TakeWorldAffectingPicture());
         }
     }
 
@@ -77,5 +85,36 @@ public class SpecialCamera : MonoBehaviour
 
     public void DestroyPicture() {
         Destroy(pictureFrame);
+    }
+
+    private IEnumerator TakeWorldAffectingPicture()
+    {
+        List<CameraAffected> affectedObjects = FindObjectsOfType<CameraAffected>().ToList();
+
+        foreach (CameraAffected affectedObject in affectedObjects)
+        {
+            if(affectedObject.PlayerInside)
+            {
+                foreach(Renderer renderer in affectedObject.GetRenderers())
+                {
+                    if (GeometryUtility.TestPlanesAABB(GeometryUtility.CalculateFrustumPlanes(specialCamera), renderer.bounds))
+                    {
+                        affectedObject.OnCameraAffected();
+                    }
+                }
+            }
+            
+        }
+
+        animationPlaying = true;
+        polaroidAnimator.SetTrigger("takePicture");
+
+        yield return new WaitForSeconds(polaroidMovementTime);
+        animationPlaying = false;
+    }
+
+    public bool IsVisible(List<Renderer> renderers)
+    {
+        return renderers.Exists((renderer) => renderer.isVisible);
     }
 }
