@@ -1,9 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(AudioSource))]
@@ -16,10 +13,10 @@ public class SpecialCamera : MonoBehaviour
     private GameObject pictureFrame;
 
     private AudioSource audioSource;
-
-    private bool animationPlaying = false;
-    private float polaroidMovementTime = 3f;
     private float picturePrintTime = 5f;
+
+    private bool usingLens = false;
+    public bool hasLens = false;
 
     private void Start() {
         polaroidAnimator = GetComponent<Animator>();
@@ -27,94 +24,79 @@ public class SpecialCamera : MonoBehaviour
     }
 
     private void Update() {
-        if (Settings.paused || animationPlaying)
+        if (Settings.paused)
             return;
 
         if (Input.GetKeyDown(KeyCode.Q)) {
-            Settings.takingPicture = true;
-            StartCoroutine(TakePicture());
+            usingLens = true;
+            TakePicture();
         }
 
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            StartCoroutine(TakeWorldAffectingPicture());
+        if (Input.GetKeyDown(KeyCode.R) && hasLens) {
+            usingLens = false;
+            TakePicture();
         }
     }
 
-    public IEnumerator TakePicture()
+    public void TakePicture()
     {
+        Settings.takingPicture = true;
         Messenger.Broadcast(MessageEvents.TOGGLE_UI);
-        animationPlaying = true;
         polaroidAnimator.SetTrigger("takePicture");
+    }
 
-        yield return new WaitForSeconds(polaroidMovementTime);
-
+    private IEnumerator PrintImage() {
         yield return new WaitForEndOfFrame();
 
+        //Instantiates the picture's frame inside the camera
         pictureFrame = Instantiate(pictureOriginal, pictureOriginal.transform.parent);
 
-        int sqr = 1000;
-	
+        //Saves what is being rendered by the special camera in a texture of size sqr x sqr
+        int sqr = 1000;	
         specialCamera.aspect = 1.0f;
-        
         RenderTexture tempRT = new (sqr,sqr, 24 );
-
         specialCamera.targetTexture = tempRT;
 	    specialCamera.Render();
-
         Texture2D image = new (specialCamera.targetTexture.width, specialCamera.targetTexture.height, TextureFormat.RGB24, false);
         RenderTexture.active = tempRT;
         image.ReadPixels(new Rect(0, 0, specialCamera.targetTexture.width, specialCamera.targetTexture.height), 0, 0);
         image.Apply();
+
+        //Places the saved image on the picture
         pictureFrame.transform.Find("Picture").GetComponent<Renderer>().material.mainTexture = image;
+
+        //Camera returns to its place
+        yield return new WaitForSeconds(1);
+
+        //Starts printing animation
         pictureFrame.GetComponent<Animator>().SetBool("out", true);
         yield return new WaitForSeconds(picturePrintTime);
-        ShowPicture();
-        DestroyPicture();
-        animationPlaying = false;
+
+        //Displays the image to the player
+        Messenger<Texture>.Broadcast(MessageEvents.VIEW_PICTURE, pictureFrame.transform.Find("Picture").GetComponent<Renderer>().material.mainTexture);
+        Destroy(pictureFrame);
+    }
+
+    private IEnumerator AffectWorld() {
+        Messenger<Camera>.Broadcast(MessageEvents.AFFECT_WITH_CAMERA, specialCamera, MessengerMode.DONT_REQUIRE_LISTENER);
+
+        //Camera returns to its place
+        yield return new WaitForSeconds(2);
+
+        Settings.takingPicture = false;
+        Messenger.Broadcast(MessageEvents.TOGGLE_UI);
     }
 
     private void CameraFlash() {
         audioSource.Play();
-		Messenger.Broadcast(MessageEvents.CAMERA_FLASH);
-    }
 
-    public void ShowPicture() {
-        Messenger<Texture>.Broadcast(MessageEvents.VIEW_PICTURE, pictureFrame.transform.Find("Picture").GetComponent<Renderer>().material.mainTexture);
-    }
-
-    public void DestroyPicture() {
-        Destroy(pictureFrame);
-    }
-
-    private IEnumerator TakeWorldAffectingPicture()
-    {
-        List<CameraAffected> affectedObjects = FindObjectsOfType<CameraAffected>().ToList();
-
-        foreach (CameraAffected affectedObject in affectedObjects)
-        {
-            if(affectedObject.PlayerInside)
-            {
-                foreach(Renderer renderer in affectedObject.GetRenderers())
-                {
-                    if (GeometryUtility.TestPlanesAABB(GeometryUtility.CalculateFrustumPlanes(specialCamera), renderer.bounds))
-                    {
-                        affectedObject.OnCameraAffected();
-                    }
-                }
-            }
-            
+        if (usingLens) {
+            StartCoroutine(PrintImage());
+            Messenger<Color>.Broadcast(MessageEvents.CAMERA_FLASH, Color.white);
         }
-
-        animationPlaying = true;
-        polaroidAnimator.SetTrigger("takePicture");
-
-        yield return new WaitForSeconds(polaroidMovementTime);
-        animationPlaying = false;
-    }
-
-    public bool IsVisible(List<Renderer> renderers)
-    {
-        return renderers.Exists((renderer) => renderer.isVisible);
+        else {
+            StartCoroutine(AffectWorld());
+            Messenger<Color>.Broadcast(MessageEvents.CAMERA_FLASH, new Color32(255, 156, 0, 255));
+        }
     }
 }

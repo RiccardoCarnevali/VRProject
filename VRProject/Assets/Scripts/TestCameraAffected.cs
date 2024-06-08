@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TestCameraAffected : CameraAffected
 {
-    public override void OnCameraAffected()
+    protected override void OnCameraAffected()
     {
         Debug.Log("Affected");
     }

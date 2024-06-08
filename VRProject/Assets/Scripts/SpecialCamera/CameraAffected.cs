@@ -1,37 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Collider))]
 public abstract class CameraAffected : MonoBehaviour
 {
-    [SerializeField] List<Renderer> renderers;
     public bool PlayerInside { get; private set; }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+
+    public void TryAffect(Camera camera) {
+        if (GeometryUtility.TestPlanesAABB(GeometryUtility.CalculateFrustumPlanes(camera), GetComponent<Collider>().bounds))
+        {
+            OnCameraAffected();
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public abstract void OnCameraAffected();
-
-    public IList<Renderer> GetRenderers()
-    {
-        return renderers.AsReadOnly();
-    }
-
-    public void OnTriggerEnter(Collider other)
-    {
-        PlayerInside |= other.GetComponent<CharacterController>() != null;
-    }
-
-    public void OnTriggerExit(Collider other)
-    {
-        PlayerInside &= other.GetComponent<CharacterController>() == null;
-    }
+    protected abstract void OnCameraAffected();
 }

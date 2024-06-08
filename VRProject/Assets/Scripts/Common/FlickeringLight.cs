@@ -11,6 +11,7 @@ public class FlickeringLight : MonoBehaviour
     private float waitProgress = 0;
     private float minFlickerDurationSeconds = 0.2f;
     private float maxFlickerDurationSeconds = 0.6f;
+    private float flickerIntervalSeconds = 0.05f;
 
     private bool flickering = false;
 
@@ -39,7 +40,7 @@ public class FlickeringLight : MonoBehaviour
 
         while (Time.time - start < durationSeconds) {
             flickeringLight.enabled = !flickeringLight.enabled;
-            yield return null;
+            yield return new WaitForSeconds(flickerIntervalSeconds);
         }
 
         flickeringLight.enabled = true;

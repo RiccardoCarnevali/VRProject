@@ -7,32 +7,33 @@ public class CameraFlash : MonoBehaviour
 {
 
     [SerializeField] private Image cameraFlash;
-    private float cameraFlashTime = 0.75f;
+    private float flashDurationSeconds = 0.75f;
 
     // Start is called before the first frame update
     void Start()
     {
-        Messenger.AddListener(MessageEvents.CAMERA_FLASH, OnCameraFlash);
+        Messenger<Color>.AddListener(MessageEvents.CAMERA_FLASH, OnCameraFlash);
     }
 
     private void OnDestroy() {
-        Messenger.RemoveListener(MessageEvents.CAMERA_FLASH, OnCameraFlash);
+        Messenger<Color>.RemoveListener(MessageEvents.CAMERA_FLASH, OnCameraFlash);
     }
 
-    private void OnCameraFlash() {
-        StartCoroutine(FlashCoroutine());
+    private void OnCameraFlash(Color flashColor) {
+        StartCoroutine(FlashCoroutine(flashColor));
     }
 
-    private IEnumerator FlashCoroutine() {
-        float startTime = Time.time;
+    private IEnumerator FlashCoroutine(Color flashColor) {
+        float progress = 0;
 
-        Color white = Color.white;
-        Color originalColor = cameraFlash.color;
+        Color endColor = flashColor;
+        endColor.a = 0;
 
-        while (Time.time - startTime < cameraFlashTime) {
-            cameraFlash.color = Color.Lerp(white, originalColor, (Time.time - startTime) / cameraFlashTime);
+        while (progress < flashDurationSeconds) {
+            progress += Time.deltaTime * Time.timeScale;
+            cameraFlash.color = Color.Lerp(flashColor, endColor, progress / flashDurationSeconds);
             yield return null;
         }
-        cameraFlash.color = originalColor;
+        cameraFlash.color = endColor;
     }
 }

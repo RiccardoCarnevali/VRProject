@@ -13,7 +13,7 @@ public class Collectable : Interactable
 
     public override string GetLabel()
     {
-        return "Pick up";
+        return InteractionLabels.PICK_UP;
     }
 
     public override void Interact()
