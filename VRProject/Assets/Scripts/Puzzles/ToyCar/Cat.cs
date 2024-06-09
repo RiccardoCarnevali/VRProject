@@ -51,10 +51,4 @@ public class Cat : MonoBehaviour
         transform.localRotation = finalRotation;
         rotating = false;
     }
-
-    private void OnTriggerEnter(Collider other) {
-        if (other.TryGetComponent(out ToyCar toyCar)) {
-            toyCar.Reset();
-        }
-    }
 }

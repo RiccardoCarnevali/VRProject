@@ -1,11 +1,10 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Spikes : MonoBehaviour
 {
     private float angle = 45f;
-    private float delaySeconds = 3f;
+    private float delaySeconds = 5f;
     private float rotationTimeSeconds = 0.2f;
 
     private void Start() {
@@ -34,10 +33,5 @@ public class Spikes : MonoBehaviour
         }
 
         transform.localRotation = finalRotation;
-    }
-
-    private void OnTriggerEnter(Collider other) {
-        if (other.TryGetComponent(out ToyCar toyCar))
-            toyCar.Reset();
     }
 }
