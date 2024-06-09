@@ -28,12 +28,12 @@ public class SpecialCamera : MonoBehaviour
             return;
 
         if (Input.GetKeyDown(KeyCode.Q)) {
-            usingLens = true;
+            usingLens = false;
             TakePicture();
         }
 
         if (Input.GetKeyDown(KeyCode.R) && hasLens) {
-            usingLens = false;
+            usingLens = true;
             TakePicture();
         }
     }
@@ -90,7 +90,7 @@ public class SpecialCamera : MonoBehaviour
     private void CameraFlash() {
         audioSource.Play();
 
-        if (usingLens) {
+        if (!usingLens) {
             StartCoroutine(PrintImage());
             Messenger<Color>.Broadcast(MessageEvents.CAMERA_FLASH, Color.white);
         }
