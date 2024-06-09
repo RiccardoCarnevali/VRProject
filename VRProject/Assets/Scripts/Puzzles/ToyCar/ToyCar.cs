@@ -8,7 +8,13 @@ public class ToyCar : CameraAffected
 
     private bool moving = false;
     private float speed = 0.1f;
-    private float wheelRotationSpeed = 90f;
+    private float wheelRotationSpeed = 120f;
+
+    private AudioSource audioSource;
+
+    private void Awake() {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     private void Start() {
         startingPosition = transform.position;
@@ -27,10 +33,20 @@ public class ToyCar : CameraAffected
     protected override void OnCameraAffected()
     {
         moving = !moving;
+
+        if (moving)
+            audioSource.Play();
+        else
+            audioSource.Stop();
     }
 
     public void Reset() {
         transform.position = startingPosition;
+        Stop();
+    }
+
+    public void Stop() {
         moving = false;
+        audioSource.Stop();
     }
 }
