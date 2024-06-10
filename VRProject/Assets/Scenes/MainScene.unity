@@ -5237,14 +5237,46 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 849949389}
     m_Modifications:
+    - target: {fileID: 186123655570675983, guid: 4b93698ac8e74954eb5236cca655caf9, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 41d4b41e98977c743a24580775039e6e, type: 2}
+    - target: {fileID: 836895879533672847, guid: 4b93698ac8e74954eb5236cca655caf9, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 41d4b41e98977c743a24580775039e6e, type: 2}
+    - target: {fileID: 1562341716592952242, guid: 4b93698ac8e74954eb5236cca655caf9, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 41d4b41e98977c743a24580775039e6e, type: 2}
     - target: {fileID: 1920889909459041294, guid: 4b93698ac8e74954eb5236cca655caf9, type: 3}
       propertyPath: OutputAudioMixerGroup
       value: 
       objectReference: {fileID: -5807429832292303723, guid: 32a58c834f5413615a006519fb51a7e5, type: 2}
+    - target: {fileID: 2042286054771563246, guid: 4b93698ac8e74954eb5236cca655caf9, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 41d4b41e98977c743a24580775039e6e, type: 2}
+    - target: {fileID: 3145989247114655877, guid: 4b93698ac8e74954eb5236cca655caf9, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 41d4b41e98977c743a24580775039e6e, type: 2}
     - target: {fileID: 3350082789297886252, guid: 4b93698ac8e74954eb5236cca655caf9, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3507635047297839811, guid: 4b93698ac8e74954eb5236cca655caf9, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 41d4b41e98977c743a24580775039e6e, type: 2}
+    - target: {fileID: 3566000181903424580, guid: 4b93698ac8e74954eb5236cca655caf9, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 41d4b41e98977c743a24580775039e6e, type: 2}
+    - target: {fileID: 4093449786517570358, guid: 4b93698ac8e74954eb5236cca655caf9, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 41d4b41e98977c743a24580775039e6e, type: 2}
     - target: {fileID: 4233338411179900802, guid: 4b93698ac8e74954eb5236cca655caf9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.35
@@ -5289,6 +5321,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: CogPuzzle
       objectReference: {fileID: 0}
+    - target: {fileID: 5238653842241332594, guid: 4b93698ac8e74954eb5236cca655caf9, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 41d4b41e98977c743a24580775039e6e, type: 2}
+    - target: {fileID: 5435129050318758154, guid: 4b93698ac8e74954eb5236cca655caf9, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 41d4b41e98977c743a24580775039e6e, type: 2}
     - target: {fileID: 5517237198854753170, guid: 4b93698ac8e74954eb5236cca655caf9, type: 3}
       propertyPath: _displayDigit
       value: 
@@ -5297,6 +5337,14 @@ PrefabInstance:
       propertyPath: _displayAudioSource
       value: 
       objectReference: {fileID: 1031490262}
+    - target: {fileID: 5579458740982229413, guid: 4b93698ac8e74954eb5236cca655caf9, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 41d4b41e98977c743a24580775039e6e, type: 2}
+    - target: {fileID: 7095132323940813845, guid: 4b93698ac8e74954eb5236cca655caf9, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 41d4b41e98977c743a24580775039e6e, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 5822848686350855141, guid: 4b93698ac8e74954eb5236cca655caf9, type: 3}
