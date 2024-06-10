@@ -5237,6 +5237,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 849949389}
     m_Modifications:
+    - target: {fileID: 1920889909459041294, guid: 4b93698ac8e74954eb5236cca655caf9, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: -5807429832292303723, guid: 32a58c834f5413615a006519fb51a7e5, type: 2}
     - target: {fileID: 3350082789297886252, guid: 4b93698ac8e74954eb5236cca655caf9, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
@@ -5285,6 +5289,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: CogPuzzle
       objectReference: {fileID: 0}
+    - target: {fileID: 5517237198854753170, guid: 4b93698ac8e74954eb5236cca655caf9, type: 3}
+      propertyPath: _displayDigit
+      value: 
+      objectReference: {fileID: 1070585749}
+    - target: {fileID: 5517237198854753170, guid: 4b93698ac8e74954eb5236cca655caf9, type: 3}
+      propertyPath: _displayAudioSource
+      value: 
+      objectReference: {fileID: 1031490262}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 5822848686350855141, guid: 4b93698ac8e74954eb5236cca655caf9, type: 3}
@@ -5292,7 +5304,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2304936934763829028, guid: 4b93698ac8e74954eb5236cca655caf9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1599305042}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 194154741056945660, guid: 4b93698ac8e74954eb5236cca655caf9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1031490262}
   m_SourcePrefab: {fileID: 100100000, guid: 4b93698ac8e74954eb5236cca655caf9, type: 3}
 --- !u!4 &286721401 stripped
 Transform:
@@ -20438,6 +20453,107 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.1, y: 0.12215913, z: 0.120060086}
   m_Center: {x: 0.0000000014795117, y: 0.019518744, z: 0.01496996}
+--- !u!1 &1031490259 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 194154741056945660, guid: 4b93698ac8e74954eb5236cca655caf9, type: 3}
+  m_PrefabInstance: {fileID: 286721400}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &1031490262
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1031490259}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: -5807429832292303723, guid: 32a58c834f5413615a006519fb51a7e5, type: 2}
+  m_audioClip: {fileID: 8300000, guid: 2f9a2bce6c3dc884faaa7d2d95b47297, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1035676981
 GameObject:
   m_ObjectHideFlags: 0
@@ -20742,7 +20858,7 @@ GameObject:
   - component: {fileID: 1070585750}
   - component: {fileID: 1070585752}
   - component: {fileID: 1070585751}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: CogPuzzleDisplayDigit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25933,7 +26049,7 @@ GameObject:
   - component: {fileID: 1327965447}
   - component: {fileID: 1327965449}
   - component: {fileID: 1327965448}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: CogPuzzleDisplayDigitBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30021,7 +30137,7 @@ GameObject:
   - component: {fileID: 1599305045}
   - component: {fileID: 1599305044}
   - component: {fileID: 1599305043}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31709,7 +31825,7 @@ GameObject:
   - component: {fileID: 1679414093}
   - component: {fileID: 1679414095}
   - component: {fileID: 1679414094}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: CogPuzzleDisplayBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
