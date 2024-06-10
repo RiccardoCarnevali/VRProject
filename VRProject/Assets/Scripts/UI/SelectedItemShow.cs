@@ -24,7 +24,7 @@ public class SelectedItemShow : MonoBehaviour
             return;
 
         Item itemCopy = Instantiate(item, selectedItemSpot.transform);
-        itemCopy.transform.SetLocalPositionAndRotation(Vector3.zero,  Quaternion.Euler(item.Rotation));
+        itemCopy.transform.SetLocalPositionAndRotation(item.Offset * 3,  Quaternion.Euler(item.Rotation));
         selectedItem = itemCopy.gameObject;
         itemCopy.transform.localScale = Vector3.one * 3 * itemCopy.Scale;
     }
