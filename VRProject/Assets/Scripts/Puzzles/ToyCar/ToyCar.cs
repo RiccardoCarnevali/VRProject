@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class ToyCar : CameraAffected
 {
+    [SerializeField] private AudioSource blipAudioSource;
+    [SerializeField] private GameObject solutionNumber;
+
     [SerializeField] private GameObject frontWheels;
     [SerializeField] private GameObject backWheels;
     private Vector3 startingPosition;
@@ -18,6 +21,12 @@ public class ToyCar : CameraAffected
 
     private void Start() {
         startingPosition = transform.position;
+
+        if (Settings.load && SaveSystem.CheckFlag("toy_car_puzzle_won")) {
+            GetComponent<HighlightController>().DisableHighlight();
+            solutionNumber.SetActive(true);
+            enabled = false;
+        }
     }
 
     private void Update() {
@@ -45,8 +54,17 @@ public class ToyCar : CameraAffected
         Stop();
     }
 
-    public void Stop() {
+    private void Stop() {
         moving = false;
         audioSource.Stop();
+    }
+
+    public void Win() {
+        SaveSystem.SetFlag("toy_car_puzzle_won");
+        Stop();
+        GetComponent<HighlightController>().DisableHighlight();
+        blipAudioSource.Play();
+        solutionNumber.SetActive(true);
+        enabled = false;
     }
 }

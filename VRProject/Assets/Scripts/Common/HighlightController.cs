@@ -32,7 +32,7 @@ public class HighlightController : MonoBehaviour
     }
 
     public void DisableHighlight() {
-        Destroy(highlightEffect);
+        highlightEffect.innerGlow = 0;
         Destroy(this);
     }
 }
