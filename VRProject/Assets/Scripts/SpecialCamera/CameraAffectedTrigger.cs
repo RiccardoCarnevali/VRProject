@@ -18,4 +18,9 @@ public class CameraAffectedTrigger : MonoBehaviour
             Messenger<Camera>.RemoveListener(MessageEvents.AFFECT_WITH_CAMERA, target.TryAffect);
         }
     }
+
+    private void OnDestroy() {
+        if (registered) 
+            Messenger<Camera>.RemoveListener(MessageEvents.AFFECT_WITH_CAMERA, target.TryAffect);
+    }
 }

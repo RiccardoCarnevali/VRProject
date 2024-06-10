@@ -15,7 +15,7 @@ public class HighlightController : MonoBehaviour
     }
 
     private void Update() {
-        highlightEffect.innerGlow = Mathf.Lerp(0, 1, progress / loopTimeSeconds);
+        highlightEffect.overlay = Mathf.Lerp(0, 1, progress / loopTimeSeconds);
 
         if (highlightRising) {
             progress += Time.deltaTime * Time.timeScale;
@@ -32,7 +32,7 @@ public class HighlightController : MonoBehaviour
     }
 
     public void DisableHighlight() {
-        highlightEffect.innerGlow = 0;
+        highlightEffect.overlay = 0;
         Destroy(this);
     }
 }
