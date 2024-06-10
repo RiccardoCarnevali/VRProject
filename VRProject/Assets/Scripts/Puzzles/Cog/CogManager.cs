@@ -14,11 +14,16 @@ public class CogManager : Interactable
     [SerializeField] private GameObject _cogPile;
     [SerializeField] private GameObject _chosenCogSlot;
     [SerializeField] private GameObject _canvas;
+    [SerializeField] private GameObject _startCog;
+    [SerializeField] private GameObject _endCog;
+    [SerializeField] private LockerInteractable _lockerToOpen;
+    [SerializeField] private Dialogue _solvedDialogue;
 
     private static readonly float _cogScaling = 0.4f;
     private int _chosenCogIndex;
     private List<CogInteractable> _cogBearings;
     private List<GameObject> _cogs;
+    private bool _solved = false;
 
     public override string GetLabel()
     {
@@ -27,11 +32,17 @@ public class CogManager : Interactable
 
     public override void Interact()
     {
+        if(_solved)
+        {
+            DialogueManager.Instance().StartDialogue(_solvedDialogue);
+        }
         _camera.SetActive(true);
         CursorManager.ShowCursor();
         Settings.inPuzzle = true;
-        InitiatePuzzle();
+        if(_cogs.Count == 0)
+            InitiatePuzzle();
         _canvas.SetActive(true);
+        _cogs[0].SetActive(true);
     }
 
     // Start is called before the first frame update
@@ -46,12 +57,12 @@ public class CogManager : Interactable
         {
             GameObject newCog = Instantiate(cog.gameObject, position: new(), new(), _chosenCogSlot.transform);
             newCog.transform.localPosition = new();
-            newCog.SetActive(false);
+            newCog.transform.parent = null;
             _cogs.Add(newCog);
             ScaleCogToSlot(newCog);
+            newCog.SetActive(false);
         }
-
-        _cogs[0].SetActive(true);
+        _cogPile.SetActive(false);
     }
 
     void Awake()
@@ -64,6 +75,8 @@ public class CogManager : Interactable
     void Update()
     {
         if (!_camera.activeSelf) return;
+        if (Input.GetKeyDown(KeyCode.Escape))
+            Exit();
         
         GameObject hitObject = null;
         Ray ray = _camera.GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
@@ -103,9 +116,13 @@ public class CogManager : Interactable
     public void Exit()
     {
         _camera.SetActive(false);
+        _canvas.SetActive(false);
         CursorManager.HideCursor();
         Settings.inPuzzle = false;
-
+        if(_cogs.Count != 0)
+            _cogs[_chosenCogIndex].SetActive(false);
+        foreach (CogInteractable bearing in _cogBearings)
+            bearing.GetComponent<Renderer>().material = _defaultBearingMaterial;
     }
 
     public void PreviousCog()
@@ -147,18 +164,92 @@ public class CogManager : Interactable
         cog.transform.localScale /= _cogScaling;
     }
 
-    public bool CogsIntersect(Collider collider)
+    public bool CogsIntersect()
     {
-       
-        foreach(GameObject other in _cogs)
+        foreach (CogInteractable cog in _cogBearings)
         {
-            if (other.GetComponent<Collider>().bounds.Intersects(collider.bounds))
-                return true;
+            if(cog.PlacedCog != null)
+            {
+                SphereCollider collider = cog.PlacedCog.GetComponent<SphereCollider>();
+                foreach (CogInteractable other in _cogBearings)
+                {
+                    if (other.PlacedCog != null && cog.PlacedCog != null && other != cog)
+                    {
+                        SphereCollider otherCollider = other.PlacedCog.GetComponent<SphereCollider>();
+                        if (Physics.ComputePenetration(otherCollider, otherCollider.gameObject.transform.position, otherCollider.gameObject.transform.rotation,
+                            collider, cog.PlacedCog.transform.position,
+                            cog.PlacedCog.transform.rotation, out _, out _))
+                        {
+                            Debug.Log(otherCollider.gameObject.transform.position + " " + otherCollider.center + " " + otherCollider.radius);
+                            Debug.Log(cog.PlacedCog.transform.position + " " + cog.PlacedCog.GetComponent<SphereCollider>().center + " " + cog.PlacedCog.GetComponent<SphereCollider>().radius);
+                            return true;
+                        }
+                    }
+                }
+                if (Physics.ComputePenetration(_startCog.GetComponent<SphereCollider>(), _startCog.transform.position, _startCog.transform.rotation,
+                        collider, cog.PlacedCog.transform.position, cog.PlacedCog.transform.rotation, out _, out _))
+                {
+                    Debug.Log("intersects start");
+                    return true;
+                }
+
+                if (Physics.ComputePenetration(_endCog.GetComponent<SphereCollider>(), _endCog.transform.position, _endCog.transform.rotation,
+                            collider, cog.PlacedCog.transform.position, cog.PlacedCog.transform.rotation, out _, out _))
+                {
+                    Debug.Log("intersects end");
+                    return true;
+                }
+            }
         }
         return false;
     }
 
-    public void Test() => Debug.Log("DragonballZ");
+    public void TrySolving()
+    {
+        StartCoroutine(PlayAudio());
+        _startCog.GetComponent<Cog>().CallRotate();
+        foreach(CogInteractable cog in _cogBearings)
+        {
+            if (!cog.CorrectCog())
+            {
+                ResetCogs();
+                return; 
+            }
+            cog.PlacedCog.GetComponent<Cog>().CallRotate();
+        }
+        _endCog.GetComponent<Cog>().CallRotate();
+        _lockerToOpen.Unlock();
+        _solved = true;
+    }
 
-    public void AddCogBearing(CogInteractable cog) => _cogBearings.Add(cog);
+    private IEnumerator PlayAudio()
+    {
+        GetComponent<AudioSource>().Play();
+        yield return new WaitForSeconds(1.1f);
+        GetComponent<AudioSource>().Stop();
+    }
+
+
+    private void ResetCogs()
+    {
+        _startCog.GetComponent<Cog>().ResetRotationEndAnimation();
+        _endCog.GetComponent<Cog>().ResetRotationEndAnimation();
+        foreach (CogInteractable cog in _cogBearings)
+        {
+            if (cog.PlacedCog != null)
+            {
+                cog.PlacedCog.GetComponent<Cog>().ResetRotationEndAnimation();
+            }
+        }
+    }
+
+    public void AddCogBearing(CogInteractable cog)
+    {
+        _cogBearings.Add(cog);
+        _cogBearings.Sort(delegate(CogInteractable cog1, CogInteractable cog2) 
+            {
+                return cog1.CogSlot.CompareTo(cog2.CogSlot);
+            }
+        );
+    }
 }
