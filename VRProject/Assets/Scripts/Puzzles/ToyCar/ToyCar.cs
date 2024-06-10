@@ -8,10 +8,12 @@ public class ToyCar : CameraAffected
     [SerializeField] private GameObject frontWheels;
     [SerializeField] private GameObject backWheels;
     private Vector3 startingPosition;
+    private Vector3 endingPosition = new Vector3(-0.825f, 1, 0);
 
     private bool moving = false;
     private float speed = 0.1f;
     private float wheelRotationSpeed = 120f;
+    private bool won = false;
 
     private AudioSource audioSource;
 
@@ -25,7 +27,8 @@ public class ToyCar : CameraAffected
         if (Settings.load && SaveSystem.CheckFlag("toy_car_puzzle_won")) {
             GetComponent<HighlightController>().DisableHighlight();
             solutionNumber.SetActive(true);
-            enabled = false;
+            transform.localPosition = endingPosition;
+            won = true;
         }
     }
 
@@ -41,6 +44,9 @@ public class ToyCar : CameraAffected
 
     protected override void OnCameraAffected()
     {
+        if (won)
+            return;
+            
         moving = !moving;
 
         if (moving)
@@ -65,6 +71,6 @@ public class ToyCar : CameraAffected
         GetComponent<HighlightController>().DisableHighlight();
         blipAudioSource.Play();
         solutionNumber.SetActive(true);
-        enabled = false;
+        won = true;
     }
 }
