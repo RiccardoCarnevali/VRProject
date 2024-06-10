@@ -9,7 +9,7 @@ public class MessageEvents
     public const string SELECTED_ITEM = "SELECTED_ITEM";
 
     public const string AFFECT_WITH_CAMERA = "AFFECT_WITH_CAMERA";
-
+    
     public const string MOUSE_SENSITIVITY_CHANGED = "MOUSE_SENSITIVITY_CHANGED";
     public const string TEXT_SPEED_CHANGED = "TEXT_SPEED_CHANGED";
 }
