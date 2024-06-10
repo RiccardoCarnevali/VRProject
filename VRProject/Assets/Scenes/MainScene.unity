@@ -29492,6 +29492,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 2478302855919005518, guid: 4b93698ac8e74954eb5236cca655caf9, type: 3}
+      propertyPath: _dialogue.sentences.Array.data[0]
+      value: A pile of cogs, haphazardly placed on the floor.
+      objectReference: {fileID: 0}
     - target: {fileID: 2861981909373777665, guid: 4b93698ac8e74954eb5236cca655caf9, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0.74

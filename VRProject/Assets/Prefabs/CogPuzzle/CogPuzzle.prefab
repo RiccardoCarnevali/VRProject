@@ -2509,7 +2509,7 @@ MonoBehaviour:
   _dialogue:
     speaker: You
     sentences:
-    - A pile of cog, haphazardly placed on the floor.
+    - A pile of cogs, haphazardly placed on the floor.
 --- !u!1 &7760784706074783656
 GameObject:
   m_ObjectHideFlags: 0
