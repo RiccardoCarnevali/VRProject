@@ -8,6 +8,7 @@ public class Cog : MonoBehaviour
     [SerializeField] public float degrees;
     private static readonly float s_duration = 1.5f;
     private bool _resetRotationEndAnimation = false;
+    private Quaternion _startRotation;
 
     public void CallRotate()
     {
@@ -17,22 +18,23 @@ public class Cog : MonoBehaviour
 
     public IEnumerator Rotate()
     {
-        float degreeZ = transform.rotation.eulerAngles.z;
+        _startRotation = transform.localRotation;
+        float degreeZ = transform.localEulerAngles.z;
         float timeElapsed = 0f;
         while (timeElapsed < s_duration)
         {
             float newDegreeZ = Mathf.Lerp(degreeZ, degreeZ + degrees, timeElapsed / s_duration);
             timeElapsed += Time.deltaTime;
-            transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, newDegreeZ);
+            transform.localRotation = Quaternion.Euler(transform.localEulerAngles.x, transform.localEulerAngles.y, newDegreeZ);
             yield return null;
         }
         if(_resetRotationEndAnimation)
         {
-            transform.rotation = Quaternion.Euler(0f,0f,0f);
+            transform.localRotation = _startRotation;
             _resetRotationEndAnimation = false;
         } else
         {
-            transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, degreeZ + degrees);
+            transform.localRotation = Quaternion.Euler(transform.localEulerAngles.x, transform.localEulerAngles.y, degreeZ + degrees);
         }
     }
 

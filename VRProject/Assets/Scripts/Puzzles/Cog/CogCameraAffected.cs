@@ -5,13 +5,17 @@ using UnityEngine;
 public class CogCameraAffected : CameraAffected
 {
     [SerializeField] private CogManager _cogManager;
-    public override void OnCameraAffected()
+    protected override void OnCameraAffected()
     {
-        StartCoroutine(SolvePuzzle());
+        if (!_cogManager.Solved)
+        {
+            StartCoroutine(SolvePuzzle());
+        }
+        
     }
     private IEnumerator SolvePuzzle()
     {
-        yield return new WaitForSeconds(3.5f);  
+        yield return new WaitForSeconds(0.5f);  
         _cogManager.TrySolving();
 
     }

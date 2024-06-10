@@ -16,14 +16,17 @@ public class CogManager : Interactable
     [SerializeField] private GameObject _canvas;
     [SerializeField] private GameObject _startCog;
     [SerializeField] private GameObject _endCog;
-    [SerializeField] private LockerInteractable _lockerToOpen;
-    [SerializeField] private Dialogue _solvedDialogue;
+    [SerializeField] private GameObject _displayDigit;
+    [SerializeField] private AudioSource _displayAudioSource;
 
     private static readonly float _cogScaling = 0.4f;
     private int _chosenCogIndex;
     private List<CogInteractable> _cogBearings;
     private List<GameObject> _cogs;
     private bool _solved = false;
+    private string _solvedFlag = "cog_puzzle_solved";
+
+    public bool Solved { get => _solved; }
 
     public override string GetLabel()
     {
@@ -32,10 +35,6 @@ public class CogManager : Interactable
 
     public override void Interact()
     {
-        if(_solved)
-        {
-            DialogueManager.Instance().StartDialogue(_solvedDialogue);
-        }
         _camera.SetActive(true);
         CursorManager.ShowCursor();
         Settings.inPuzzle = true;
@@ -48,7 +47,17 @@ public class CogManager : Interactable
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (SaveSystem.Load() && SaveSystem.CheckFlag(_solvedFlag))
+        {
+            _solved = true;
+            _displayDigit.SetActive(true);
+            _cogPile.SetActive(false);
+            DisableInteraction();
+            foreach (CogInteractable bearing in _cogBearings)
+            {
+                bearing.transform.GetChild(0).gameObject.SetActive(true);
+            }
+        }
     }
 
     void InitiatePuzzle()
@@ -218,8 +227,11 @@ public class CogManager : Interactable
             cog.PlacedCog.GetComponent<Cog>().CallRotate();
         }
         _endCog.GetComponent<Cog>().CallRotate();
-        _lockerToOpen.Unlock();
+        _displayDigit.SetActive(true);
+        _displayAudioSource.Play();
         _solved = true;
+        SaveSystem.SetFlag(_solvedFlag);
+        DisableInteraction();
     }
 
     private IEnumerator PlayAudio()
