@@ -13,7 +13,7 @@ public class PolaroidInteractable : Interactable
     
     public override string GetLabel()
     {
-        return InteractionLabels.PICK_UP;
+        return InteractionLabels.EQUIP;
     }
 
     public override void Interact()

@@ -22,13 +22,11 @@ public class Controls : MonoBehaviour
     private void Awake() {
         Messenger.AddListener(MessageEvents.POLAROID_PICKED_UP, OnPolaroidPickedUp);
         Messenger.AddListener(MessageEvents.FIRST_ITEM_PICKED_UP, OnFirstItemPickedUp);
-        Messenger.AddListener(MessageEvents.POLAROID_LENS_PICKED_UP, OnPolaroidLensPickedUp);
     }
 
     private void OnDestroy() {
         Messenger.RemoveListener(MessageEvents.POLAROID_PICKED_UP, OnPolaroidPickedUp);
         Messenger.RemoveListener(MessageEvents.FIRST_ITEM_PICKED_UP, OnFirstItemPickedUp);
-        Messenger.RemoveListener(MessageEvents.POLAROID_LENS_PICKED_UP, OnPolaroidLensPickedUp);
     }
 
     void Start()

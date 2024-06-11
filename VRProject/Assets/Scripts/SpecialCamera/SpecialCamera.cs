@@ -15,8 +15,7 @@ public class SpecialCamera : MonoBehaviour
     private AudioSource audioSource;
     private float picturePrintTime = 5f;
 
-    private bool usingLens = false;
-    public bool hasLens = false;
+    public bool lens = false;
 
     private void Start() {
         polaroidAnimator = GetComponent<Animator>();
@@ -28,12 +27,6 @@ public class SpecialCamera : MonoBehaviour
             return;
 
         if (Input.GetKeyDown(KeyCode.Q)) {
-            usingLens = false;
-            TakePicture();
-        }
-
-        if (Input.GetKeyDown(KeyCode.R) && hasLens) {
-            usingLens = true;
             TakePicture();
         }
     }
@@ -90,7 +83,7 @@ public class SpecialCamera : MonoBehaviour
     private void CameraFlash() {
         audioSource.Play();
 
-        if (!usingLens) {
+        if (!lens) {
             StartCoroutine(PrintImage());
             Messenger<Color>.Broadcast(MessageEvents.CAMERA_FLASH, Color.white);
         }

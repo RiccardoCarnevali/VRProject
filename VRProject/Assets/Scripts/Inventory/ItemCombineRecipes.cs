@@ -7,6 +7,7 @@ public class ItemCombineRecipes : MonoBehaviour
 {
     [SerializeField] private Item screwdriver;
     [SerializeField] private Item scissors;
+    [SerializeField] private Item chargedRemote;
 
     public static Dictionary<HashSet<ItemType>, Item> CanCombine;
 
@@ -15,6 +16,7 @@ public class ItemCombineRecipes : MonoBehaviour
         CanCombine = new();
         AddRecipe(ItemType.SCREWDRIVER_HANDLE, ItemType.SCREWDRIVER_TIP, screwdriver);
         AddRecipe(ItemType.SCISSORS_INDEX_HALF, ItemType.SCISSORS_THUMB_HALF, scissors);
+        AddRecipe(ItemType.REMOTE, ItemType.BATTERY, chargedRemote);
     }
 
     private void AddRecipe(ItemType first, ItemType second, Item result)

@@ -16,7 +16,8 @@ public class Item: MonoBehaviour
         [InspectorName("Key")] KEY,
         [InspectorName("Crowbar")] CROWBAR,
         [InspectorName("Battery")] BATTERY,
-        [InspectorName("Remote")] REMOTE
+        [InspectorName("Remote")] REMOTE,
+        [InspectorName("Charged remote")] CHARGED_REMOTE,
     }
 
     [field: SerializeField] public string Id {get; private set;}

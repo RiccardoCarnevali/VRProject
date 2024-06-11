@@ -8,7 +8,7 @@ public class PolaroidLensInteractable : Interactable
 
     private void Start() {
         if (Settings.load && SaveSystem.CheckFlag("polaroid_lens_picked_up")) {
-            specialCamera.hasLens = true;
+            specialCamera.lens = true;
             Destroy(gameObject);
         }
     }
@@ -16,7 +16,7 @@ public class PolaroidLensInteractable : Interactable
     public override string GetLabel()
     {
         if (specialCamera.gameObject.activeSelf) 
-            return InteractionLabels.PICK_UP;
+            return InteractionLabels.EQUIP;
         else 
             return InteractionLabels.INSPECT;
     }
@@ -25,9 +25,8 @@ public class PolaroidLensInteractable : Interactable
     {
         if (specialCamera.gameObject.activeSelf) {
             SaveSystem.SetFlag("polaroid_lens_picked_up");
-            specialCamera.hasLens = true;
+            specialCamera.lens = true;
             Destroy(gameObject);
-            Messenger.Broadcast(MessageEvents.POLAROID_LENS_PICKED_UP);
         }
         else {
             DialogueManager.Instance().StartDialogue(inspectionDialogue);

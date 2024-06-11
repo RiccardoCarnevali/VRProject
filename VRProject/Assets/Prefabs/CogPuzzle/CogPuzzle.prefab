@@ -2666,6 +2666,8 @@ MonoBehaviour:
   _endCog: {fileID: 8218950825966826843}
   _displayDigit: {fileID: 39404875433676970}
   _displayAudioSource: {fileID: 386106266169568559}
+  _cogBearings: []
+  cogHighlight: {fileID: 0}
 --- !u!65 &5334635982284890760
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4062,7 +4064,6 @@ GameObject:
   - component: {fileID: 980911901296763367}
   - component: {fileID: 5435129050318758154}
   - component: {fileID: 7166474012850052931}
-  - component: {fileID: 8189164826153116746}
   - component: {fileID: 6884618437821708418}
   m_Layer: 0
   m_Name: cog1
@@ -4150,19 +4151,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   degrees: 90
---- !u!114 &8189164826153116746
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8849835345927272649}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5ca1e5e45b9ba14f96278acc3f351bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  highlightMaterial: {fileID: 2100000, guid: e89ec5a1e59f46f4e930d3df794076ce, type: 2}
 --- !u!135 &6884618437821708418
 SphereCollider:
   m_ObjectHideFlags: 0

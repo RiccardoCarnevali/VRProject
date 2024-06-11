@@ -66,7 +66,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8026d91cc1002f2478ea65908f2eab54, type: 3}
       propertyPath: m_Name
-      value: battery
+      value: Battery
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -99,4 +99,4 @@ MonoBehaviour:
   <Rotation>k__BackingField: {x: -35, y: 90, z: 0}
   <Scale>k__BackingField: 2000
   <Offset>k__BackingField: {x: 0, y: 0, z: 0}
-  type: 9
+  type: 10
