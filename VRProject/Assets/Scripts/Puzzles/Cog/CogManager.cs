@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using HighlightPlus;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,6 +21,7 @@ public class CogManager : Interactable
     [SerializeField] private GameObject _displayDigit;
     [SerializeField] private AudioSource _displayAudioSource;
     [SerializeField] private CogInteractable[] _cogBearings;
+    [SerializeField] private HighlightEffect cogHighlight;
 
     private static readonly float _cogScaling = 0.4f;
     private int _chosenCogIndex;
@@ -54,10 +56,9 @@ public class CogManager : Interactable
             _displayDigit.SetActive(true);
             _cogPile.SetActive(false);
             DisableInteraction();
+            cogHighlight.enabled = false;
             foreach (CogInteractable bearing in _cogBearings)
             {
-                Debug.Log("here");
-                Debug.Log(bearing.transform.position);
                 bearing.transform.GetChild(0).gameObject.SetActive(true);
             }
         }
@@ -195,8 +196,6 @@ public class CogManager : Interactable
                             collider, cog.PlacedCog.transform.position,
                             cog.PlacedCog.transform.rotation, out _, out _))
                         {
-                            Debug.Log(otherCollider.gameObject.transform.position + " " + otherCollider.center + " " + otherCollider.radius);
-                            Debug.Log(cog.PlacedCog.transform.position + " " + cog.PlacedCog.GetComponent<SphereCollider>().center + " " + cog.PlacedCog.GetComponent<SphereCollider>().radius);
                             return true;
                         }
                     }
@@ -204,14 +203,12 @@ public class CogManager : Interactable
                 if (Physics.ComputePenetration(_startCog.GetComponent<SphereCollider>(), _startCog.transform.position, _startCog.transform.rotation,
                         collider, cog.PlacedCog.transform.position, cog.PlacedCog.transform.rotation, out _, out _))
                 {
-                    Debug.Log("intersects start");
                     return true;
                 }
 
                 if (Physics.ComputePenetration(_endCog.GetComponent<SphereCollider>(), _endCog.transform.position, _endCog.transform.rotation,
                             collider, cog.PlacedCog.transform.position, cog.PlacedCog.transform.rotation, out _, out _))
                 {
-                    Debug.Log("intersects end");
                     return true;
                 }
             }
@@ -237,6 +234,7 @@ public class CogManager : Interactable
         _displayAudioSource.Play();
         _solved = true;
         SaveSystem.SetFlag(_solvedFlag);
+        cogHighlight.enabled = false;
         DisableInteraction();
     }
 

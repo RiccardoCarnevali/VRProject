@@ -1,3 +1,4 @@
+using HighlightPlus;
 using UnityEngine;
 
 public class ToyCar : CameraAffected
@@ -25,7 +26,7 @@ public class ToyCar : CameraAffected
         startingPosition = transform.position;
 
         if (Settings.load && SaveSystem.CheckFlag("toy_car_puzzle_won")) {
-            GetComponent<HighlightController>().DisableHighlight();
+            GetComponent<HighlightEffect>().enabled = false;
             solutionNumber.SetActive(true);
             transform.localPosition = endingPosition;
             won = true;
@@ -68,7 +69,7 @@ public class ToyCar : CameraAffected
     public void Win() {
         SaveSystem.SetFlag("toy_car_puzzle_won");
         Stop();
-        GetComponent<HighlightController>().DisableHighlight();
+        GetComponent<HighlightEffect>().enabled = false;
         blipAudioSource.Play();
         solutionNumber.SetActive(true);
         won = true;
