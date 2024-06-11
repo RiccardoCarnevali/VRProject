@@ -133,6 +133,7 @@ MonoBehaviour:
   <Description>k__BackingField: A joystick. Maybe it can be used to control something
   <Rotation>k__BackingField: {x: 0, y: 0, z: 0}
   <Scale>k__BackingField: 500
+  <Offset>k__BackingField: {x: 0, y: -5, z: 0}
   type: 4
 --- !u!1 &7719710989730295423
 GameObject:
