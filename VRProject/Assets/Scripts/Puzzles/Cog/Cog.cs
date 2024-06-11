@@ -12,7 +12,6 @@ public class Cog : MonoBehaviour
 
     public void CallRotate()
     {
-        Debug.Log("rotate");
         StartCoroutine(Rotate());
     }
 

@@ -1,0 +1,102 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &6685277212108260569
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 8026d91cc1002f2478ea65908f2eab54, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8026d91cc1002f2478ea65908f2eab54, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8026d91cc1002f2478ea65908f2eab54, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 11.666667
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8026d91cc1002f2478ea65908f2eab54, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.04
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8026d91cc1002f2478ea65908f2eab54, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.439
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8026d91cc1002f2478ea65908f2eab54, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.607
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8026d91cc1002f2478ea65908f2eab54, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.05584804
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8026d91cc1002f2478ea65908f2eab54, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.61317307
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8026d91cc1002f2478ea65908f2eab54, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.3521631
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8026d91cc1002f2478ea65908f2eab54, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.70489794
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8026d91cc1002f2478ea65908f2eab54, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -25.34
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8026d91cc1002f2478ea65908f2eab54, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8026d91cc1002f2478ea65908f2eab54, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 145.6
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8026d91cc1002f2478ea65908f2eab54, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8026d91cc1002f2478ea65908f2eab54, type: 3}
+      propertyPath: m_Name
+      value: battery
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8026d91cc1002f2478ea65908f2eab54, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7270029626630382148}
+  m_SourcePrefab: {fileID: 100100000, guid: 8026d91cc1002f2478ea65908f2eab54, type: 3}
+--- !u!1 &5766729467342305672 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 8026d91cc1002f2478ea65908f2eab54, type: 3}
+  m_PrefabInstance: {fileID: 6685277212108260569}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7270029626630382148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5766729467342305672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9081b89376c9486fca9e61bfe463221b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Id>k__BackingField: battery
+  <Description>k__BackingField: A battery, could be useful for powering up a small
+    device.
+  <Rotation>k__BackingField: {x: -35, y: 90, z: 0}
+  <Scale>k__BackingField: 2000
+  <Offset>k__BackingField: {x: 0, y: 0, z: 0}
+  type: 9

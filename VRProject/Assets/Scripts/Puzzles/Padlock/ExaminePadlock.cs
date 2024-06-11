@@ -8,6 +8,8 @@ public class ExaminePadlock : Interactable
     [SerializeField] private GameObject firstDigitGameObject;
     [SerializeField] private GameObject secondDigitGameObject;
     [SerializeField] private GameObject thirdDigitGameObject;
+    [SerializeField] private LockerInteractable _locker;
+    private bool _locked = true;
 
     private readonly uint[] digits = new uint[3] { 1, 1, 1 };
     private readonly uint[] solution = new uint[3] { 1, 2, 3 };
@@ -16,7 +18,12 @@ public class ExaminePadlock : Interactable
     // Start is called before the first frame update
     void Start()
     {
-        
+        if(Settings.load && SaveSystem.CheckFlag("solved_padlock"))
+        {
+            GetComponent<Animator>().speed = 20.0f;     //very hacky, but works
+            Unlock();
+            GetComponent<Animator>().speed = 1.0f;
+        }
     }
 
     // Update is called once per frame
@@ -28,6 +35,9 @@ public class ExaminePadlock : Interactable
     public void Unlock()
     {
         GetComponent<Animator>().SetBool("Unlocked", true);
+        _locker.Unlock();
+        SaveSystem.SetFlag("solved_padlock");
+        DisableInteraction();
     }
 
     public void ExitScreen()
@@ -46,7 +56,9 @@ public class ExaminePadlock : Interactable
 
     public override string GetLabel()
     {
-        return "Interact";
+        if(_locked)
+            return InteractionLabels.INSPECT;
+        return InteractionLabels.INTERACT;
     }
 
     public void FirstDigitUp()

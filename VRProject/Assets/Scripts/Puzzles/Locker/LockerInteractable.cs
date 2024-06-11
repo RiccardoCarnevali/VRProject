@@ -5,11 +5,13 @@ using UnityEngine;
 public class LockerInteractable : Interactable
 {
     [SerializeField] private Dialogue _inspectionDialogue;
+    [SerializeField] private Animator _animator;
 
     private bool _locked = true;
 
     public void Unlock()
     {
+        SaveSystem.SetFlag("locker_unlocked");
         _locked = false;
     }
 
@@ -24,18 +26,18 @@ public class LockerInteractable : Interactable
         if (_locked)
             DialogueManager.Instance().StartDialogue(_inspectionDialogue);
         else
-            GetComponent<Animator>().SetBool("Open", true);
+        {
+            _animator.SetBool("Open", true);
+            DisableInteraction();
+        }
+            
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (Settings.load && SaveSystem.CheckFlag("locker_unlocked"))
+            _locked = false;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

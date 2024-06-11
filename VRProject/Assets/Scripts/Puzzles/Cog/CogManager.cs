@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements.Experimental;
 using static UnityEditor.Progress;
 
 public class CogManager : Interactable
@@ -18,10 +19,10 @@ public class CogManager : Interactable
     [SerializeField] private GameObject _endCog;
     [SerializeField] private GameObject _displayDigit;
     [SerializeField] private AudioSource _displayAudioSource;
+    [SerializeField] private CogInteractable[] _cogBearings;
 
     private static readonly float _cogScaling = 0.4f;
     private int _chosenCogIndex;
-    private List<CogInteractable> _cogBearings;
     private List<GameObject> _cogs;
     private bool _solved = false;
     private string _solvedFlag = "cog_puzzle_solved";
@@ -47,7 +48,7 @@ public class CogManager : Interactable
     // Start is called before the first frame update
     void Start()
     {
-        if (SaveSystem.Load() && SaveSystem.CheckFlag(_solvedFlag))
+        if (Settings.load && SaveSystem.CheckFlag(_solvedFlag))
         {
             _solved = true;
             _displayDigit.SetActive(true);
@@ -55,9 +56,12 @@ public class CogManager : Interactable
             DisableInteraction();
             foreach (CogInteractable bearing in _cogBearings)
             {
+                Debug.Log("here");
+                Debug.Log(bearing.transform.position);
                 bearing.transform.GetChild(0).gameObject.SetActive(true);
             }
         }
+
     }
 
     void InitiatePuzzle()
@@ -76,7 +80,6 @@ public class CogManager : Interactable
 
     void Awake()
     {
-        _cogBearings = new();
         _cogs = new();
     }
 
@@ -95,7 +98,10 @@ public class CogManager : Interactable
         if (hit.collider != null)
         {
             hitObject = hit.collider.gameObject;
-            _cogBearings.ForEach(bearing => { bearing.GetComponent<Renderer>().material = _defaultBearingMaterial; });
+            foreach (CogInteractable cogBearing in _cogBearings)
+            {
+                cogBearing.GetComponent<Renderer>().material = _defaultBearingMaterial;
+            }
             hitObject.GetComponent<Renderer>().material = _chosenBearingMaterial;
         }
         
@@ -253,15 +259,5 @@ public class CogManager : Interactable
                 cog.PlacedCog.GetComponent<Cog>().ResetRotationEndAnimation();
             }
         }
-    }
-
-    public void AddCogBearing(CogInteractable cog)
-    {
-        _cogBearings.Add(cog);
-        _cogBearings.Sort(delegate(CogInteractable cog1, CogInteractable cog2) 
-            {
-                return cog1.CogSlot.CompareTo(cog2.CogSlot);
-            }
-        );
     }
 }

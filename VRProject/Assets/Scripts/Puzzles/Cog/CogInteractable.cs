@@ -39,7 +39,6 @@ public class CogInteractable : MonoBehaviour
         if (_cogManager.CogsIntersect())
         {
             //play sfx
-            Debug.Log("Intersecting");
             RemoveCog();
         }
     }
@@ -48,7 +47,6 @@ public class CogInteractable : MonoBehaviour
 
     public void PlaceOrRemoveCog(GameObject cog)
     {
-        Debug.Log(cog.activeSelf);
         if (_placedCog != null)
         {
             RemoveCog();
@@ -59,15 +57,4 @@ public class CogInteractable : MonoBehaviour
         }
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        _cogManager.AddCogBearing(this);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
