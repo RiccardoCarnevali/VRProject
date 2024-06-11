@@ -94,4 +94,5 @@ MonoBehaviour:
     tip.
   <Rotation>k__BackingField: {x: 45, y: -90, z: 0}
   <Scale>k__BackingField: 300
+  <Offset>k__BackingField: {x: 10, y: 5, z: 0}
   type: 0

@@ -14,6 +14,7 @@ public class NailedPlanksInteractable : Interactable
         if (Settings.load && SaveSystem.CheckFlag("nailed_planks_removed")) {
             foreach (GameObject nailedPlank in nailedPlanks)
                 Destroy(nailedPlank);
+            Destroy(GetComponent<Collider>());
         }
     }
 
@@ -33,6 +34,7 @@ public class NailedPlanksInteractable : Interactable
             SaveSystem.SetFlag("nailed_planks_removed");
             foreach (GameObject nailedPlank in nailedPlanks)
                 Destroy(nailedPlank);
+            Destroy(GetComponent<Collider>());
             audioSource.Play();
         }
         else {
