@@ -22,20 +22,12 @@ public class ExaminePadlock : Interactable
         if (Settings.load && SaveSystem.CheckFlag(_solvedFlag))
         {
             while (solution[0] != digits[0])
-            {
-                Debug.Log("first digit " + digits[0] + " " + solution[0]);
                 FirstDigitUp();
-            }
             while (solution[1] != digits[1])
-            {
-                Debug.Log("second digit " + digits[1] + " " + solution[1]);
                 SecondDigitUp();
-            }
             while (solution[2] != digits[2])
-            {
-                Debug.Log("third digit " + digits[2] + " " + solution[2]);
                 ThirdDigitUp();
-            }
+
             Unlock();
         }
     }
