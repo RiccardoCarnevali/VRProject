@@ -62248,7 +62248,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4611213271616772386, guid: 916c296d72b54b94f9d3096f4d672f06, type: 3}
       propertyPath: m_Name
-      value: Vent sqare (3)
+      value: FakeVent
       objectReference: {fileID: 0}
     - target: {fileID: 4611213271616772386, guid: 916c296d72b54b94f9d3096f4d672f06, type: 3}
       propertyPath: m_StaticEditorFlags
