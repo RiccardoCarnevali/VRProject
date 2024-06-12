@@ -68,8 +68,6 @@ public class ExaminePadlock : Interactable
 
     public override string GetLabel()
     {
-        if(_locked)
-            return InteractionLabels.INSPECT;
         return InteractionLabels.INTERACT;
     }
 
