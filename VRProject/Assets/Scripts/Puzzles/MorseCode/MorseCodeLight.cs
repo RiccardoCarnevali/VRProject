@@ -81,15 +81,25 @@ public class MorseCodeLight : MonoBehaviour
         repeatWaitTimeSeconds = ditDurationSeconds * 10;
 
         message = message.ToUpper();
-        StartCoroutine(Play(0));
+        StartCoroutine(ShowMessage());
     }
 
-    private IEnumerator Play(int charIndex) {
+    private IEnumerator ShowMessage() {
+        
+        int charIndex = 0;
 
-        if (charIndex == message.Length) {
-            charIndex = 0;
-            yield return new WaitForSeconds(repeatWaitTimeSeconds);
+        while(true) {
+            yield return ShowCharacter(charIndex);
+            ++charIndex;
+
+            if (charIndex == message.Length) {
+                charIndex = 0;
+                yield return new WaitForSeconds(repeatWaitTimeSeconds);
+            }
         }
+    }
+
+    private IEnumerator ShowCharacter(int charIndex) {
 
         char currentChar = message[charIndex];
 
@@ -115,8 +125,5 @@ public class MorseCodeLight : MonoBehaviour
 
             yield return new WaitForSeconds(waitBetweenCharactersSeconds);
         }
-
-        ++charIndex;
-        yield return Play(charIndex);
     }
 }
