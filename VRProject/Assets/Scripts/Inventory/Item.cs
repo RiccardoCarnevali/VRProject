@@ -13,9 +13,11 @@ public class Item: MonoBehaviour
         [InspectorName("Scissors")] SCISSORS,
         [InspectorName("ScissorsIndexHalf")] SCISSORS_INDEX_HALF,
         [InspectorName("ScissorsThumbHalf")] SCISSORS_THUMB_HALF,
+        [InspectorName("Key")] KEY,
         [InspectorName("Crowbar")] CROWBAR,
         [InspectorName("Battery")] BATTERY,
-        [InspectorName("Remote")] REMOTE
+        [InspectorName("Remote")] REMOTE,
+        [InspectorName("Charged remote")] CHARGED_REMOTE,
     }
 
     [field: SerializeField] public string Id {get; private set;}

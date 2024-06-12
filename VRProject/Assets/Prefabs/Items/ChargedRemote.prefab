@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6617128380588816736}
   - component: {fileID: -8297373084721060695}
   m_Layer: 0
-  m_Name: Remote
+  m_Name: ChargedRemote
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -96,10 +96,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9081b89376c9486fca9e61bfe463221b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Id>k__BackingField: remote
-  <Description>k__BackingField: A remote controller with a single button on it. There
-    is not battery inside, it won't work like this.
+  <Id>k__BackingField: charged_remote
+  <Description>k__BackingField: A remote controller with a single button on it. I
+    put a battery in it, so it should probably work now.
   <Rotation>k__BackingField: {x: 180, y: 0, z: -90}
   <Scale>k__BackingField: 180
   <Offset>k__BackingField: {x: 0, y: -10, z: 0}
-  type: 11
+  type: 12
