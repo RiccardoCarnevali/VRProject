@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ExaminePadlock : Interactable
@@ -10,34 +11,53 @@ public class ExaminePadlock : Interactable
     [SerializeField] private GameObject thirdDigitGameObject;
     [SerializeField] private LockerInteractable _locker;
     private bool _locked = true;
+    private string _solvedFlag = "solved_padlock";
 
     private readonly uint[] digits = new uint[3] { 1, 1, 1 };
-    private readonly uint[] solution = new uint[3] { 1, 2, 3 };
+    private readonly uint[] solution = new uint[3] { 3, 1, 9 };
 
 
-    // Start is called before the first frame update
     void Start()
     {
-        if(Settings.load && SaveSystem.CheckFlag("solved_padlock"))
+        if (Settings.load && SaveSystem.CheckFlag(_solvedFlag))
         {
-            GetComponent<Animator>().speed = 20.0f;     //very hacky, but works
+            while (solution[0] != digits[0])
+            {
+                Debug.Log("first digit " + digits[0] + " " + solution[0]);
+                FirstDigitUp();
+            }
+            while (solution[1] != digits[1])
+            {
+                Debug.Log("second digit " + digits[1] + " " + solution[1]);
+                SecondDigitUp();
+            }
+            while (solution[2] != digits[2])
+            {
+                Debug.Log("third digit " + digits[2] + " " + solution[2]);
+                ThirdDigitUp();
+            }
             Unlock();
-            GetComponent<Animator>().speed = 1.0f;
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if(Settings.padlockOn && Input.GetKeyDown(KeyCode.Escape))
+            ExitScreen();
     }
+    
 
     public void Unlock()
     {
-        GetComponent<Animator>().SetBool("Unlocked", true);
-        _locker.Unlock();
-        SaveSystem.SetFlag("solved_padlock");
-        DisableInteraction();
+        if(digits.SequenceEqual(solution))
+        {
+            GetComponent<Animator>().SetBool("Unlocked", true);
+            _locker.Unlock();
+            SaveSystem.SetFlag(_solvedFlag);
+            DisableInteraction();
+            ExitScreen();
+        }
+        
     }
 
     public void ExitScreen()
@@ -86,20 +106,20 @@ public class ExaminePadlock : Interactable
     {
         firstDigitGameObject.transform.localEulerAngles =
             new(firstDigitGameObject.transform.localEulerAngles.x, firstDigitGameObject.transform.localEulerAngles.y, firstDigitGameObject.transform.localEulerAngles.z - 40f);
-        digits[0] = (digits[0] - 1) == 0 ? 1 : (digits[0] - 1);
+        digits[0] = (digits[0] - 1) == 0 ? 9 : (digits[0] - 1);
     }
 
     public void SecondDigitDown()
     {
         secondDigitGameObject.transform.localEulerAngles =
             new(secondDigitGameObject.transform.localEulerAngles.x, secondDigitGameObject.transform.localEulerAngles.y, secondDigitGameObject.transform.localEulerAngles.z - 40f);
-        digits[1] = (digits[1] - 1) == 0 ? 1 : (digits[1] - 1);
+        digits[1] = (digits[1] - 1) == 0 ? 9 : (digits[1] - 1);
     }
 
     public void ThirdDigitDown()
     {
         thirdDigitGameObject.transform.localEulerAngles =
             new(thirdDigitGameObject.transform.localEulerAngles.x, thirdDigitGameObject.transform.localEulerAngles.y, thirdDigitGameObject.transform.localEulerAngles.z - 40f);
-        digits[2] = (digits[2] - 1) == 0 ? 1 : (digits[2] - 1);
+        digits[2] = (digits[2] - 1) == 0 ? 9 : (digits[2] - 1);
     }
 }
