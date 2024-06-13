@@ -39542,7 +39542,6 @@ GameObject:
   - component: {fileID: 1089933154}
   - component: {fileID: 1089933153}
   - component: {fileID: 1089933152}
-  - component: {fileID: 1089933155}
   m_Layer: 0
   m_Name: Locker
   m_TagString: Untagged
@@ -39639,23 +39638,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1089933150}
   m_Mesh: {fileID: -5495902117074765545, guid: 403e26e110361a048b48a470820ba82b, type: 3}
---- !u!114 &1089933155
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1089933150}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7887490daeda6b43b2b698a661cb2e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _inspectionDialogue:
-    speaker: You
-    sentences:
-    - It's locked.
-  _animator: {fileID: 1089933152}
 --- !u!1 &1091929491
 GameObject:
   m_ObjectHideFlags: 0
@@ -68960,7 +68942,7 @@ MonoBehaviour:
   firstDigitGameObject: {fileID: 1567391977}
   secondDigitGameObject: {fileID: 1874690770}
   thirdDigitGameObject: {fileID: 1626198125}
-  _locker: {fileID: 1089933155}
+  _locker: {fileID: 304444083}
 --- !u!65 &1954379219
 BoxCollider:
   m_ObjectHideFlags: 0
