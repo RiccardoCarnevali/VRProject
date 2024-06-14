@@ -9,12 +9,11 @@ public class FinalCutscene : MonoBehaviour
 {
     [SerializeField] private AutoSave _autoSave;
     [SerializeField] private AudioClip _sirenAudioClip;
-    [SerializeField] private AudioClip _sheldonScooperAudioClip;
     [SerializeField] private Dialogue _firstDialogue;
     [SerializeField] private Dialogue _secondDialogue;
     [SerializeField] private SheldonScooper _sheldonScooper;
     [SerializeField] private GameObject _scoopingRoomCamera;
-    [SerializeField] private RawImage _bloodSplatters;
+
 
     private bool _triggeredFinalScene = false;
     private AudioFade _audioFade;
@@ -44,8 +43,8 @@ public class FinalCutscene : MonoBehaviour
     {
         yield return new WaitForSeconds(1.5f);
         StartCoroutine(_audioFade.FadeIn());
-        _audioSource.Play();            // chiama sfx applausi
-        yield return new WaitForSeconds(1f); // aspetta un altro po'
+        _audioSource.Play();
+        yield return new WaitForSeconds(1f);
         DialogueManager.Instance().StartDialogue(_firstDialogue);
         yield return new WaitUntil(() => !Settings.dialogue);
         _audioSource.loop = false;
@@ -55,17 +54,14 @@ public class FinalCutscene : MonoBehaviour
         yield return new WaitUntil(() => !Settings.dialogue);
         _audioSource.PlayOneShot(_sirenAudioClip);
         yield return new WaitForSeconds(_sirenAudioClip.length + 4f);
-        _audioSource.PlayOneShot(_sheldonScooperAudioClip, 1f);
         _sheldonScooper.Scoop();
         yield return new WaitForSeconds(0.9f);
-        _bloodSplatters.enabled = true;
         Messenger<Action, float, float>.Broadcast(MessageEvents.FADE_OUT, BackToMainMenu, 2f, 2f);
 
     }
 
     private void BackToMainMenu()
     {
-        _bloodSplatters.enabled = false;
         Settings.inCutscene = false;
         SceneManager.LoadScene("MainMenu");
     }

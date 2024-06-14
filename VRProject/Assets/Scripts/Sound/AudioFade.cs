@@ -19,6 +19,7 @@ public class AudioFade : MonoBehaviour
         float progress = 0;
 
         float volume = audioSource.volume;
+        audioSource.volume = 0;
         while (audioSource.volume < volume)
         {
             progress += Time.deltaTime * Time.timeScale;

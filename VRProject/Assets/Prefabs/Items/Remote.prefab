@@ -98,7 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Id>k__BackingField: remote
   <Description>k__BackingField: A remote controller with a single button on it. There
-    is not battery inside, it won't work like this.
+    is no battery inside, it won't work like this.
   <Rotation>k__BackingField: {x: 180, y: 0, z: -90}
   <Scale>k__BackingField: 180
   <Offset>k__BackingField: {x: 0, y: -10, z: 0}

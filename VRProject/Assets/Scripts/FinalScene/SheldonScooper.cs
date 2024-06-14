@@ -1,23 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SheldonScooper : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private RawImage _bloodSplatters;
+    private AudioSource _audioSource;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    private void Awake() {
+        _audioSource = GetComponent<AudioSource>();
     }
 
     public void Scoop()
     {
         GetComponent<Animator>().SetTrigger("Scoop");
+    }
+
+    public void PlayScoopingSound() {
+        _audioSource.Play();
+    }
+
+    public void BloodSplatter() {
+        _bloodSplatters.enabled = true;
     }
 }
