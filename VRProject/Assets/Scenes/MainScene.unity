@@ -13080,6 +13080,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7282385005950709272, guid: 3186a6a1f3672df4681a96a94a9d2dad, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2119808438}
+    - targetCorrespondingSourceObject: {fileID: 7282385005950709272, guid: 3186a6a1f3672df4681a96a94a9d2dad, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1078568276}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3186a6a1f3672df4681a96a94a9d2dad, type: 3}
 --- !u!4 &352670861 stripped
@@ -21804,6 +21807,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7095717588489672631, guid: 81a0bbacb3e98c044800fef7e60a62a5, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1038997627}
+    - targetCorrespondingSourceObject: {fileID: 7095717588489672631, guid: 81a0bbacb3e98c044800fef7e60a62a5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 713014913}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 81a0bbacb3e98c044800fef7e60a62a5, type: 3}
 --- !u!4 &462269694 stripped
@@ -28541,8 +28547,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _autoSave: {fileID: 1696967692}
-  _specialCamera: {fileID: 493425941}
-  _finalRoomPlayerSpot: {fileID: 1405495625}
   _sirenAudioClip: {fileID: 8300000, guid: fe7c7f427badd3043ac9785365605913, type: 3}
   _sheldonScooperAudioClip: {fileID: 8300000, guid: e00ed5d558d59874f84986ccb91abec1, type: 3}
   _firstDialogue:
@@ -28558,8 +28562,11 @@ MonoBehaviour:
     speaker: Wall Speakers
     sentences:
     - We're afraid we need to take it away from you.
-    - Well, time to harvest it out of you.
+    - Thank you for your cooperation.
+    - Now, time for the harvest.
   _sheldonScooper: {fileID: 234917668}
+  _scoopingRoomCamera: {fileID: 1405495624}
+  _bloodSplatters: {fileID: 1663585023}
 --- !u!65 &675956263
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -29406,6 +29413,79 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4611213271616772387, guid: 916c296d72b54b94f9d3096f4d672f06, type: 3}
   m_PrefabInstance: {fileID: 5599090522031334125}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &713014912
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 713014913}
+  - component: {fileID: 713014915}
+  - component: {fileID: 713014914}
+  m_Layer: 9
+  m_Name: DialogueTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &713014913
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 713014912}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.81, y: 2.82, z: -11.69}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 462269694}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &713014914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 713014912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05c0f0aea1921a64aa8d8b11f5f7de30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: first_ending_dialogue
+  dialogue:
+    speaker: You
+    sentences:
+    - ... I think I'm starting to remember.
+    - Those people... They kidnapped me and brought me here! The puzzles, the camera,
+      the entire facility. It's all fake...
+--- !u!65 &713014915
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 713014912}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.41, y: 3.98, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &716108095
 GameObject:
   m_ObjectHideFlags: 0
@@ -44750,6 +44830,81 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1078568275
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1078568276}
+  - component: {fileID: 1078568278}
+  - component: {fileID: 1078568277}
+  m_Layer: 9
+  m_Name: DialogueTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1078568276
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1078568275}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2.1, y: 1.345, z: 9.38}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 352670861}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1078568277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1078568275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05c0f0aea1921a64aa8d8b11f5f7de30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: second_ending_dialogue
+  dialogue:
+    speaker: You
+    sentences:
+    - This is all a ruse they created to develop my powers... That's why I can see
+      those objects glowing. That's why I always knew how to move forward.
+    - What did they call it again...?
+    - ...
+    - ... Vision.
+--- !u!65 &1078568278
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1078568275}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.41, y: 3.98, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1079988108
 GameObject:
   m_ObjectHideFlags: 0
@@ -57367,8 +57522,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1405495625}
   - component: {fileID: 1405495626}
+  - component: {fileID: 1405495627}
   m_Layer: 0
-  m_Name: PlayerSpot
+  m_Name: ScoopingRoomCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57383,7 +57539,7 @@ Transform:
   m_GameObject: {fileID: 1405495624}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.05, y: -0.5, z: 0}
+  m_LocalPosition: {x: 0.351, y: -0.354, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -57440,6 +57596,14 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!81 &1405495627
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1405495624}
+  m_Enabled: 1
 --- !u!4 &1406242804 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8075795743059959683, guid: a8b9c6f9a89711d4da799da51e7037ce, type: 3}
@@ -63368,6 +63532,78 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1663585021
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1663585022}
+  - component: {fileID: 1663585024}
+  - component: {fileID: 1663585023}
+  m_Layer: 5
+  m_Name: BloodSplatter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1663585022
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1663585021}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1899066155}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1663585023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1663585021}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Texture: {fileID: 2800000, guid: 2991920c3df642b4da6dea4d7b7db9ea, type: 3}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+--- !u!222 &1663585024
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1663585021}
+  m_CullTransparentMesh: 1
 --- !u!1 &1666082136
 GameObject:
   m_ObjectHideFlags: 0
@@ -72979,7 +73215,7 @@ GameObject:
   - component: {fileID: 1899066153}
   - component: {fileID: 1899066152}
   m_Layer: 5
-  m_Name: FadeInUI
+  m_Name: OverlapUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -73060,6 +73296,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1663585022}
   - {fileID: 1642904330}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

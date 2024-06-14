@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class FinalCutscene : MonoBehaviour
 {
@@ -12,6 +14,7 @@ public class FinalCutscene : MonoBehaviour
     [SerializeField] private Dialogue _secondDialogue;
     [SerializeField] private SheldonScooper _sheldonScooper;
     [SerializeField] private GameObject _scoopingRoomCamera;
+    [SerializeField] private RawImage _bloodSplatters;
 
     private bool _triggeredFinalScene = false;
     private AudioFade _audioFade;
@@ -33,7 +36,7 @@ public class FinalCutscene : MonoBehaviour
         _autoSave.enabled = false;
 
         Messenger.Broadcast(MessageEvents.TOGGLE_UI);
-        Messenger<Action, float, float>.Broadcast(MessageEvents.FADE_IN, () => StartCoroutine(FinalRoomScene()), 2f, 2f);
+        Messenger<Action, float, float>.Broadcast(MessageEvents.FADE_IN, () => StartCoroutine(FinalRoomScene()), 4f, 2f);
     }
 
 
@@ -51,16 +54,19 @@ public class FinalCutscene : MonoBehaviour
         DialogueManager.Instance().StartDialogue(_secondDialogue);
         yield return new WaitUntil(() => !Settings.dialogue);
         _audioSource.PlayOneShot(_sirenAudioClip);
-        yield return new WaitForSeconds(_sirenAudioClip.length + 5f);
-        _audioSource.PlayOneShot(_sheldonScooperAudioClip);
+        yield return new WaitForSeconds(_sirenAudioClip.length + 4f);
+        _audioSource.PlayOneShot(_sheldonScooperAudioClip, 1f);
         _sheldonScooper.Scoop();
-        // RedSplash()
-        // FadeToBlack()
-        BackToMainMenu();
+        yield return new WaitForSeconds(0.9f);
+        _bloodSplatters.enabled = true;
+        Messenger<Action, float, float>.Broadcast(MessageEvents.FADE_OUT, BackToMainMenu, 2f, 2f);
+
     }
 
     private void BackToMainMenu()
     {
+        _bloodSplatters.enabled = false;
         Settings.inCutscene = false;
+        SceneManager.LoadScene("MainMenu");
     }
 }

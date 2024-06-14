@@ -18,6 +18,6 @@ public class SheldonScooper : MonoBehaviour
 
     public void Scoop()
     {
-        GetComponent<Animator>().SetBool("Scoop", true);
+        GetComponent<Animator>().SetTrigger("Scoop");
     }
 }

@@ -19,7 +19,7 @@ public class AudioFade : MonoBehaviour
         float progress = 0;
 
         float volume = audioSource.volume;
-        while (audioSource.volume < 1)
+        while (audioSource.volume < volume)
         {
             progress += Time.deltaTime * Time.timeScale;
             audioSource.volume = Mathf.Lerp(0, volume, progress / fadeInTimeSeconds);
