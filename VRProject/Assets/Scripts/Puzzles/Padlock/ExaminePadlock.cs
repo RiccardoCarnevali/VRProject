@@ -10,7 +10,6 @@ public class ExaminePadlock : Interactable
     [SerializeField] private GameObject secondDigitGameObject;
     [SerializeField] private GameObject thirdDigitGameObject;
     [SerializeField] private LockerInteractable _locker;
-    private bool _locked = true;
     private string _solvedFlag = "solved_padlock";
 
     private readonly uint[] digits = new uint[3] { 1, 1, 1 };
