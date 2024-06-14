@@ -9868,6 +9868,10 @@ PrefabInstance:
       value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 5517237198854753170, guid: 4b93698ac8e74954eb5236cca655caf9, type: 3}
+      propertyPath: _error
+      value: 
+      objectReference: {fileID: 8300000, guid: 1e5c9f568c0e2014db399db2e2324f1b, type: 3}
+    - target: {fileID: 5517237198854753170, guid: 4b93698ac8e74954eb5236cca655caf9, type: 3}
       propertyPath: cogHighlight
       value: 
       objectReference: {fileID: 1907841881}
