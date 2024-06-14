@@ -18,6 +18,8 @@ public class CogManager : Interactable
     [SerializeField] private AudioSource _displayAudioSource;
     [SerializeField] private CogInteractable[] _cogBearings;
     [SerializeField] private HighlightEffect cogHighlight;
+    [SerializeField] private AudioClip _error;
+
 
     private static readonly float _cogScaling = 0.4f;
     private int _chosenCogIndex;
@@ -192,6 +194,7 @@ public class CogManager : Interactable
                             collider, cog.PlacedCog.transform.position,
                             cog.PlacedCog.transform.rotation, out _, out _))
                         {
+                            GetComponent<AudioSource>().PlayOneShot(_error, 0.5f);
                             return true;
                         }
                     }
@@ -199,12 +202,15 @@ public class CogManager : Interactable
                 if (Physics.ComputePenetration(_startCog.GetComponent<SphereCollider>(), _startCog.transform.position, _startCog.transform.rotation,
                         collider, cog.PlacedCog.transform.position, cog.PlacedCog.transform.rotation, out _, out _))
                 {
+                    GetComponent<AudioSource>().PlayOneShot(_error, 0.5f);
                     return true;
+
                 }
 
                 if (Physics.ComputePenetration(_endCog.GetComponent<SphereCollider>(), _endCog.transform.position, _endCog.transform.rotation,
                             collider, cog.PlacedCog.transform.position, cog.PlacedCog.transform.rotation, out _, out _))
                 {
+                    GetComponent<AudioSource>().PlayOneShot(_error, 0.5f);
                     return true;
                 }
             }
